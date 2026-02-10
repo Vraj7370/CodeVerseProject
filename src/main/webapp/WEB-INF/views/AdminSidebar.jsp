@@ -14,6 +14,11 @@
     <a href="newUserType">
         <i class="bi bi-box me-2"></i> New UserType
     </a>
+    
+    <a href="newHackathon">
+        <i class="bi bi-box me-2"></i> New Hackathon
+    </a>
+    
     <a href="listUser">
         <i class="bi bi-people me-2"></i> Users
     </a>
