@@ -18,9 +18,19 @@
         border-radius: 12px;
     }
 </style>
+
+<jsp:include page="AdminCSS.jsp"></jsp:include>
+
 </head>
 
 <body>
+
+<!-- header -->
+	<jsp:include page="AdminHeader.jsp"></jsp:include>
+
+
+	<!-- Sidebar -->
+	<jsp:include page="AdminSidebar.jsp"></jsp:include>
 
 <div class="container">
     <div class="row justify-content-center">

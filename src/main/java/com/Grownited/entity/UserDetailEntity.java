@@ -13,11 +13,12 @@ public class UserDetailEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer userDetailId;
-	private Integer userId;//
+	private Integer userId;//fk
 	private String qualification;
 	private String city;
 	private String state;
 	private String country;
+	private Integer userTypeId; //fk 
 
 	public Integer getUserDetailId() {
 		return userDetailId;
@@ -67,4 +68,15 @@ public class UserDetailEntity {
 		this.country = country;
 	}
 
+	public Integer getUserTypeId() {
+		return userTypeId;
+	}
+
+	public void setUserTypeId(Integer userTypeId) {
+		this.userTypeId = userTypeId;
+	}
+
+	
+	
+	
 }

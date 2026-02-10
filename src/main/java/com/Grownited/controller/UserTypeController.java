@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.Grownited.entity.UserTypeEntity;
 import com.Grownited.repository.UserTypeRepository;
 
-
 @Controller 
 public class UserTypeController {
 
+	//Singleton design pattern 
 	@Autowired
 	UserTypeRepository userTypeRepository;
 	
