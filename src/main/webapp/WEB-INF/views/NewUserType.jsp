@@ -1,76 +1,74 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <title>Add New User Type</title>
-
-<!-- Bootstrap CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-
-<style>
-    body {
-        background-color: #f8f9fa;
-    }
-    .card {
-        margin-top: 80px;
-        border-radius: 12px;
-    }
-</style>
-
 <jsp:include page="AdminCSS.jsp"></jsp:include>
-
 </head>
 
 <body>
 
-<!-- header -->
-	<jsp:include page="AdminHeader.jsp"></jsp:include>
+	<div class="container-scroller">
 
+		<jsp:include page="AdminHeader.jsp"></jsp:include>
 
-	<!-- Sidebar -->
-	<jsp:include page="AdminSidebar.jsp"></jsp:include>
+		<div class="container-fluid page-body-wrapper">
 
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-6 col-lg-5">
-            <div class="card shadow">
-                <div class="card-body p-4">
-                    <h4 class="text-center mb-4">Add New User Type</h4>
+			<jsp:include page="AdminLeftSidebar.jsp"></jsp:include>
 
-                    <form action="saveUserType" method="post">
-                        
-                        <!-- User Type -->
-                        <div class="mb-3">
-                            <label class="form-label">User Type</label>
-                            <input type="text"
-                                   name="userType"
-                                   class="form-control"
-                                   placeholder="Enter user type"
-                                   required>
-                        </div>
+			<div class="main-panel">
+				<div class="content-wrapper">
 
-                        <!-- Buttons -->
-                        <div class="d-grid gap-2">
-                            <button type="submit" class="btn btn-primary">
-                                Save User Type
-                            </button>
-                            <a href="admin-dashboard" class="btn btn-secondary">
-                                Cancel
-                            </a>
-                        </div>
+					<div class="text-center mb-4">
+						<h3 class="font-weight-bold d-inline-block border-bottom pb-2">
+							New User Type</h3>
+					</div>
 
-                    </form>
+					<div class="row justify-content-center">
+						<div class="col-md-6 col-lg-5">
 
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+							<div class="card">
+								<div class="card-body">
 
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+									<div class="d-flex justify-content-between mb-3">
+										<p class="card-title mb-0">Add New User Type</p>
+										<a href="listUser" class="text-info">View all</a>
+									</div>
+
+									<form action="saveUserType" method="post">
+
+										<div class="mb-3">
+											<label class="form-label">User Type</label> <input
+												type="text" name="userType" class="form-control"
+												placeholder="Enter user type" required>
+										</div>
+
+										<div class="d-flex gap-2">
+											<button type="submit" class="btn btn-primary">Save</button>
+
+											<a href="admin-dashboard" class="btn btn-secondary">
+												Cancel </a>
+										</div>
+
+									</form>
+
+								</div>
+							</div>
+
+						</div>
+					</div>
+
+				</div>
+
+				<jsp:include page="AdminFooter.jsp"></jsp:include>
+
+			</div>
+		</div>
+	</div>
 
 </body>
 </html>

@@ -32,9 +32,9 @@ public class SessionController {
 	public String openSignupPage(Model model) {
 		
 		List<UserTypeEntity> allUserType = userTypeRepository.findAll(); 
-		
+		//userType -> send Signup->
 		model.addAttribute("allUserType",allUserType); 
-		return "Signup"; 
+		return "Signup"; // jsp name
 	}
 
 	@GetMapping("/login")

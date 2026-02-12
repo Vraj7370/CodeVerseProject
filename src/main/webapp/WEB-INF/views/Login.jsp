@@ -1,81 +1,112 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<title>Login</title>
 
-    <!-- Bootstrap 5 CDN -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<jsp:include page="AdminCSS.jsp"></jsp:include>
 
-    <title>Login</title>
+<style>
 
-    <style>
-        body {
-            background: #f5f6fa;
-        }
+/* Center Card */
+.login-wrapper {
+	min-height: 75vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
 
-        .login-card {
-            max-width: 420px;
-            margin: 60px auto;
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
-            background: #fff;
-        }
-    </style>
+.login-card {
+	width: 100%;
+	max-width: 420px;
+	border-radius: 14px;
+}
+
+.login-card .card-body {
+	padding: 35px;
+}
+</style>
+
 </head>
 
 <body>
 
-    <div class="container">
-        <div class="login-card">
+	<div class="container-scroller">
 
-            <h3 class="text-center mb-4">Login</h3>
+		<!-- Navbar -->
+		<jsp:include page="AdminHeader.jsp"></jsp:include>
 
-            <!-- Display error message -->
-            <c:if test="${not empty error}">
-                <div class="alert alert-danger">${error}</div>
-            </c:if>
+		<div class="container-fluid page-body-wrapper">
 
-            <form action="loginUser" method="post">
+			<!-- Sidebar -->
+			<jsp:include page="AdminLeftSidebar.jsp"></jsp:include>
 
-                <!-- Email -->
-                <div class="mb-3">
-                    <label for="email" class="form-label">Email Address</label>
-                    <input type="email" name="email" id="email" class="form-control" 
-                           placeholder="Enter your email" required>
-                </div>
+			<div class="main-panel">
+				<div class="content-wrapper">
 
-                <!-- Password -->
-                <div class="mb-3">
-                    <label for="password" class="form-label">Password</label>
-                    <input type="password" name="password" id="password" class="form-control" 
-                           placeholder="Enter your password" required>
-                </div>
+					<div class="login-wrapper">
 
-                <!-- Login Button -->
-                <button type="submit" class="btn btn-primary w-100">Login</button>
+						<div class="card shadow-sm login-card">
+							<div class="card-body">
 
-                <!-- Register Link -->
-                <p class="text-center mt-3">
-                    Don't have an account? 
-                    <a href="signup">Sign Up</a>
-                </p>
+								<div class="text-center mb-4">
+									<h3 class="font-weight-bold d-inline-block border-bottom pb-2">
+										Login</h3>
+								</div>
 
-                <p class="text-center mt-3">
-                    Forget Password? 
-                    <a href="forgetpassword">Click Here</a>
-                </p>
+								<!-- Error Message -->
+								<c:if test="${not empty error}">
+									<div class="alert alert-danger text-center">${error}</div>
+								</c:if>
 
-            </form>
-        </div>
-    </div>
+								<form action="loginUser" method="post">
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+									<div class="mb-3">
+										<label class="form-label">Email Address</label> <input
+											type="email" name="email" class="form-control"
+											placeholder="Enter your email" required>
+									</div>
+
+									<div class="mb-3">
+										<label class="form-label">Password</label> <input
+											type="password" name="password" class="form-control"
+											placeholder="Enter your password" required>
+									</div>
+
+									<button type="submit" class="btn btn-primary w-100 mt-2">
+										Login</button>
+
+									<div class="text-center mt-3">
+										<small> Don't have an account? <a href="signup">Sign
+												Up</a>
+										</small>
+									</div>
+
+									<div class="text-center mt-2">
+										<small> Forgot Password? <a href="forgetpassword">
+												Click Here </a>
+										</small>
+									</div>
+
+								</form>
+
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+
+				<jsp:include page="AdminFooter.jsp"></jsp:include>
+
+			</div>
+		</div>
+	</div>
 
 </body>
 </html>

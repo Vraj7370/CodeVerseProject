@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.Grownited.entity.UserTypeEntity;
 import com.Grownited.repository.UserTypeRepository;
 
+//Logic			DB			?			? 
+//Controller , Repository , Service , Component 
 @Controller 
 public class UserTypeController {
 

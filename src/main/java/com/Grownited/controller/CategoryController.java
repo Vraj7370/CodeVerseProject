@@ -12,10 +12,12 @@ import com.Grownited.entity.CategoryEntity;
 import com.Grownited.repository.CategoryRepository;
 
 
+//JPA -> specification  
+
 @Controller
 public class CategoryController {
 
-	@Autowired
+	@Autowired // inject 
 	CategoryRepository categoryRepository; 
 	
 	@GetMapping("newCategory")
@@ -34,7 +36,12 @@ public class CategoryController {
 	
 	@GetMapping("listCategory")
 	public String listCategory(Model model) {
-	
+		//select * from categories ; 
+		//1
+		//2
+		//3
+		//4
+		//List<Entity> 
 		List<CategoryEntity> categoryList = categoryRepository.findAll();
 		model.addAttribute("categoryList",categoryList);//
 		
