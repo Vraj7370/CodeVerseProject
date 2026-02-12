@@ -60,13 +60,15 @@ public class SessionController {
 		userEntity.setActive(true);
 		userEntity.setCreatedAt(LocalDate.now());
 		
-		
-		userRepository.save(userEntity); 
+		// users insert -> UserRepository
+		// new -> X
+		userRepository.save(userEntity); //users insert  -> userId 
 		userDetailEntity.setUserId(userEntity.getUserId());
 		userDetailRepository.save(userDetailEntity);//
 		
 		 
 		return "Login";
 	}
+
 
 }

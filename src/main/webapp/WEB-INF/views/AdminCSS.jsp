@@ -6,7 +6,7 @@
 	href="assets/vendors/font-awesome/css/font-awesome.min.css">
 <link rel="stylesheet"
 	href="assets/vendors/mdi/css/materialdesignicons.min.css">
-<
+
 <!-- <link rel="stylesheet" href="assets/vendors/datatables.net-bs4/dataTables.bootstrap4.css"> -->
 
 <link rel="stylesheet"

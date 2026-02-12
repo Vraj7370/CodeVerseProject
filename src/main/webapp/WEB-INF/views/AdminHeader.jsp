@@ -1,10 +1,48 @@
+
+<style>
+
+/* ===== FIX LOGO SIZE (Override SkyDash default) ===== */
+
+.navbar .brand-logo img {
+    height: 71px !important;   /* logo bada */
+    width: auto !important;
+    max-height: none !important;
+}
+
+.navbar-brand-wrapper {
+    height: 75px !important;   /* navbar height adjust */
+    display: flex;
+    align-items: center;
+}
+
+/* Hover thoda smooth */
+.navbar .brand-logo img:hover {
+    transform: scale(1.05);
+    transition: 0.3s ease;
+}
+/* ===== SOLID WHITE NAVBAR FIX ===== */
+
+.navbar {
+    background-color: #ffffff !important;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+}
+
+.navbar.fixed-top {
+    background-color: #ffffff !important;
+}
+
+.navbar-brand-wrapper {
+    background-color: #ffffff !important;
+}
+</style>
+
+
 <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
 			<div
 				class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-start">
 				<a class="navbar-brand brand-logo me-5" href="admin-dashboard"><img
-					src="assets/images/logo.svg" class="me-2" alt="logo" /></a> <a
-					class="navbar-brand brand-logo-mini" href="admin-dashboard"><img
-					src="assets/images/logo-mini.svg" alt="logo" /></a>
+					src="assets/images/codeverse-logo.png" class="me-2" alt="logo" /></a> 
+					
 			</div>
 			<div
 				class="navbar-menu-wrapper d-flex align-items-center justify-content-end">

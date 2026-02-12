@@ -134,14 +134,16 @@
 																</c:otherwise>
 															</c:choose></td>
 
-														<td class="text-center"><a
+														<td class="text-center">
+														<a
 															href="editCategory?id=${cat.categoryId}"
 															class="btn btn-sm btn-outline-warning action-btn">
-																Edit </a> <a href="deleteCategory?id=${cat.categoryId}"
+																Edit </a> 
+														<a href="deleteCategory?categoryId=${cat.categoryId}"
 															class="btn btn-sm btn-outline-danger action-btn"
 															onclick="return confirm('Are you sure you want to delete this category?')">
 																Delete </a></td>
-
+																
 													</tr>
 
 												</c:forEach>

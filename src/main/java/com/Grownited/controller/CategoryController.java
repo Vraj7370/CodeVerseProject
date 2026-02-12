@@ -40,6 +40,14 @@ public class CategoryController {
 		
 		return "ListCategory";
 	}
+	
+	@GetMapping("/deleteCategory")
+	public String deleteCategory(Integer categoryId) {
+
+	    categoryRepository.deleteById(categoryId);
+
+	    return "redirect:/listCategory";
+	}
 		
 
 }

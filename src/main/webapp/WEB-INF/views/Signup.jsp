@@ -10,59 +10,41 @@
 
 <jsp:include page="AdminCSS.jsp"></jsp:include>
 
+</head>
+<jsp:include page="AdminCSS.jsp"></jsp:include>
+
 <style>
 
-/* ===== Card Styling ===== */
-.card {
-	border-radius: 14px;
+/* ===== PERFECT SKYDASH RADIO ALIGNMENT ===== */
+.form-check-inline {
+	display: inline-flex !important;
+	align-items: center !important;
+	margin-right: 25px;
+	padding-left: 0;
 }
 
-/* ===== Gender Professional Alignment ===== */
-.gender-group {
-	display: flex;
-	gap: 35px;
-	align-items: center;
-	height: 38px;
-}
-
-.gender-option {
-	display: flex;
-	align-items: center;
-	gap: 6px;
-}
-
-.gender-option input[type="radio"] {
-	margin: 0;
-	width: 16px;
-	height: 16px;
+.form-check-input {
+	margin: 0 !important;
+	position: relative !important;
+	top: 1px; /* tiny vertical adjustment */
 	cursor: pointer;
 }
 
-.gender-option label {
-	margin: 0;
+.form-check-label {
+	margin: 0 0 0 6px !important;
+	line-height: 1.5;
+	cursor: pointer;
 	font-weight: 500;
-	cursor: pointer;
 }
 
-/* ===== Button polish ===== */
-.btn-primary {
-	padding-left: 25px;
-	padding-right: 25px;
-}
-
-.btn-secondary {
-	padding-left: 25px;
-	padding-right: 25px;
+/* Remove extra bootstrap spacing */
+.form-check {
+	padding-left: 0;
 }
 </style>
-</head>
-
 <body>
-
 	<div class="container-scroller">
 
-		<!-- Navbar -->
-		<jsp:include page="AdminHeader.jsp"></jsp:include>
 
 		<div class="container-fluid page-body-wrapper">
 
@@ -79,90 +61,79 @@
 					</div>
 
 					<div class="row justify-content-center">
-						<div class="col-lg-9">
+						<div class="col-lg-8">
 
 							<div class="card shadow-sm">
 								<div class="card-body">
 
-									<form action="register" method="post"
-										enctype="multipart/form-data">
+									<form action="register" method="post">
 
-										<div class="row g-3">
+										<div class="row">
 
-											<!-- First Name -->
-											<div class="col-md-6">
+											<div class="col-md-6 mb-3">
 												<label class="form-label">First Name</label> <input
 													type="text" name="firstName" class="form-control" required>
 											</div>
 
-											<!-- Last Name -->
-											<div class="col-md-6">
+											<div class="col-md-6 mb-3">
 												<label class="form-label">Last Name</label> <input
 													type="text" name="lastName" class="form-control" required>
 											</div>
 
-											<!-- Email -->
-											<div class="col-md-6">
+											<div class="col-md-6 mb-3">
 												<label class="form-label">Email</label> <input type="email"
 													name="email" class="form-control" required>
 											</div>
 
-											<!-- Password -->
-											<div class="col-md-6">
+											<div class="col-md-6 mb-3">
 												<label class="form-label">Password</label> <input
 													type="password" name="password" class="form-control"
 													required>
 											</div>
 
 											<!-- Gender -->
-											<div class="col-md-6">
-												<label class="form-label">Gender</label>
+											<!-- Gender -->
+											<div class="col-md-6 mb-3">
+												<label class="form-label d-block">Gender</label>
 
-												<div class="gender-group">
+												<div class="form-check form-check-inline">
+													<input class="form-check-input" type="radio" name="gender"
+														value="MALE" required> <label
+														class="form-check-label">Male</label>
+												</div>
 
-													<div class="gender-option">
-														<input type="radio" name="gender" id="male" value="MALE"
-															required> <label for="male">Male</label>
-													</div>
+												<div class="form-check form-check-inline">
+													<input class="form-check-input" type="radio" name="gender"
+														value="FEMALE"> <label class="form-check-label">Female</label>
+												</div>
 
-													<div class="gender-option">
-														<input type="radio" name="gender" id="female"
-															value="FEMALE"> <label for="female">Female</label>
-													</div>
-
-													<div class="gender-option">
-														<input type="radio" name="gender" id="other" value="OTHER">
-														<label for="other">Other</label>
-													</div>
-
+												<div class="form-check form-check-inline">
+													<input class="form-check-input" type="radio" name="gender"
+														value="OTHER"> <label class="form-check-label">Other</label>
 												</div>
 											</div>
 
-											<!-- Birth Year -->
-											<div class="col-md-6">
+											<div class="col-md-6 mb-3">
 												<label class="form-label">Birth Year</label> <input
 													type="number" name="birthYear" class="form-control"
 													min="1900" max="2100" required>
 											</div>
 
-											<!-- Contact -->
-											<div class="col-md-6">
+											<div class="col-md-6 mb-3">
 												<label class="form-label">Contact Number</label> <input
 													type="text" name="contactNum" class="form-control" required>
 											</div>
 
-											<!-- Qualification -->
-											<div class="col-md-6">
+											<div class="col-md-6 mb-3">
 												<label class="form-label">Qualification</label> <input
 													type="text" name="qualification" class="form-control"
-													required>
+													placeholder="e.g. B.Tech, MCA, BSc" required>
 											</div>
 
-											<!-- User Type -->
-											<div class="col-md-6">
+											<div class="col-md-6 mb-3">
 												<label class="form-label">User Type</label> <select
-													name="userTypeId" class="form-control" required>
-													<option value="">-- Select User Type --</option>
+													name="userTypeId" class="form-control">
+													<option value="-1">---Select User Type---</option>
 
 													<c:forEach items="${allUserType}" var="ut">
 														<option value="${ut.userTypeId}">${ut.userType}</option>
@@ -170,38 +141,31 @@
 												</select>
 											</div>
 
-											<!-- City -->
-											<div class="col-md-4">
+											<div class="col-md-4 mb-3">
 												<label class="form-label">City</label> <input type="text"
 													name="city" class="form-control" required>
 											</div>
 
-											<!-- State -->
-											<div class="col-md-4">
+											<div class="col-md-4 mb-3">
 												<label class="form-label">State</label> <input type="text"
 													name="state" class="form-control" required>
 											</div>
 
-											<!-- Country -->
-											<div class="col-md-4">
+											<div class="col-md-4 mb-3">
 												<label class="form-label">Country</label> <input type="text"
 													name="country" value="India" class="form-control" required>
 											</div>
 
-											<!-- Profile Picture -->
-											<div class="col-12">
-												<label class="form-label"> Profile Picture </label> <input
+											<div class="col-12 mb-3">
+												<label class="form-label">Profile Picture URL</label> <input
 													type="file" name="profilePicURL" class="form-control">
 											</div>
 
 										</div>
 
-										<!-- Buttons -->
-										<div class="text-center mt-4">
-											<button type="submit" class="btn btn-primary">Save
-												User</button>
-
-											<a href="listUser" class="btn btn-secondary"> Cancel </a>
+										<div class="text-center mt-3">
+											<button type="submit" class="btn btn-primary px-4">
+												Save User</button>
 										</div>
 
 									</form>

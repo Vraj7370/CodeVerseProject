@@ -51,5 +51,17 @@ public class HackathonController {
 	}
 	
 	
+	@GetMapping("viewHackathon")
+	public String viewHackathon(Integer hackathonId, Model model) {
+
+
+	    HackathonEntity hackathon = hackathonRepository.findById(hackathonId).orElse(null);
+
+
+	    model.addAttribute("hackathon", hackathon);
+
+	    return "ViewHackathon";
+	}
+	
 
 }

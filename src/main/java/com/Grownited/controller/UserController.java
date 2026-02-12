@@ -50,5 +50,19 @@ public class UserController {
 		}
 
 	}
+	
+	@GetMapping("deleteUser")
+	public String deleteUser(Integer userId) {
+
+	    // Pehle userDetail delete karo (agar foreign key relation hai)
+	    userDetailRepository.deleteById(userId);
+
+	    // Fir main user delete karo
+	    userRepository.deleteById(userId);
+
+	    return "redirect:/listUser";
+	}
+	
+	
 
 }
