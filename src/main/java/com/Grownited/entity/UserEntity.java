@@ -8,7 +8,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
-@Entity // create table
+@Entity 
 @Table(name = "users") // this will assign table name => users
 public class UserEntity {
 
@@ -20,7 +20,7 @@ public class UserEntity {
 	private String email;
 	private String password;
 	private LocalDate createdAt;  
-	private String role; //admin , participant , judge
+	private String role; 
 	private String gender;
 	private Integer birthYear;
 	private String contactNum; 

@@ -32,9 +32,9 @@ public class SessionController {
 	public String openSignupPage(Model model) {
 		
 		List<UserTypeEntity> allUserType = userTypeRepository.findAll(); 
-		//userType -> send Signup->
+
 		model.addAttribute("allUserType",allUserType); 
-		return "Signup"; // jsp name
+		return "Signup"; 
 	}
 
 	@GetMapping("/login")
@@ -60,9 +60,8 @@ public class SessionController {
 		userEntity.setActive(true);
 		userEntity.setCreatedAt(LocalDate.now());
 		
-		// users insert -> UserRepository
-		// new -> X
-		userRepository.save(userEntity); //users insert  -> userId 
+		
+		userRepository.save(userEntity); 
 		userDetailEntity.setUserId(userEntity.getUserId());
 		userDetailRepository.save(userDetailEntity);//
 		

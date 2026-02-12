@@ -33,7 +33,7 @@ public class HackathonController {
 	@PostMapping("saveHackathon")
 	public String saveHackathon(HackathonEntity hackathonEntity) {
 		hackathonRepository.save(hackathonEntity);
-		return "redirect:/listHackathon";//do not open jsp , open another url -> listHackathon
+		return "redirect:/listHackathon";
 	}
 
 	@GetMapping("listHackathon")
@@ -47,7 +47,7 @@ public class HackathonController {
 	public String deleteHackathon(Integer hackathonId) {
 		hackathonRepository.deleteById(hackathonId);
 		
-		return "redirect:/listHackathon";//do not open jsp , open another url -> listHackathon
+		return "redirect:/listHackathon";
 	}
 	
 	

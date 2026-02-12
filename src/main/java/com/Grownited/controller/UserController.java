@@ -32,8 +32,7 @@ public class UserController {
 
 	@GetMapping("viewUser")
 	public String viewUser(Integer userId, Model model) {
-		// read userId
-		// select * from users where userId = rock?
+		
 		Optional<UserEntity> opUser = userRepository.findById(userId);// Optional
 		Optional<UserDetailEntity> opUserDetail = userDetailRepository.findByUserId(userId);
 		if (opUser.isEmpty()) {
