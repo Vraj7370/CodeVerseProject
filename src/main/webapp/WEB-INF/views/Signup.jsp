@@ -11,7 +11,6 @@
 <jsp:include page="AdminCSS.jsp"></jsp:include>
 
 </head>
-<jsp:include page="AdminCSS.jsp"></jsp:include>
 
 <style>
 
@@ -43,6 +42,9 @@
 }
 </style>
 <body>
+
+	<jsp:include page="AdminHeader.jsp"></jsp:include>
+	
 	<div class="container-scroller">
 
 

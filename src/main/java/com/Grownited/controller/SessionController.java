@@ -49,20 +49,19 @@ public class SessionController {
 
 	@PostMapping("/register")
 	public String register(UserEntity userEntity, UserDetailEntity userDetailEntity) {
-		System.out.println(userEntity.getFirstName());
-		System.out.println(userEntity.getLastName());
-		System.out.println("Processor => " + Runtime.getRuntime().availableProcessors());
-		System.out.println(userDetailEntity.getCountry());
-		System.out.println(userDetailEntity.getState());
+//		System.out.println(userEntity.getFirstName());
+//		System.out.println(userEntity.getLastName());
+//		System.out.println("Processor => " + Runtime.getRuntime().availableProcessors());
+//		System.out.println(userDetailEntity.getCountry());
+//		System.out.println(userDetailEntity.getState());
 
 		
 		userEntity.setRole("PARTICIPANT");
 		userEntity.setActive(true);
 		userEntity.setCreatedAt(LocalDate.now());
 		
-		// users insert -> UserRepository
-		// new -> X
-		userRepository.save(userEntity); //users insert  -> userId 
+		
+		userRepository.save(userEntity); 
 		userDetailEntity.setUserId(userEntity.getUserId());
 		userDetailRepository.save(userDetailEntity);//
 		

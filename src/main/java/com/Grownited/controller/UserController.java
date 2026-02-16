@@ -1,7 +1,6 @@
 package com.Grownited.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,32 +31,26 @@ public class UserController {
 
 	@GetMapping("viewUser")
 	public String viewUser(Integer userId, Model model) {
-		
-		Optional<UserEntity> opUser = userRepository.findById(userId);// Optional
-		Optional<UserDetailEntity> opUserDetail = userDetailRepository.findByUserId(userId);
-		if (opUser.isEmpty()) {
-			// error set
-			// list redirect
-			return "";
-		} else {
 
-			UserEntity userEntity = opUser.get();
-			UserDetailEntity userDetailEntity = opUserDetail.get();
+	    UserEntity user = userRepository.findById(userId).orElse(null);
+	    UserDetailEntity userDetail = userDetailRepository.findByUserId(userId).orElse(null);
 
-			model.addAttribute("user", userEntity);
-			model.addAttribute("userDetail", userDetailEntity);
-			return "ViewUser";
-		}
+	    if (user == null) {
+	        return "redirect:/listUser";
+	    }
 
+	    model.addAttribute("user", user);
+	    model.addAttribute("userDetail", userDetail);
+
+	    return "ViewUser";
 	}
 	
 	@GetMapping("deleteUser")
 	public String deleteUser(Integer userId) {
 
-	    // Pehle userDetail delete karo (agar foreign key relation hai)
+
 	    userDetailRepository.deleteById(userId);
 
-	    // Fir main user delete karo
 	    userRepository.deleteById(userId);
 
 	    return "redirect:/listUser";

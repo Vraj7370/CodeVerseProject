@@ -27,7 +27,6 @@ public class CategoryController {
 	public String saveCategory(CategoryEntity categoryEntity) {
 
 		categoryEntity.setActive(true);
-		//insert 
 		categoryRepository.save(categoryEntity); 
 		return "AdminDashboard";
 	}
