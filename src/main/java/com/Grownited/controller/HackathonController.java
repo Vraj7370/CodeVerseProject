@@ -9,9 +9,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.Grownited.entity.HackathonEntity;
+import com.Grownited.entity.UserEntity;
 import com.Grownited.entity.UserTypeEntity;
 import com.Grownited.repository.HackathonRepository;
 import com.Grownited.repository.UserTypeRepository;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller  // MVC Controller to handle requests
 public class HackathonController {
@@ -30,11 +33,12 @@ public class HackathonController {
 		return "NewHackathon";
 	}
 	
-	// Save Hackathon (Create)
 	@PostMapping("saveHackathon")
-	public String saveHackathon(HackathonEntity hackathonEntity) {
+	public String saveHackathon(HackathonEntity hackathonEntity,HttpSession session) {
+		UserEntity currentLogInUser = (UserEntity) session.getAttribute("user");
+		hackathonEntity.setUserId(currentLogInUser.getUserId());
 		hackathonRepository.save(hackathonEntity);
-		return "redirect:/listHackathon";
+		return "redirect:/listHackathon";//do not open jsp , open another url -> listHackathon
 	}
 
 	// List all Hackathons (Read)

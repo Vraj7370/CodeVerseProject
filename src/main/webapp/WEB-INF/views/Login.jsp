@@ -64,7 +64,7 @@
 									<div class="alert alert-danger text-center">${error}</div>
 								</c:if>
 
-								<form action="loginUser" method="post">
+								<form action="authenticate" method="post">
 
 									<div class="mb-3">
 										<label class="form-label">Email Address</label> <input

@@ -27,9 +27,10 @@
 			<div class="main-panel">
 				<div class="content-wrapper">
 
-					<!-- Welcome Section -->
-					<h3 class="font-weight-bold">Welcome ${sessionScope.userName}
-					</h3>
+					<c:if test="${not empty sessionScope.user}">
+						<h3 class="font-weight-bold">Welcome
+							${sessionScope.user.firstName} ${sessionScope.user.lastName}</h3>
+					</c:if>
 
 					<h6 class="font-weight-normal mb-4">Hackathon Management
 						Dashboard Overview</h6>
