@@ -17,7 +17,7 @@
 					<li class="nav-item"><a class="nav-link" href="newUserType">Add
 							NewUser Type</a></li>
 					<li class="nav-item"><a class="nav-link" href="listUserType">List
-							NewUser Type</a></li>		
+							NewUser Type</a></li>
 					<li class="nav-item"><a class="nav-link" href="listUser">User
 							List</a></li>
 				</ul>
@@ -48,6 +48,17 @@
 
 					<li class="nav-item"><a class="nav-link" href="listHackathon">List
 							Hackathon</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="newHackathonDescription">New Hackathon description </a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="listHackathonDescription">List Hackathon description </a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="newHackathonPrize">New Hackathon Prize </a></li>
+
+					<li class="nav-item"><a class="nav-link"
+						href="newHackathonTeam">New Hackathon Team </a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="listHackathonTeam">List Hackathon Team </a></li>
 				</ul>
 			</div></li>
 		<li class="nav-item"><a class="nav-link"
@@ -79,10 +90,10 @@
 		</a>
 			<div class="collapse" id="auth">
 				<ul class="nav flex-column sub-menu">
-					<li class="nav-item"><a class="nav-link"
-						href="login"> Login </a></li>
-					<li class="nav-item"><a class="nav-link"
-						href="signup"> Register </a></li>
+					<li class="nav-item"><a class="nav-link" href="login">
+							Login </a></li>
+					<li class="nav-item"><a class="nav-link" href="signup">
+							Register </a></li>
 				</ul>
 			</div></li>
 		<li class="nav-item"><a class="nav-link"

@@ -16,8 +16,10 @@ import com.Grownited.entity.UserTypeEntity;
 import com.Grownited.repository.UserDetailRepository;
 import com.Grownited.repository.UserRepository;
 import com.Grownited.repository.UserTypeRepository;
+import com.Grownited.service.MailerService;
 
 import jakarta.servlet.http.HttpSession;
+
 
 @Controller
 public class SessionController {
@@ -31,11 +33,13 @@ public class SessionController {
 	@Autowired
 	UserDetailRepository userDetailRepository;
 
+	@Autowired
+	MailerService mailerService;
+	
 	@GetMapping("/signup")
 	public String openSignupPage(Model model) {
 
 		List<UserTypeEntity> allUserType = userTypeRepository.findAll();
-
 		model.addAttribute("allUserType", allUserType);
 		return "Signup";
 	}
@@ -46,7 +50,7 @@ public class SessionController {
 	}
 
 	@PostMapping("/authenticate")
-	public String authenticate(String email, String password, Model model, HttpSession session) {
+	public String authenticate(String email, String password,Model model,HttpSession session) {
 		Optional<UserEntity> op = userRepository.findByEmail(email);
 
 		if (op.isPresent()) {
@@ -62,8 +66,8 @@ public class SessionController {
 				}
 			}
 		}
-
-		model.addAttribute("error", "Invalid Credentials");
+		
+		model.addAttribute("error","Invalid Credentials");
 		return "Login";
 	}
 
@@ -74,27 +78,27 @@ public class SessionController {
 
 	@PostMapping("/register")
 	public String register(UserEntity userEntity, UserDetailEntity userDetailEntity) {
-//		System.out.println(userEntity.getFirstName());
-//		System.out.println(userEntity.getLastName());
-//		System.out.println("Processor => " + Runtime.getRuntime().availableProcessors());
-//		System.out.println(userDetailEntity.getCountry());
-//		System.out.println(userDetailEntity.getState());
 
 		userEntity.setRole("PARTICIPANT");
 		userEntity.setActive(true);
 		userEntity.setCreatedAt(LocalDate.now());
 
-		userRepository.save(userEntity);
+		
+		userRepository.save(userEntity); 
 		userDetailEntity.setUserId(userEntity.getUserId());
-		userDetailRepository.save(userDetailEntity);//
-
+		userDetailRepository.save(userDetailEntity);
+		
+		//welcome mail send
+		mailerService.sendWelcomeMail(userEntity);
 		return "Login";
 	}
 
 	@GetMapping("logout")
 	public String logout(HttpSession session) {
-		session.invalidate();
+		session.invalidate(); 
 		return "Login";
 	}
-
+	
+	
+	
 }
