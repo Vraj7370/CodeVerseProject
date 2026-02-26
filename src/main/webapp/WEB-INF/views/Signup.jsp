@@ -68,7 +68,7 @@
 							<div class="card shadow-sm">
 								<div class="card-body">
 
-									<form action="register" method="post">
+									<form action="register" method="post" enctype="multipart/form-data" >
 
 										<div class="row">
 
@@ -160,7 +160,7 @@
 
 											<div class="col-12 mb-3">
 												<label class="form-label">Profile Picture URL</label> <input
-													type="file" name="profilePicURL" class="form-control">
+													type="file" name="profilePic" class="form-control">
 											</div>
 
 										</div>

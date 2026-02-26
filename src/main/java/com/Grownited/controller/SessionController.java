@@ -1,7 +1,9 @@
 package com.Grownited.controller;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.Grownited.entity.UserDetailEntity;
 import com.Grownited.entity.UserEntity;
@@ -18,6 +21,7 @@ import com.Grownited.repository.UserDetailRepository;
 import com.Grownited.repository.UserRepository;
 import com.Grownited.repository.UserTypeRepository;
 import com.Grownited.service.MailerService;
+import com.cloudinary.Cloudinary;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -38,6 +42,9 @@ public class SessionController {
 
 	@Autowired
 	MailerService mailerService;
+
+	@Autowired
+	Cloudinary cloudinary;
 
 	@GetMapping("/signup")
 	public String openSignupPage(Model model) {
@@ -82,25 +89,38 @@ public class SessionController {
 	}
 
 	@PostMapping("/register")
-	public String register(UserEntity userEntity, UserDetailEntity userDetailEntity) {
-
-		// encode password FIRST
-		String encodedPassword = passwordEncoder.encode(userEntity.getPassword());
-
-		userEntity.setPassword(encodedPassword);
+	public String register(UserEntity userEntity, UserDetailEntity userDetailEntity, MultipartFile profilePic) {
 
 		userEntity.setRole("PARTICIPANT");
 		userEntity.setActive(true);
 		userEntity.setCreatedAt(LocalDate.now());
 
+		// password encode
+		String encodedPassword = passwordEncoder.encode(userEntity.getPassword());
+
+		userEntity.setPassword(encodedPassword);
+		try {
+
+			if (profilePic != null && !profilePic.isEmpty()) {
+
+				System.out.println(profilePic.getOriginalFilename());
+
+				Map uploadResult = cloudinary.uploader().upload(profilePic.getBytes(), Map.of());
+
+				String profilePicURL = uploadResult.get("secure_url").toString();
+
+				userEntity.setProfilePicURL(profilePicURL);
+			}
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		// save user
 		userRepository.save(userEntity);
 
-		// save user detail
 		userDetailEntity.setUserId(userEntity.getUserId());
 		userDetailRepository.save(userDetailEntity);
 
-		// welcome mail
 		mailerService.sendWelcomeMail(userEntity);
 
 		return "Login";
