@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +21,6 @@ import com.Grownited.service.MailerService;
 
 import jakarta.servlet.http.HttpSession;
 
-
 @Controller
 public class SessionController {
 
@@ -34,8 +34,11 @@ public class SessionController {
 	UserDetailRepository userDetailRepository;
 
 	@Autowired
+	PasswordEncoder passwordEncoder;
+
+	@Autowired
 	MailerService mailerService;
-	
+
 	@GetMapping("/signup")
 	public String openSignupPage(Model model) {
 
@@ -50,13 +53,15 @@ public class SessionController {
 	}
 
 	@PostMapping("/authenticate")
-	public String authenticate(String email, String password,Model model,HttpSession session) {
+	public String authenticate(String email, String password, Model model, HttpSession session) {
 		Optional<UserEntity> op = userRepository.findByEmail(email);
 
 		if (op.isPresent()) {
 			UserEntity dbUser = op.get();
 			session.setAttribute("user", dbUser);
-			if (dbUser.getPassword().equals(password)) {
+
+			if (passwordEncoder.matches(password, dbUser.getPassword())) {
+
 				if (dbUser.getRole().equals("ADMIN")) {
 					return "redirect:/admin-dashboard";
 				} else if (dbUser.getRole().equals("PARTICIPANT")) {
@@ -66,8 +71,8 @@ public class SessionController {
 				}
 			}
 		}
-		
-		model.addAttribute("error","Invalid Credentials");
+
+		model.addAttribute("error", "Invalid Credentials");
 		return "Login";
 	}
 
@@ -79,26 +84,32 @@ public class SessionController {
 	@PostMapping("/register")
 	public String register(UserEntity userEntity, UserDetailEntity userDetailEntity) {
 
+		// encode password FIRST
+		String encodedPassword = passwordEncoder.encode(userEntity.getPassword());
+
+		userEntity.setPassword(encodedPassword);
+
 		userEntity.setRole("PARTICIPANT");
 		userEntity.setActive(true);
 		userEntity.setCreatedAt(LocalDate.now());
 
-		
-		userRepository.save(userEntity); 
+		// save user
+		userRepository.save(userEntity);
+
+		// save user detail
 		userDetailEntity.setUserId(userEntity.getUserId());
 		userDetailRepository.save(userDetailEntity);
-		
-		//welcome mail send
+
+		// welcome mail
 		mailerService.sendWelcomeMail(userEntity);
+
 		return "Login";
 	}
 
 	@GetMapping("logout")
 	public String logout(HttpSession session) {
-		session.invalidate(); 
+		session.invalidate();
 		return "Login";
 	}
-	
-	
-	
+
 }
