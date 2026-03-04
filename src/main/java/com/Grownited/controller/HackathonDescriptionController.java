@@ -19,14 +19,14 @@ public class HackathonDescriptionController {
 
     
     // Open Form Page
-    @GetMapping("newHackathonDescription")
+    @GetMapping("/newHackathonDescription")
     public String newHackathonDescription() {
         return "NewHackathonDescription";
     }
 
     
     // Save Data
-    @PostMapping("saveHackathonDescription")
+    @PostMapping("/saveHackathonDescription")
     public String saveHackathonDescription(HackathonDescriptionEntity hackathonDescriptionEntity) {
 
         hackathonDescriptionRepository.save(hackathonDescriptionEntity);
@@ -36,7 +36,7 @@ public class HackathonDescriptionController {
 
     
     // List Page
-    @GetMapping("listHackathonDescription")
+    @GetMapping("/listHackathonDescription")
     public String listHackathonDescription(Model model) {
 
         List<HackathonDescriptionEntity> descriptionList =
@@ -54,6 +54,6 @@ public class HackathonDescriptionController {
 
         hackathonDescriptionRepository.deleteById(hackathonDescriptionId);
 
-        return "redirect:/listHackathonDescription";
+        return "redirect:listHackathonDescription";
     }
 }

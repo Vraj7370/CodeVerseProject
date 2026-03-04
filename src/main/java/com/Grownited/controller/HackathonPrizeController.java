@@ -24,7 +24,7 @@ public class HackathonPrizeController {
 
 
     // Open Form
-    @GetMapping("newHackathonPrize")
+    @GetMapping("/newHackathonPrize")
     public String newHackathonPrize(Model model) {
 
         List<HackathonEntity> hackathonList =
@@ -37,7 +37,7 @@ public class HackathonPrizeController {
 
 
     // Save
-    @PostMapping("saveHackathonPrize")
+    @PostMapping("/saveHackathonPrize")
     public String saveHackathonPrize(HackathonPrizeEntity prizeEntity) {
 
         hackathonPrizeRepository.save(prizeEntity);
@@ -47,7 +47,7 @@ public class HackathonPrizeController {
 
 
     // List
-    @GetMapping("listHackathonPrize")
+    @GetMapping("/listHackathonPrize")
     public String listHackathonPrize(Model model) {
 
         List<HackathonPrizeEntity> prizeList =
@@ -60,11 +60,11 @@ public class HackathonPrizeController {
 
 
     // Delete
-    @GetMapping("deleteHackathonPrize")
+    @GetMapping("/deleteHackathonPrize")
     public String deleteHackathonPrize(Long hackathonPrizeId) {
 
         hackathonPrizeRepository.deleteById(hackathonPrizeId);
 
-        return "redirect:/listHackathonPrize";
+        return "redirect:listHackathonPrize";
     }
 }

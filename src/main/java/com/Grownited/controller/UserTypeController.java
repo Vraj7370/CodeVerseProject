@@ -23,18 +23,18 @@ public class UserTypeController {
 	@Autowired
 	UserRepository userRepository;
 
-	@GetMapping("newUserType")
+	@GetMapping("/newUserType")
 	public String newUserType() {
 		return "NewUserType";
 	}
 
-	@PostMapping("saveUserType")
+	@PostMapping("/saveUserType")
 	public String saveUserType(UserTypeEntity userTypeEntity) {
 		userTypeRepository.save(userTypeEntity);
 		return "AdminDashboard";
 	}
 
-	@GetMapping("listUserType")
+	@GetMapping("/listUserType")
 	public String listUserType(Model model) {
 
 		List<UserTypeEntity> allUserType = userTypeRepository.findAll();
@@ -42,12 +42,12 @@ public class UserTypeController {
 		return "ListUserType";
 	}
 	
-	@GetMapping("deleteUserType")
+	@GetMapping("/deleteUserType")
 	public String deleteUserType(Integer userTypeId) {
 
 		userTypeRepository.deleteById(userTypeId);
 
-		return "redirect:/listUserType";
+		return "redirect:listUserType";
 	}
 
 }

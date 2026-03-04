@@ -21,7 +21,7 @@ public class UserController {
 	@Autowired
 	UserDetailRepository userDetailRepository;
 
-	@GetMapping("listUser")
+	@GetMapping("/listUser")
 	public String listUser(Model model) {
 
 		List<UserEntity> allUser = userRepository.findAll();
@@ -29,14 +29,14 @@ public class UserController {
 		return "ListUser";
 	}
 
-	@GetMapping("viewUser")
+	@GetMapping("/viewUser")
 	public String viewUser(Integer userId, Model model) {
 
 	    UserEntity user = userRepository.findById(userId).orElse(null);
 	    UserDetailEntity userDetail = userDetailRepository.findByUserId(userId).orElse(null);
 
 	    if (user == null) {
-	        return "redirect:/listUser";
+	        return "redirect:listUser";
 	    }
 
 	    model.addAttribute("user", user);
@@ -45,7 +45,7 @@ public class UserController {
 	    return "ViewUser";
 	}
 	
-	@GetMapping("deleteUser")
+	@GetMapping("/deleteUser")
 	public String deleteUser(Integer userId) {
 
 
@@ -53,7 +53,7 @@ public class UserController {
 
 	    userRepository.deleteById(userId);
 
-	    return "redirect:/listUser";
+	    return "redirect:listUser";
 	}
 	
 	

@@ -70,7 +70,7 @@ public class SessionController {
 			if (passwordEncoder.matches(password, dbUser.getPassword())) {
 
 				if (dbUser.getRole().equals("ADMIN")) {
-					return "redirect:/admin-dashboard";
+					return "redirect:admin-dashboard";
 				} else if (dbUser.getRole().equals("PARTICIPANT")) {
 					return "redirect:/participant-dashboard";
 				} else if (dbUser.getRole().equals("JUDGE")) {
@@ -126,7 +126,7 @@ public class SessionController {
 		return "Login";
 	}
 
-	@GetMapping("logout")
+	@GetMapping("/logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
 		return "Login";

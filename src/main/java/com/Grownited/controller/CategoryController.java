@@ -18,7 +18,7 @@ public class CategoryController {
 	@Autowired 
 	CategoryRepository categoryRepository; 
 	
-	@GetMapping("newCategory")
+	@GetMapping("/newCategory")
 	public String newCategory() {
 		return "NewCategory";
 	}
@@ -31,7 +31,7 @@ public class CategoryController {
 		return "AdminDashboard";
 	}
 	
-	@GetMapping("listCategory")
+	@GetMapping("/listCategory")
 	public String listCategory(Model model) {
 		
 		List<CategoryEntity> categoryList = categoryRepository.findAll();
@@ -45,7 +45,7 @@ public class CategoryController {
 
 	    categoryRepository.deleteById(categoryId);
 
-	    return "redirect:/listCategory";
+	    return "redirect:listCategory";
 	}
 		
 

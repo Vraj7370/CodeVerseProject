@@ -26,7 +26,7 @@ public class HackathonTeamController {
 	UserRepository userRepository;
 
 	// Open Form
-	@GetMapping("newHackathonTeam")
+	@GetMapping("/newHackathonTeam")
 	public String newHackathonTeam(Model model) {
 
 		model.addAttribute("hackathonList", hackathonRepository.findAll());
@@ -37,7 +37,7 @@ public class HackathonTeamController {
 	}
 
 	// Save
-	@PostMapping("saveHackathonTeam")
+	@PostMapping("/saveHackathonTeam")
 	public String saveHackathonTeam(HackathonTeamEntity teamEntity) {
 
 		hackathonTeamRepository.save(teamEntity);
@@ -46,7 +46,7 @@ public class HackathonTeamController {
 	}
 
 	// List
-	@GetMapping("listHackathonTeam")
+	@GetMapping("/listHackathonTeam")
 	public String listHackathonTeam(Model model) {
 
 		List<HackathonTeamEntity> teamList = hackathonTeamRepository.findAll();
@@ -57,11 +57,11 @@ public class HackathonTeamController {
 	}
 
 	// Delete
-	@GetMapping("deleteHackathonTeam")
+	@GetMapping("/deleteHackathonTeam")
 	public String deleteHackathonTeam(Integer hackathonTeamId) {
 
 		hackathonTeamRepository.deleteById(hackathonTeamId);
 
-		return "redirect:/listHackathonTeam";
+		return "redirect:listHackathonTeam";
 	}
 }

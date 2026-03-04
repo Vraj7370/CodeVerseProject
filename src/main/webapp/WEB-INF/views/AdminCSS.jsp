@@ -7,8 +7,6 @@
 <link rel="stylesheet"
 	href="assets/vendors/mdi/css/materialdesignicons.min.css">
 
-<!-- <link rel="stylesheet" href="assets/vendors/datatables.net-bs4/dataTables.bootstrap4.css"> -->
-
 <link rel="stylesheet"
 	href="assets/vendors/datatables.net-bs5/dataTables.bootstrap5.css">
 <link rel="stylesheet"

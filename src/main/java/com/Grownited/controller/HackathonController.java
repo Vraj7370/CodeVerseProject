@@ -16,56 +16,64 @@ import com.Grownited.repository.UserTypeRepository;
 
 import jakarta.servlet.http.HttpSession;
 
-@Controller  // MVC Controller to handle requests
+@Controller // MVC Controller to handle requests
 public class HackathonController {
 
-	@Autowired  // Inject HackathonRepository
+	@Autowired // Inject HackathonRepository
 	HackathonRepository hackathonRepository;
-	
-	@Autowired  // Inject UserTypeRepository
-	UserTypeRepository userTypeRepository; 
-	
+
+	@Autowired // Inject UserTypeRepository
+	UserTypeRepository userTypeRepository;
+
 	// Load New Hackathon form
-	@GetMapping("newHackathon")
+	@GetMapping("/newHackathon")
 	public String newHackathon(Model model) {
 		List<UserTypeEntity> allUserType = userTypeRepository.findAll();
 		model.addAttribute("allUserType", allUserType);
 		return "NewHackathon";
 	}
-	
-	@PostMapping("saveHackathon")
-	public String saveHackathon(HackathonEntity hackathonEntity,HttpSession session) {
+
+	@PostMapping("/saveHackathon")
+	public String saveHackathon(HackathonEntity hackathonEntity, HttpSession session) {
+
 		UserEntity currentLogInUser = (UserEntity) session.getAttribute("user");
+
+		if (currentLogInUser == null) {
+			return "redirect:/login"; // Agar login nahi hai to login page
+		}
+
 		hackathonEntity.setUserId(currentLogInUser.getUserId());
+
 		hackathonRepository.save(hackathonEntity);
-		return "redirect:/listHackathon";//do not open jsp , open another url -> listHackathon
+
+		return "redirect:/listHackathon";
 	}
 
 	// List all Hackathons (Read)
-	@GetMapping("listHackathon")
+	@GetMapping("/listHackathon")
 	public String listHackathon(Model model) {
 		List<HackathonEntity> allHackthon = hackathonRepository.findAll();
 		model.addAttribute("allHackthon", allHackthon);
 		return "ListHackathon";
 	}
-	
+
 	// Delete Hackathon by ID
-	@GetMapping("deleteHackathon")
+	@GetMapping("/deleteHackathon")
 	public String deleteHackathon(Integer hackathonId) {
 		hackathonRepository.deleteById(hackathonId);
 		return "redirect:/listHackathon";
-	}	
-	
+	}
+
 	// View single Hackathon by ID
-	@GetMapping("viewHackathon")
+	@GetMapping("/viewHackathon")
 	public String viewHackathon(Integer hackathonId, Model model) {
 
-	    HackathonEntity hackathon = hackathonRepository.findById(hackathonId).orElse(null);
+		HackathonEntity hackathon = hackathonRepository.findById(hackathonId).orElse(null);
 
-	    if (hackathon == null) {
-	        return "redirect:/listHackathon";
-	    }
-	    model.addAttribute("hackathon", hackathon);
-	    return "ViewHackathon";
+		if (hackathon == null) {
+			return "redirect:/listHackathon";
+		}
+		model.addAttribute("hackathon", hackathon);
+		return "ViewHackathon";
 	}
 }
