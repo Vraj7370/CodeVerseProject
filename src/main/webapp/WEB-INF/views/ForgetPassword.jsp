@@ -67,7 +67,7 @@
 									<div class="alert alert-danger text-center">${error}</div>
 								</c:if>
 
-								<form action="forgetpassword" method="post">
+								<form action="forgot-password" method="post">
 
 									<div class="mb-3">
 										<label class="form-label"> Email Address </label> <input

@@ -40,9 +40,9 @@
 	<div
 		class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-start">
 		<a class="navbar-brand brand-logo me-5" href="admin-dashboard"><img
-			src="assets/images/codeverse-logo.png" class="me-2" alt="logo" /></a> <a
+			src="assets/images/logo.png" class="me-2" alt="logo" /></a> <a
 			class="navbar-brand brand-logo-mini" href="index.html"><img
-			src="assets/images/codeverse-logo.png" alt="logo" /></a>
+			src="assets/images/logo.png" alt="logo" /></a>
 	</div>
 	<div
 		class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
@@ -119,7 +119,7 @@
 						<img src="${sessionScope.user.profilePicURL}" alt="profile" />
 
 					</c:if> <c:if test="${empty sessionScope.user.profilePicURL}">
-						<img src="assets/images/faces/dummy.jpeg" alt="profile" />
+						<img src="assets/images/faces/dummy.png" alt="profile" />
 					</c:if>
 
 

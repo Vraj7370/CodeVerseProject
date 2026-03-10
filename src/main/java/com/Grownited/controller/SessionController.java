@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.Grownited.entity.UserDetailEntity;
@@ -84,8 +85,57 @@ public class SessionController {
 	}
 
 	@GetMapping("/forgetpassword")
-	public String openForgetPassword() {
+	public String showForgotPasswordForm() {
+
 		return "ForgetPassword";
+	}
+
+	@PostMapping("/forgot-password")
+	public String forgotPassword(@RequestParam String email) {
+
+		// 1️⃣ Find user
+		UserEntity user = userRepository.findByemail(email);
+
+		if (user == null) {
+			return "Email not found";
+		}
+
+		// 2️⃣ Call your existing method
+		String otp = mailerService.sendForgotPasswordOtp(email);
+
+		// 3️⃣ Save OTP in database
+		user.setOtp(otp);
+		userRepository.save(user);
+
+		return "ResetPassword";
+	}
+
+	@PostMapping("/reset-password")
+	public String resetPassword(@RequestParam String email, @RequestParam String otp,
+			@RequestParam String newPassword) {
+
+		UserEntity user = userRepository.findByemail(email);
+
+		if (user == null) {
+			return "User not found";
+		}
+
+		if (!user.getOtp().equals(otp)) {
+
+			return "ResetPassword";
+
+		}
+
+		// Encode new password
+		String encodedPassword = passwordEncoder.encode(newPassword);
+		user.setPassword(encodedPassword);
+
+		// Clear OTP after use
+		user.setOtp(null);
+
+		userRepository.save(user);
+
+		return "Login";
 	}
 
 	@PostMapping("/register")
