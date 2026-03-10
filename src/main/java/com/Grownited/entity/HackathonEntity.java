@@ -27,6 +27,7 @@ public class HackathonEntity {
 	LocalDate registrationStartDate;
 	LocalDate registrationEndDate;
 	Integer userId;
+	String description;
 	 
 	
 	
@@ -101,6 +102,12 @@ public class HackathonEntity {
 	}
 	public void setUserId(Integer userId) {
 		this.userId = userId;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	

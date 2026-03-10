@@ -73,7 +73,7 @@ public class SessionController {
 				if (dbUser.getRole().equals("ADMIN")) {
 					return "redirect:/admin-dashboard";
 				} else if (dbUser.getRole().equals("PARTICIPANT")) {
-					return "redirect:/participant-dashboard";
+					return "redirect:/participant/home";
 				} else if (dbUser.getRole().equals("JUDGE")) {
 					return "redirect:/judge-dashboard";
 				}
