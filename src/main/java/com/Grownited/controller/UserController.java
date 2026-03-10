@@ -24,9 +24,18 @@ public class UserController {
 	@GetMapping("/listUser")
 	public String listUser(Model model) {
 
-		List<UserEntity> allUser = userRepository.findAll();
-		model.addAttribute("userList", allUser);
-		return "ListUser";
+	    List<UserEntity> allUser = userRepository.findAll();
+
+	    long adminCount = userRepository.countByRole("ADMIN");
+	    long activeUsers = userRepository.countByActive(true);
+	    long inactiveUsers = userRepository.countByActive(false);
+
+	    model.addAttribute("userList", allUser);
+	    model.addAttribute("adminCount", adminCount);
+	    model.addAttribute("activeUsers", activeUsers);
+	    model.addAttribute("inactiveUsers", inactiveUsers);
+
+	    return "ListUser";
 	}
 
 	@GetMapping("/viewUser")
