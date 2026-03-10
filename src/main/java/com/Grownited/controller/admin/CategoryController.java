@@ -1,4 +1,4 @@
-package com.Grownited.controller;
+package com.Grownited.controller.admin;
 
 import java.util.List;
 
@@ -20,7 +20,7 @@ public class CategoryController {
 	
 	@GetMapping("/newCategory")
 	public String newCategory() {
-		return "NewCategory";
+		return "admin/NewCategory";
 	}
 
 	@PostMapping("saveCategory")
@@ -28,7 +28,7 @@ public class CategoryController {
 
 		categoryEntity.setActive(true);
 		categoryRepository.save(categoryEntity); 
-		return "AdminDashboard";
+		return "admin/AdminDashboard";
 	}
 	
 	@GetMapping("/listCategory")
@@ -37,7 +37,7 @@ public class CategoryController {
 		List<CategoryEntity> categoryList = categoryRepository.findAll();
 		model.addAttribute("categoryList",categoryList);//
 		
-		return "ListCategory";
+		return "admin/ListCategory";
 	}
 	
 	@GetMapping("/deleteCategory")
@@ -45,7 +45,7 @@ public class CategoryController {
 
 	    categoryRepository.deleteById(categoryId);
 
-	    return "redirect:listCategory";
+	    return "redirect:/listCategory";
 	}
 		
 

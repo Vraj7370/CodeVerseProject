@@ -1,4 +1,4 @@
-package com.Grownited.controller;
+package com.Grownited.controller.admin;
 
 import java.util.List;
 
@@ -21,7 +21,7 @@ public class HackathonDescriptionController {
     // Open Form Page
     @GetMapping("/newHackathonDescription")
     public String newHackathonDescription() {
-        return "NewHackathonDescription";
+        return "admin/NewHackathonDescription";
     }
 
     
@@ -31,7 +31,7 @@ public class HackathonDescriptionController {
 
         hackathonDescriptionRepository.save(hackathonDescriptionEntity);
 
-        return "AdminDashboard";
+        return "admin/AdminDashboard";
     }
 
     
@@ -44,7 +44,7 @@ public class HackathonDescriptionController {
 
         model.addAttribute("descriptionList", descriptionList);
 
-        return "ListHackathonDescription";
+        return "admin/ListHackathonDescription";
     }
 
     
@@ -54,6 +54,6 @@ public class HackathonDescriptionController {
 
         hackathonDescriptionRepository.deleteById(hackathonDescriptionId);
 
-        return "redirect:listHackathonDescription";
+        return "redirect:/listHackathonDescription";
     }
 }

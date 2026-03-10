@@ -1,4 +1,4 @@
-package com.Grownited.controller;
+package com.Grownited.controller.admin;
 
 import java.util.List;
 
@@ -35,7 +35,7 @@ public class UserController {
 	    model.addAttribute("activeUsers", activeUsers);
 	    model.addAttribute("inactiveUsers", inactiveUsers);
 
-	    return "ListUser";
+	    return "admin/ListUser";
 	}
 
 	@GetMapping("/viewUser")
@@ -45,13 +45,13 @@ public class UserController {
 	    UserDetailEntity userDetail = userDetailRepository.findByUserId(userId).orElse(null);
 
 	    if (user == null) {
-	        return "redirect:listUser";
+	        return "redirect:admin/listUser";
 	    }
 
 	    model.addAttribute("user", user);
 	    model.addAttribute("userDetail", userDetail);
 
-	    return "ViewUser";
+	    return "admin/ViewUser";
 	}
 	
 	@GetMapping("/deleteUser")
@@ -62,7 +62,7 @@ public class UserController {
 
 	    userRepository.deleteById(userId);
 
-	    return "redirect:listUser";
+	    return "redirect:/listUser";
 	}
 	
 	

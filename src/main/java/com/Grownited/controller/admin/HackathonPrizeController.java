@@ -1,4 +1,4 @@
-package com.Grownited.controller;
+package com.Grownited.controller.admin;
 
 import java.util.List;
 
@@ -32,7 +32,7 @@ public class HackathonPrizeController {
 
         model.addAttribute("hackathonList", hackathonList);
 
-        return "NewHackathonPrize";
+        return "admin/NewHackathonPrize";
     }
 
 
@@ -42,7 +42,7 @@ public class HackathonPrizeController {
 
         hackathonPrizeRepository.save(prizeEntity);
 
-        return "AdminDashboard";
+        return "admin/AdminDashboard";
     }
 
 
@@ -55,7 +55,7 @@ public class HackathonPrizeController {
 
         model.addAttribute("prizeList", prizeList);
 
-        return "ListHackathonPrize";
+        return "admin/ListHackathonPrize";
     }
 
 
@@ -65,6 +65,6 @@ public class HackathonPrizeController {
 
         hackathonPrizeRepository.deleteById(hackathonPrizeId);
 
-        return "redirect:listHackathonPrize";
+        return "redirect:/listHackathonPrize";
     }
 }

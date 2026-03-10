@@ -1,4 +1,4 @@
-package com.Grownited.controller;
+package com.Grownited.controller.admin;
 
 import java.util.List;
 
@@ -48,6 +48,6 @@ public class AdminController {
 
         model.addAttribute("recentHackathons", recentHackathons);
 
-        return "AdminDashboard";
+        return "admin/AdminDashboard";
     }
 }

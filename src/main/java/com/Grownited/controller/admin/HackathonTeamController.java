@@ -1,4 +1,4 @@
-package com.Grownited.controller;
+package com.Grownited.controller.admin;
 
 import java.util.List;
 
@@ -33,7 +33,7 @@ public class HackathonTeamController {
 
 		model.addAttribute("userList", userRepository.findAll());
 
-		return "NewHackathonTeam";
+		return "admin/NewHackathonTeam";
 	}
 
 	// Save
@@ -42,7 +42,7 @@ public class HackathonTeamController {
 
 		hackathonTeamRepository.save(teamEntity);
 
-		return "AdminDashboard";
+		return "admin/AdminDashboard";
 	}
 
 	// List
@@ -53,7 +53,7 @@ public class HackathonTeamController {
 
 		model.addAttribute("teamList", teamList);
 
-		return "ListHackathonTeam";
+		return "admin/ListHackathonTeam";
 	}
 
 	// Delete
@@ -62,6 +62,6 @@ public class HackathonTeamController {
 
 		hackathonTeamRepository.deleteById(hackathonTeamId);
 
-		return "redirect:listHackathonTeam";
+		return "redirect:/listHackathonTeam";
 	}
 }

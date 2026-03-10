@@ -1,4 +1,4 @@
-package com.Grownited.controller;
+package com.Grownited.controller.admin;
 
 import java.util.List;
 
@@ -30,7 +30,7 @@ public class HackathonController {
 	public String newHackathon(Model model) {
 		List<UserTypeEntity> allUserType = userTypeRepository.findAll();
 		model.addAttribute("allUserType", allUserType);
-		return "NewHackathon";
+		return "admin/NewHackathon";
 	}
 
 	@PostMapping("/saveHackathon")
@@ -54,7 +54,7 @@ public class HackathonController {
 	public String listHackathon(Model model) {
 		List<HackathonEntity> allHackthon = hackathonRepository.findAll();
 		model.addAttribute("allHackthon", allHackthon);
-		return "ListHackathon";
+		return "admin/ListHackathon";
 	}
 
 	// Delete Hackathon by ID
@@ -74,6 +74,6 @@ public class HackathonController {
 			return "redirect:/listHackathon";
 		}
 		model.addAttribute("hackathon", hackathon);
-		return "ViewHackathon";
+		return "admin/ViewHackathon";
 	}
 }

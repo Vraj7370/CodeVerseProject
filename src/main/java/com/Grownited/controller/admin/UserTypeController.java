@@ -1,4 +1,4 @@
-package com.Grownited.controller;
+package com.Grownited.controller.admin;
 
 import java.util.List;
 
@@ -25,13 +25,13 @@ public class UserTypeController {
 
 	@GetMapping("/newUserType")
 	public String newUserType() {
-		return "NewUserType";
+		return "admin/NewUserType";
 	}
 
 	@PostMapping("/saveUserType")
 	public String saveUserType(UserTypeEntity userTypeEntity) {
 		userTypeRepository.save(userTypeEntity);
-		return "AdminDashboard";
+		return "admin/AdminDashboard";
 	}
 
 	@GetMapping("/listUserType")
@@ -39,7 +39,7 @@ public class UserTypeController {
 
 		List<UserTypeEntity> allUserType = userTypeRepository.findAll();
 		model.addAttribute("userTypeList", allUserType);
-		return "ListUserType";
+		return "admin/ListUserType";
 	}
 	
 	@GetMapping("/deleteUserType")
@@ -47,7 +47,7 @@ public class UserTypeController {
 
 		userTypeRepository.deleteById(userTypeId);
 
-		return "redirect:listUserType";
+		return "redirect:/listUserType";
 	}
 
 }

@@ -1,4 +1,4 @@
-package com.Grownited.controller;
+package com.Grownited.controller.admin;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -52,12 +52,12 @@ public class SessionController {
 
 		List<UserTypeEntity> allUserType = userTypeRepository.findAll();
 		model.addAttribute("allUserType", allUserType);
-		return "Signup";
+		return "admin/Signup";
 	}
 
 	@GetMapping("/login")
 	public String openLoginPage() {
-		return "Login";
+		return "admin/Login";
 	}
 
 	@PostMapping("/authenticate")
@@ -71,7 +71,7 @@ public class SessionController {
 			if (passwordEncoder.matches(password, dbUser.getPassword())) {
 
 				if (dbUser.getRole().equals("ADMIN")) {
-					return "redirect:admin-dashboard";
+					return "redirect:/admin-dashboard";
 				} else if (dbUser.getRole().equals("PARTICIPANT")) {
 					return "redirect:/participant-dashboard";
 				} else if (dbUser.getRole().equals("JUDGE")) {
@@ -81,13 +81,13 @@ public class SessionController {
 		}
 
 		model.addAttribute("error", "Invalid Credentials");
-		return "Login";
+		return "admin/Login";
 	}
 
 	@GetMapping("/forgetpassword")
 	public String showForgotPasswordForm() {
 
-		return "ForgetPassword";
+		return "admin/ForgetPassword";
 	}
 
 	@PostMapping("/forgot-password")
@@ -107,7 +107,7 @@ public class SessionController {
 		user.setOtp(otp);
 		userRepository.save(user);
 
-		return "ResetPassword";
+		return "admin/ResetPassword";
 	}
 
 	@PostMapping("/reset-password")
@@ -122,7 +122,7 @@ public class SessionController {
 
 		if (!user.getOtp().equals(otp)) {
 
-			return "ResetPassword";
+			return "admin/ResetPassword";
 
 		}
 
@@ -135,7 +135,7 @@ public class SessionController {
 
 		userRepository.save(user);
 
-		return "Login";
+		return "admin/Login";
 	}
 
 	@PostMapping("/register")
@@ -173,13 +173,13 @@ public class SessionController {
 
 		mailerService.sendWelcomeMail(userEntity);
 
-		return "Login";
+		return "admin/Login";
 	}
 
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
-		return "Login";
+		return "admin/Login";
 	}
 
 }
