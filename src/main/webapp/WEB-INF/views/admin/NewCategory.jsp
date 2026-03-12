@@ -316,6 +316,23 @@ to {
 	transform: translateY(-2px);
 	box-shadow: var(--shadow-md);
 }
+
+/* ===== DASHBOARD BACKGROUND FIX ===== */
+
+/* main dashboard area */
+.content-wrapper{
+	background:#F3EFE7 !important;
+}
+
+/* page body soft contrast */
+body{
+	background:#F3EFE7 !important;
+}
+
+/* panels/cards area subtle contrast */
+.main-panel{
+	background:#F3EFE7 !important;
+}
 </style>
 </head>
 

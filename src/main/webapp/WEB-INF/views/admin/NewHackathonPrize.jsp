@@ -1,5 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
+
+
 <jsp:include page="AdminCSS.jsp" />
 
 <div class="container-scroller">

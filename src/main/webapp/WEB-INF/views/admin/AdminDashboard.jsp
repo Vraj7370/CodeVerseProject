@@ -347,19 +347,21 @@
   }
 
   /* Status Pills */
-  .status-pill {
+  .pill {
     display: inline-block;
-    padding: 3px 10px;
+    padding: 3px 11px;
     border-radius: 50px;
     font-size: 0.72rem;
     font-weight: 700;
     letter-spacing: 0.5px;
+    white-space: nowrap;
   }
 
-  .pill-upcoming  { background: #E8F5EE; color: #2D6A4F; }
-  .pill-ongoing   { background: #FEF0EB; color: #B5573B; }
-  .pill-completed { background: #EAF0FA; color: #2C4A6E; }
-  .pill-default   { background: var(--cream); color: var(--slate); }
+  .pill-upcoming  { background: #E8F0FE; color: #2C4A6E; }
+  .pill-ongoing   { background: #E8F5EE; color: #2D6A4F; }
+  .pill-completed { background: var(--cream); color: var(--slate); }
+  .pill-free      { background: #E8F5EE; color: #2D6A4F; }
+  .pill-paid      { background: #FEF0EB; color: #B5573B; }
 
   /* ===========================
      STAT PULSE NUMBERS
@@ -372,6 +374,23 @@
     animation: countUp 0.5s ease both;
     animation-delay: inherit;
   }
+  
+  /* ===== DASHBOARD BACKGROUND FIX ===== */
+
+/* main dashboard area */
+.content-wrapper{
+	background:#F3EFE7 !important;
+}
+
+/* page body soft contrast */
+body{
+	background:#F3EFE7 !important;
+}
+
+/* panels/cards area subtle contrast */
+.main-panel{
+	background:#F3EFE7 !important;
+}
 
 </style>
 </head>
@@ -565,22 +584,19 @@
                     <c:forEach var="h" items="${recentHackathons}">
                       <tr>
                         <td><strong>${h.title}</strong></td>
-                        <td>
-                          <c:choose>
-                            <c:when test="${h.status == 'Upcoming'}">
-                              <span class="status-pill pill-upcoming">${h.status}</span>
-                            </c:when>
-                            <c:when test="${h.status == 'Ongoing'}">
-                              <span class="status-pill pill-ongoing">${h.status}</span>
-                            </c:when>
-                            <c:when test="${h.status == 'Completed'}">
-                              <span class="status-pill pill-completed">${h.status}</span>
-                            </c:when>
-                            <c:otherwise>
-                              <span class="status-pill pill-default">${h.status}</span>
-                            </c:otherwise>
-                          </c:choose>
-                        </td>
+                           <td>
+                      <c:choose>
+                        <c:when test="${h.status == 'UPCOMING'}">
+                          <span class="pill pill-upcoming">${h.status}</span>
+                        </c:when>
+                        <c:when test="${h.status == 'ONGOING'}">
+                          <span class="pill pill-ongoing">${h.status}</span>
+                        </c:when>
+                        <c:otherwise>
+                          <span class="pill pill-completed">${h.status}</span>
+                        </c:otherwise>
+                      </c:choose>
+                    </td>
                         <td>${h.eventType}</td>
                         <td>${h.registrationEndDate}</td>
                       </tr>

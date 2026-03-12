@@ -69,6 +69,9 @@ public class HackathonController {
 	public String viewHackathon(Integer hackathonId, Model model) {
 
 		HackathonEntity hackathon = hackathonRepository.findById(hackathonId).orElse(null);
+		
+		List<UserTypeEntity> allUserType = userTypeRepository.findAll();
+		model.addAttribute("allUserType", allUserType);
 
 		if (hackathon == null) {
 			return "redirect:/listHackathon";

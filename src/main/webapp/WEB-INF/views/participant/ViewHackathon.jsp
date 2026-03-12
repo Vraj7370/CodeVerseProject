@@ -5,15 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>${hackathon.title}— HackPortal</title>
+<title>${hackathon.title}| CodeVerse</title>
 <link
 	href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
 	rel="stylesheet">
 <style>
-
-/* ══════════════════════════════════════
-   TOKENS  — Clean Professional Theme (EXACT Home.jsp copy)
-══════════════════════════════════════ */
 :root {
 	--bg: #f4f2ee;
 	--bg1: #ffffff;
@@ -90,11 +86,6 @@ select {
 
 input {
 	font-family: var(--ff);
-}
-
-svg {
-	flex-shrink: 0;
-	display: block;
 }
 
 /* ══ BG ══ */
@@ -188,7 +179,6 @@ to {
 }
 
 .brand-name {
-	font-family: var(--ff);
 	font-size: 1.1rem;
 	font-weight: 700;
 	color: var(--nv);
@@ -199,35 +189,52 @@ to {
 	color: var(--tl);
 }
 
-.back-btn {
+.nav-links {
 	display: flex;
 	align-items: center;
-	gap: 8px;
-	font-size: 0.9rem;
+	gap: 2px;
+}
+
+.nav-links a {
+	font-size: 0.875rem;
 	font-weight: 500;
 	color: var(--t2);
-	padding: 6px 14px;
+	padding: 6px 13px;
 	border-radius: 8px;
-	border: 1px solid var(--bd2);
-	transition: all 0.2s;
+	transition: all 0.18s;
 }
 
-.back-btn:hover {
+.nav-links a:hover {
 	color: var(--nv);
 	background: var(--nv-dim);
-	border-color: var(--bd3);
-	transform: translateX(-2px);
 }
 
-.back-btn svg {
-	color: var(--t2);
+.nav-cta {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	font-size: 0.85rem !important;
+	font-weight: 600 !important;
+	color: #fff !important;
+	background: var(--nv) !important;
+	padding: 7px 16px !important;
+	border-radius: 8px !important;
+	margin-left: 6px;
+	transition: all 0.2s var(--ease) !important;
+	box-shadow: var(--sh-sm);
+}
+
+.nav-cta:hover {
+	background: var(--nv2) !important;
+	transform: translateY(-1px);
+	box-shadow: var(--sh-md) !important;
 }
 
 /* ══ PAGE WRAPPER ══ */
 .page-wrapper {
 	position: relative;
 	z-index: 1;
-	max-width: 1000px;
+	max-width: 1200px;
 	margin: 0 auto;
 	padding: 40px 48px 60px;
 	animation: rise 0.7s var(--ease) both;
@@ -246,34 +253,62 @@ to {
 
 }
 
-/* ══ HERO SECTION ══ */
+/* ══ BREADCRUMB ══ */
+.breadcrumb {
+	display: flex;
+	align-items: center;
+	gap: 0;
+	font-size: 0.8rem;
+	color: var(--t3);
+	margin-bottom: 24px;
+}
+
+.breadcrumb a {
+	color: var(--t2);
+	transition: color 0.2s;
+	padding: 0;
+}
+
+.breadcrumb a:hover {
+	color: var(--tl);
+}
+
+.breadcrumb-sep {
+	color: var(--t4);
+	margin: 0 8px;
+	font-size: 0.75rem;
+	line-height: 1;
+	display: inline-block;
+	/* use a plain ASCII slash — no special unicode */
+}
+
+/* ══ HERO ══ */
 .hero-section {
 	background: var(--bg1);
 	border: 1px solid var(--bd);
 	border-radius: var(--r3);
-	padding: 28px 32px;
-	margin-bottom: 24px;
+	padding: 36px 40px;
+	margin-bottom: 28px;
 	box-shadow: var(--sh-md);
 }
 
 .hero-top {
 	display: flex;
 	align-items: center;
-	gap: 10px;
+	gap: 8px;
 	flex-wrap: wrap;
-	margin-bottom: 16px;
+	margin-bottom: 18px;
 }
 
 .status-chip {
 	display: inline-flex;
 	align-items: center;
 	gap: 6px;
-	font-family: var(--ff);
-	font-size: 0.7rem;
-	font-weight: 600;
-	letter-spacing: 0.5px;
+	font-size: 0.68rem;
+	font-weight: 700;
+	letter-spacing: 0.6px;
 	text-transform: uppercase;
-	padding: 6px 14px;
+	padding: 5px 13px;
 	border-radius: 100px;
 }
 
@@ -339,12 +374,11 @@ rgba(
 .payment-chip {
 	display: inline-flex;
 	align-items: center;
-	font-family: var(--ff);
-	font-size: 0.7rem;
-	font-weight: 600;
-	letter-spacing: 0.5px;
+	font-size: 0.68rem;
+	font-weight: 700;
+	letter-spacing: 0.6px;
 	text-transform: uppercase;
-	padding: 6px 14px;
+	padding: 5px 13px;
 	border-radius: 100px;
 }
 
@@ -361,34 +395,87 @@ rgba(
 }
 
 .hero-title {
-	font-family: var(--ff);
-	font-size: 2.2rem;
-	font-weight: 700;
+	font-size: 2.5rem;
+	font-weight: 800;
 	color: var(--nv);
-	letter-spacing: -0.5px;
-	margin-bottom: 12px;
-	line-height: 1.2;
+	letter-spacing: -0.8px;
+	margin-bottom: 20px;
+	line-height: 1.15;
 }
 
 .hero-meta {
 	display: flex;
 	align-items: center;
-	gap: 20px;
+	gap: 28px;
 	flex-wrap: wrap;
-	font-size: 0.9rem;
+	font-size: 0.875rem;
 	color: var(--t2);
+	padding-top: 18px;
+	border-top: 1px solid var(--bd);
 }
 
 .hero-meta-item {
 	display: flex;
 	align-items: center;
-	gap: 6px;
+	gap: 7px;
+	font-weight: 500;
 }
-
-.hero-meta-item svg {
-	color: var(--tl);
+/* inline SVG icons via CSS — no external library needed */
+.ico {
 	width: 16px;
 	height: 16px;
+	flex-shrink: 0;
+	display: inline-block;
+	vertical-align: middle;
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center;
+	opacity: 0.7;
+}
+
+.ico-pin {
+	background-image:
+		url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232e6b72' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z'/%3E%3Ccircle cx='12' cy='10' r='3'/%3E%3C/svg%3E");
+}
+
+.ico-clock {
+	background-image:
+		url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232e6b72' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cpolyline points='12 6 12 12 16 14'/%3E%3C/svg%3E");
+}
+
+.ico-cal {
+	background-image:
+		url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232e6b72' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='4' width='18' height='18' rx='2'/%3E%3Cline x1='16' y1='2' x2='16' y2='6'/%3E%3Cline x1='8' y1='2' x2='8' y2='6'/%3E%3Cline x1='3' y1='10' x2='21' y2='10'/%3E%3C/svg%3E");
+}
+
+.ico-doc {
+	background-image:
+		url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232e6b72' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z'/%3E%3Cpolyline points='14 2 14 8 20 8'/%3E%3C/svg%3E");
+}
+
+.ico-link {
+	background-image:
+		url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234b5b6e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71'/%3E%3Cpath d='M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71'/%3E%3C/svg%3E");
+}
+
+.ico-tw {
+	background-image:
+		url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234b5b6e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z'/%3E%3C/svg%3E");
+}
+
+.ico-arr {
+	background-image:
+		url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='5' y1='12' x2='19' y2='12'/%3E%3Cpolyline points='12 5 19 12 12 19'/%3E%3C/svg%3E");
+}
+
+.ico-chk {
+	background-image:
+		url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
+}
+
+.ico-bolt {
+	background-image:
+		url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23e0be73' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='13 2 3 14 12 14 11 22 21 10 12 10 13 2'/%3E%3C/svg%3E");
 }
 
 /* ══ CONTENT GRID ══ */
@@ -396,6 +483,7 @@ rgba(
 	display: grid;
 	grid-template-columns: 2fr 1fr;
 	gap: 24px;
+	align-items: start;
 }
 
 /* ══ MAIN CARD ══ */
@@ -408,7 +496,7 @@ rgba(
 }
 
 .card-header {
-	padding: 18px 24px;
+	padding: 16px 24px;
 	border-bottom: 1px solid var(--bd);
 	background: var(--bg2);
 	display: flex;
@@ -417,66 +505,102 @@ rgba(
 }
 
 .card-header h2 {
-	font-family: var(--ff);
-	font-size: 1.1rem;
+	font-size: 0.95rem;
 	font-weight: 600;
 	color: var(--nv);
 }
 
-.card-header svg {
-	color: var(--tl);
-}
-
 .card-body {
-	padding: 24px;
+	padding: 28px 32px;
 }
 
-.card-body p {
+.hackathon-description {
 	font-size: 0.95rem;
-	line-height: 1.7;
+	line-height: 1.75;
 	color: var(--t2);
-	margin-bottom: 24px;
+	margin-bottom: 32px;
+	padding-bottom: 28px;
+	border-bottom: 1px solid var(--bd);
 }
 
 /* ══ INFO GRID ══ */
 .info-grid {
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
-	gap: 16px;
-	margin-bottom: 24px;
+	gap: 12px;
+	margin-bottom: 28px;
 }
 
 .info-item {
 	background: var(--bg2);
 	border: 1px solid var(--bd);
 	border-radius: var(--r);
-	padding: 16px 18px;
-	transition: border-color 0.2s;
+	padding: 16px 20px;
+	transition: all 0.2s;
 }
 
 .info-item:hover {
-	border-color: var(--tl-dim);
+	border-color: rgba(46, 107, 114, 0.25);
+	background: rgba(46, 107, 114, 0.04);
 }
 
 .info-label {
-	font-size: 0.65rem;
-	font-weight: 600;
+	font-size: 0.62rem;
+	font-weight: 700;
 	text-transform: uppercase;
-	letter-spacing: 0.5px;
+	letter-spacing: 0.8px;
 	color: var(--t3);
 	margin-bottom: 6px;
 }
 
 .info-value {
-	font-size: 1.1rem;
-	font-weight: 600;
+	font-size: 1.05rem;
+	font-weight: 700;
 	color: var(--nv);
 }
 
 .info-value small {
-	font-size: 0.8rem;
+	font-size: 0.78rem;
 	font-weight: 400;
 	color: var(--t3);
+	margin-left: 3px;
+}
+
+/* ══ TAGS ══ */
+.tags-section {
+	
+}
+
+.tags-label {
+	font-size: 0.62rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.8px;
+	color: var(--t3);
+	margin-bottom: 12px;
+}
+
+.tags-list {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+}
+
+.tag {
+	background: var(--bg2);
+	border: 1px solid var(--bd2);
+	color: var(--t2);
+	font-size: 0.78rem;
+	font-weight: 500;
+	padding: 5px 13px;
+	border-radius: 6px;
+	transition: all 0.18s;
+}
+
+.tag:hover {
+	background: var(--tl-dim);
+	border-color: rgba(46, 107, 114, 0.3);
+	color: var(--tl);
 }
 
 /* ══ SIDEBAR ══ */
@@ -487,53 +611,76 @@ rgba(
 	overflow: hidden;
 	box-shadow: var(--sh-sm);
 	position: sticky;
-	top: 84px;
+	top: 80px;
 }
 
 .sidebar-header {
-	padding: 18px 20px;
+	padding: 20px 24px;
 	background: var(--nv);
 	color: white;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.07);
 }
 
 .sidebar-header h3 {
-	font-size: 0.9rem;
-	font-weight: 600;
-	letter-spacing: 0.3px;
+	font-size: 1rem;
+	font-weight: 700;
+	letter-spacing: -0.2px;
+	margin-bottom: 3px;
+}
+
+.sidebar-header p {
+	font-size: 0.7rem;
+	color: rgba(255, 255, 255, 0.45);
+	font-weight: 400;
 }
 
 .sidebar-body {
-	padding: 20px;
+	padding: 22px;
 }
 
 /* Prize Box */
 .prize-box {
 	text-align: center;
-	padding: 20px;
-	background: var(--gd-dim);
-	border: 1px solid var(--gd);
+	padding: 20px 16px;
+	background: linear-gradient(135deg, var(--gd-dim) 0%,
+		rgba(201, 168, 76, 0.06) 100%);
+	border: 1px solid rgba(201, 168, 76, 0.3);
 	border-radius: var(--r);
-	margin-bottom: 24px;
+	margin-bottom: 20px;
 }
 
 .prize-label {
-	font-size: 0.7rem;
+	font-size: 0.65rem;
+	font-weight: 700;
 	text-transform: uppercase;
-	color: var(--t2);
-	margin-bottom: 4px;
+	letter-spacing: 0.8px;
+	color: var(--t3);
+	margin-bottom: 6px;
 }
 
 .prize-value {
-	font-size: 1.8rem;
-	font-weight: 700;
+	font-size: 1.5rem;
+	font-weight: 800;
 	color: var(--nv);
+	letter-spacing: -0.5px;
+}
+
+.prize-sub {
+	font-size: 0.7rem;
+	color: var(--t3);
+	margin-top: 3px;
+}
+
+/* Date Boxes */
+.dates-section {
+	margin-bottom: 4px;
 }
 
 .date-box {
 	display: flex;
 	align-items: center;
 	gap: 12px;
-	padding: 14px 0;
+	padding: 13px 0;
 	border-bottom: 1px solid var(--bd);
 }
 
@@ -542,13 +689,13 @@ rgba(
 }
 
 .date-icon {
-	width: 40px;
-	height: 40px;
-	border-radius: 8px;
+	width: 38px;
+	height: 38px;
+	border-radius: 9px;
+	flex-shrink: 0;
 	background: var(--tl-dim);
 	display: grid;
 	place-items: center;
-	color: var(--tl);
 }
 
 .date-info {
@@ -556,38 +703,43 @@ rgba(
 }
 
 .date-label {
-	font-size: 0.65rem;
+	font-size: 0.62rem;
+	font-weight: 700;
 	text-transform: uppercase;
+	letter-spacing: 0.8px;
 	color: var(--t3);
-	margin-bottom: 2px;
+	margin-bottom: 3px;
 }
 
 .date-value {
-	font-size: 0.95rem;
+	font-size: 0.9rem;
 	font-weight: 600;
 	color: var(--nv);
 }
 
-/* ══ BUTTONS ══ */
+/* Register Button */
 .register-btn {
-	display: block;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
 	width: 100%;
-	text-align: center;
-	padding: 14px;
+	padding: 13px 20px;
 	background: var(--tl);
 	color: white;
 	border-radius: 10px;
-	font-weight: 600;
-	font-size: 1rem;
+	font-weight: 700;
+	font-size: 0.95rem;
 	transition: all 0.2s var(--ease);
-	margin: 20px 0 12px;
-	box-shadow: 0 4px 12px var(--tl-glow);
+	margin: 18px 0 10px;
+	box-shadow: 0 4px 14px var(--tl-glow);
+	cursor: pointer;
 }
 
 .register-btn:hover {
 	background: var(--tl-light);
 	transform: translateY(-2px);
-	box-shadow: 0 8px 20px var(--tl-glow);
+	box-shadow: 0 8px 22px var(--tl-glow);
 }
 
 .register-btn.disabled {
@@ -596,11 +748,61 @@ rgba(
 	pointer-events: none;
 	box-shadow: none;
 	border: 1px solid var(--bd);
+	cursor: default;
 }
 
-.register-btn svg {
-	display: inline;
-	margin-right: 6px;
+.register-btn.success {
+	background: var(--nv);
+	pointer-events: none;
+	box-shadow: none;
+}
+
+.reg-note {
+	text-align: center;
+	font-size: 0.72rem;
+	color: var(--t3);
+	line-height: 1.5;
+}
+
+/* Share */
+.share-row {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding-top: 18px;
+	border-top: 1px solid var(--bd);
+	margin-top: 6px;
+}
+
+.share-label {
+	font-size: 0.7rem;
+	color: var(--t3);
+	font-weight: 600;
+	letter-spacing: 0.5px;
+	text-transform: uppercase;
+}
+
+.share-btns {
+	display: flex;
+	gap: 6px;
+}
+
+.share-btn {
+	width: 34px;
+	height: 34px;
+	border-radius: 8px;
+	background: transparent;
+	border: 1px solid var(--bd2);
+	display: grid;
+	place-items: center;
+	color: var(--t3);
+	transition: all 0.18s;
+	cursor: pointer;
+}
+
+.share-btn:hover {
+	background: var(--nv-dim);
+	border-color: var(--bd3);
 }
 
 /* ══ FOOTER ══ */
@@ -614,10 +816,10 @@ rgba(
 	justify-content: space-between;
 	flex-wrap: wrap;
 	gap: 16px;
+	margin-top: 40px;
 }
 
 .f-brand {
-	font-family: var(--ff);
 	font-size: 0.95rem;
 	font-weight: 600;
 	color: rgba(255, 255, 255, 0.65);
@@ -628,22 +830,33 @@ rgba(
 }
 
 .f-copy {
-	font-family: var(--ff);
 	font-size: 0.62rem;
 	color: rgba(255, 255, 255, 0.28);
 	letter-spacing: 0.5px;
 }
 
 /* ══ RESPONSIVE ══ */
-@media ( max-width :900px) {
-	.content-grid {
-		grid-template-columns: 1fr;
-	}
+@media ( max-width :1100px) {
 	.navbar {
 		padding: 0 24px;
 	}
 	.page-wrapper {
 		padding: 30px 24px 50px;
+	}
+	.site-footer {
+		padding: 24px;
+	}
+}
+
+@media ( max-width :900px) {
+	.content-grid {
+		grid-template-columns: 1fr;
+	}
+	.sidebar-card {
+		position: static;
+	}
+	.info-grid {
+		grid-template-columns: 1fr;
 	}
 }
 
@@ -655,13 +868,13 @@ rgba(
 		padding: 20px 16px 40px;
 	}
 	.hero-section {
-		padding: 20px;
+		padding: 24px 20px;
 	}
 	.hero-title {
 		font-size: 1.8rem;
 	}
-	.info-grid {
-		grid-template-columns: 1fr;
+	.card-body {
+		padding: 20px;
 	}
 	.site-footer {
 		padding: 20px 16px;
@@ -683,27 +896,30 @@ rgba(
 	<header class="navbar">
 		<a href="home" class="brand">
 			<div class="brand-mark">
-				<svg width="15" height="15" viewBox="0 0 24 24" fill="none"
-					stroke="currentColor" stroke-width="2.5">
-        <polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
-      </svg>
-			</div> <span class="brand-name">Hack<span>Portal</span></span>
-		</a> <a href="home" class="back-btn"> <svg width="15" height="15"
-				viewBox="0 0 24 24" fill="none" stroke="currentColor"
-				stroke-width="2.2">
-      <line x1="19" y1="12" x2="5" y2="12" />
-				<polyline points="12 19 5 12 12 5" />
-    </svg> Back to Home
+				<span class="ico ico-bolt" style="width: 15px; height: 15px;"></span>
+			</div> <span class="brand-name">Code<span>Verse</span></span>
 		</a>
+		<nav class="nav-links">
+	 <a href="#">About</a>
+			<a href="login">Login</a> <a href="signup" class="nav-cta">
+				Register <span class="ico ico-arr"
+				style="width: 11px; height: 11px; opacity: 1;"></span>
+			</a>
+		</nav>
 	</header>
 
 	<!-- PAGE WRAPPER -->
 	<div class="page-wrapper">
 
-		<!-- HERO SECTION -->
+		<!-- BREADCRUMB -->
+		<div class="breadcrumb">
+			<a href="home">Home</a> <span class="breadcrumb-sep">/</span> <a
+				href="home">Hackathons</a> <span class="breadcrumb-sep">/</span> <span>${hackathon.title}</span>
+		</div>
+
+		<!-- HERO -->
 		<div class="hero-section">
 			<div class="hero-top">
-				<!-- Status Chip -->
 				<c:choose>
 					<c:when test="${hackathon.status == 'ONGOING'}">
 						<span class="status-chip st-live"><span class="dot"></span>Live
@@ -717,7 +933,6 @@ rgba(
 					</c:otherwise>
 				</c:choose>
 
-				<!-- Payment Chip -->
 				<c:choose>
 					<c:when test="${hackathon.payment == 'FREE'}">
 						<span class="payment-chip pay-free">Free Entry</span>
@@ -726,28 +941,25 @@ rgba(
 						<span class="payment-chip pay-paid">Paid Entry</span>
 					</c:otherwise>
 				</c:choose>
+
+				<c:if test="${not empty hackathon.eventType}">
+					<span class="payment-chip"
+						style="background: var(--nv-dim); color: var(--nv); border: 1px solid var(--bd2);">
+						${hackathon.eventType} </span>
+				</c:if>
 			</div>
 
 			<h1 class="hero-title">${hackathon.title}</h1>
 
 			<div class="hero-meta">
 				<c:if test="${not empty hackathon.location}">
-					<span class="hero-meta-item"> <svg viewBox="0 0 24 24"
-							fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-            <circle cx="12" cy="10" r="3" />
-          </svg> ${hackathon.location}
+					<span class="hero-meta-item"> <span class="ico ico-pin"></span>
+						${hackathon.location}
 					</span>
 				</c:if>
-
-				<c:if test="${not empty hackathon.eventType}">
-					<span class="hero-meta-item"> <svg viewBox="0 0 24 24"
-							fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="12" cy="12" r="10" />
-            <line x1="2" y1="12" x2="22" y2="12" />
-            <path
-								d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
-          </svg> ${hackathon.eventType}
+				<c:if test="${not empty hackathon.registrationEndDate}">
+					<span class="hero-meta-item"> <span class="ico ico-clock"></span>
+						Registration ends ${hackathon.registrationEndDate}
 					</span>
 				</c:if>
 			</div>
@@ -756,38 +968,31 @@ rgba(
 		<!-- CONTENT GRID -->
 		<div class="content-grid">
 
-			<!-- MAIN CONTENT -->
+			<!-- MAIN -->
 			<div>
 				<div class="main-card">
 					<div class="card-header">
-						<svg width="18" height="18" viewBox="0 0 24 24" fill="none"
-							stroke="currentColor" stroke-width="2">
-            <path
-								d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-            <polyline points="14 2 14 8 20 8" />
-          </svg>
-						<h2>About the Hackathon</h2>
+						<span class="ico ico-doc"></span>
+						<h2>About This Hackathon</h2>
 					</div>
 					<div class="card-body">
-						<p>
+						<div class="hackathon-description">
 							<c:choose>
 								<c:when test="${not empty hackathon.description}">
                 ${hackathon.description}
               </c:when>
 								<c:otherwise>
-                Join this exciting hackathon and showcase your skills! 
-                Collaborate with talented developers, designers, and innovators 
-                to build something extraordinary. No description provided yet.
+                Join this exciting hackathon and showcase your skills! Collaborate with talented developers, designers, and innovators to build something extraordinary. No description has been provided yet — check back soon for more details.
               </c:otherwise>
 							</c:choose>
-						</p>
+						</div>
 
 						<!-- INFO GRID -->
 						<div class="info-grid">
 							<div class="info-item">
 								<div class="info-label">Team Size</div>
 								<div class="info-value">
-									${hackathon.minTeamSize} — ${hackathon.maxTeamSize} <small>members</small>
+									${hackathon.minTeamSize} &ndash; ${hackathon.maxTeamSize} <small>members</small>
 								</div>
 							</div>
 
@@ -800,13 +1005,13 @@ rgba(
 								<div class="info-item">
 									<div class="info-label">Eligibility</div>
 									<div class="info-value">
-										<c:choose>
-											<c:when test="${hackathon.userTypeId == 1}">Working Professional</c:when>
-											<c:when test="${hackathon.userTypeId == 2}">Fresher</c:when>
-											<c:when test="${hackathon.userTypeId == 3}">College Student</c:when>
-											<c:when test="${hackathon.userTypeId == 4}">School Student</c:when>
-											<c:otherwise>All are welcome</c:otherwise>
-										</c:choose>
+
+										<c:forEach var="u" items="${allUserType}">
+											<c:if test="${u.userTypeId == hackathon.userTypeId}">
+          ${u.userType}
+        </c:if>
+										</c:forEach>
+
 									</div>
 								</div>
 							</c:if>
@@ -814,9 +1019,21 @@ rgba(
 							<c:if test="${not empty hackathon.userId}">
 								<div class="info-item">
 									<div class="info-label">Organized by</div>
-									<div class="info-value">Team ID: ${hackathon.userId}</div>
+									<div class="info-value">Team #${hackathon.userId}</div>
 								</div>
 							</c:if>
+						</div>
+
+						<!-- TAGS -->
+						<div class="tags-section">
+							<div class="tags-label">Tags</div>
+							<div class="tags-list">
+								<span class="tag">${hackathon.eventType}</span>
+								<c:if test="${hackathon.payment == 'FREE'}">
+									<span class="tag">Free Entry</span>
+								</c:if>
+								<span class="tag">Hackathon</span> <span class="tag">#${hackathon.hackathonId}</span>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -826,62 +1043,54 @@ rgba(
 			<div>
 				<div class="sidebar-card">
 					<div class="sidebar-header">
-						<h3>Registration Info</h3>
+						<h3>Registration</h3>
+						<p>Secure your spot today</p>
 					</div>
 					<div class="sidebar-body">
 
-						<!-- Prize Pool (default text since no prize field) -->
+						<!-- Prize -->
 						<div class="prize-box">
 							<div class="prize-label">Prize Pool</div>
-							<div class="prize-value">To be announced</div>
+							<div class="prize-value">To be Announced</div>
+							<div class="prize-sub">Stay tuned for updates</div>
 						</div>
 
 						<!-- Dates -->
-						<c:if test="${not empty hackathon.registrationStartDate}">
-							<div class="date-box">
-								<div class="date-icon">
-									<svg width="18" height="18" viewBox="0 0 24 24" fill="none"
-										stroke="currentColor" stroke-width="2">
-                  <rect x="3" y="4" width="18" height="18" rx="2" />
-                  <line x1="16" y1="2" x2="16" y2="6" />
-                  <line x1="8" y1="2" x2="8" y2="6" />
-                  <line x1="3" y1="10" x2="21" y2="10" />
-                </svg>
+						<div class="dates-section">
+							<c:if test="${not empty hackathon.registrationStartDate}">
+								<div class="date-box">
+									<div class="date-icon">
+										<span class="ico ico-cal"
+											style="width: 18px; height: 18px; opacity: 0.85;"></span>
+									</div>
+									<div class="date-info">
+										<div class="date-label">Registration Opens</div>
+										<div class="date-value">${hackathon.registrationStartDate}</div>
+									</div>
 								</div>
-								<div class="date-info">
-									<div class="date-label">Registration Starts</div>
-									<div class="date-value">${hackathon.registrationStartDate}</div>
-								</div>
-							</div>
-						</c:if>
+							</c:if>
 
-						<c:if test="${not empty hackathon.registrationEndDate}">
-							<div class="date-box">
-								<div class="date-icon">
-									<svg width="18" height="18" viewBox="0 0 24 24" fill="none"
-										stroke="currentColor" stroke-width="2">
-                  <rect x="3" y="4" width="18" height="18" rx="2" />
-                  <line x1="16" y1="2" x2="16" y2="6" />
-                  <line x1="8" y1="2" x2="8" y2="6" />
-                  <line x1="3" y1="10" x2="21" y2="10" />
-                </svg>
+							<c:if test="${not empty hackathon.registrationEndDate}">
+								<div class="date-box">
+									<div class="date-icon">
+										<span class="ico ico-cal"
+											style="width: 18px; height: 18px; opacity: 0.85;"></span>
+									</div>
+									<div class="date-info">
+										<div class="date-label">Registration Ends</div>
+										<div class="date-value">${hackathon.registrationEndDate}</div>
+									</div>
 								</div>
-								<div class="date-info">
-									<div class="date-label">Registration Ends</div>
-									<div class="date-value">${hackathon.registrationEndDate}</div>
-								</div>
-							</div>
-						</c:if>
+							</c:if>
+						</div>
 
 						<!-- Register Button -->
 						<c:choose>
 							<c:when test="${not empty registered and registered}">
-								<div class="register-btn disabled">
-									<svg width="16" height="16" viewBox="0 0 24 24" fill="none"
-										stroke="currentColor" stroke-width="2.5">
-                  <polyline points="20 6 9 17 4 12" />
-                </svg>
-									Already Registered
+								<div class="register-btn success">
+									<span class="ico ico-chk"
+										style="width: 16px; height: 16px; opacity: 1;"></span> Already
+									Registered
 								</div>
 							</c:when>
 							<c:when test="${hackathon.status == 'COMPLETED'}">
@@ -889,43 +1098,64 @@ rgba(
 							</c:when>
 							<c:otherwise>
 								<a href="registerHackathon?hackathonId=${hackathon.hackathonId}"
-									class="register-btn"> Register Now <svg width="14"
-										height="14" viewBox="0 0 24 24" fill="none"
-										stroke="currentColor" stroke-width="2.5">
-                  <line x1="5" y1="12" x2="19" y2="12" />
-                  <polyline points="12 5 19 12 12 19" />
-                </svg>
+									class="register-btn"> Register Now <span
+									class="ico ico-arr"
+									style="width: 14px; height: 14px; opacity: 1;"></span>
 								</a>
+								<p class="reg-note">Free to join &nbsp;·&nbsp; Takes less
+									than 2 min</p>
 							</c:otherwise>
 						</c:choose>
+
+						<!-- Share -->
+						<div class="share-row">
+							<span class="share-label">Share</span>
+							<div class="share-btns">
+								<button class="share-btn" title="Copy link" onclick="copyLink()">
+									<span class="ico ico-link" style="width: 14px; height: 14px;"></span>
+								</button>
+								<button class="share-btn" title="Share on Twitter">
+									<span class="ico ico-tw" style="width: 14px; height: 14px;"></span>
+								</button>
+							</div>
+						</div>
+
 					</div>
 				</div>
 			</div>
+
 		</div>
 	</div>
 
 	<!-- FOOTER -->
 	<footer class="site-footer">
 		<div class="f-brand">
-			Hack<span>Portal</span> — Your Gateway to Innovation
+			Code<span>Verse</span> — Your Gateway to Innovation
 		</div>
 		<div class="f-copy">&copy; 2026 CodeVerse. All rights reserved.</div>
 	</footer>
 
 	<script>
 		(function() {
-			// Progress bar
 			var pb = document.getElementById('pgbar');
-			window
-					.addEventListener(
-							'scroll',
-							function() {
-								var s = window.scrollY, h = document.documentElement.scrollHeight
-										- window.innerHeight;
-								pb.style.width = (h > 0 ? (s / h) * 100 : 0)
-										+ '%';
-							});
+			window.addEventListener('scroll', function() {
+				var s = window.scrollY;
+				var h = document.documentElement.scrollHeight
+						- window.innerHeight;
+				pb.style.width = (h > 0 ? (s / h) * 100 : 0) + '%';
+			});
 		})();
+
+		function copyLink() {
+			navigator.clipboard.writeText(window.location.href).then(
+					function() {
+						var btn = event.currentTarget;
+						btn.style.background = 'var(--nv-dim)';
+						setTimeout(function() {
+							btn.style.background = '';
+						}, 1500);
+					});
+		}
 	</script>
 
 </body>

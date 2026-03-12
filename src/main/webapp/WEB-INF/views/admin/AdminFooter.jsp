@@ -1,14 +1,32 @@
 <style>
+
+/* ===== CODEVERSE FOOTER THEME ===== */
+
 .footer {
-    background: #ffffff;
-    border-top: 1px solid #e5e7eb;
+    background: #F7F4EE;
+    border-top: 1px solid #EDE9E0;
     padding: 15px 25px;
     font-size: 14px;
+    color: #4B5B6E;
 }
 
+/* CodeVerse brand highlight */
 .footer strong {
-    color: #5e50f9;
+    color: #0E1F3D;
+    font-weight: 600;
 }
+
+/* heart icon */
+.footer .ti-heart {
+    color: #A85858;
+}
+
+/* subtle hover */
+.footer strong:hover {
+    color: #2E6B72;
+    transition: color 0.2s ease;
+}
+
 </style>
 
 
@@ -18,7 +36,7 @@
 
         <!-- Left Side -->
         <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">
-           © 2026 <strong>CodeVerse</strong> Hackathon Management System. 
+          	©2026 <strong>CodeVerse</strong> Hackathon Management System. 
             All rights reserved.
         </span>
 

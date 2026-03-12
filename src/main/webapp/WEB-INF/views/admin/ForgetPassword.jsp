@@ -273,6 +273,23 @@
   }
 
   .back-link-row a:hover { color: var(--oxford); }
+  
+  /* ===== DASHBOARD BACKGROUND FIX ===== */
+
+/* main dashboard area */
+.content-wrapper{
+	background:#F3EFE7 !important;
+}
+
+/* page body soft contrast */
+body{
+	background:#F3EFE7 !important;
+}
+
+/* panels/cards area subtle contrast */
+.main-panel{
+	background:#F3EFE7 !important;
+}
 
 </style>
 </head>

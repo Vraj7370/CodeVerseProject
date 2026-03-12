@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>User Registration</title>
 
-<jsp:include page="AdminCSS.jsp"></jsp:include>
+<jsp:include page="ParticipantCSS.jsp"></jsp:include>
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 
@@ -39,9 +39,19 @@
     color: var(--navy);
   }
 
+  /* ── ONLY CHANGE: content-wrapper centers the form ── */
   .content-wrapper {
     padding: 2rem 2rem 1rem !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     animation: pageFadeIn 0.7s ease both;
+  }
+
+  /* make title block full-width so it doesn't shrink */
+  .page-header-block {
+    width: 100%;
+    max-width: 780px;
   }
 
   @keyframes pageFadeIn {
@@ -94,6 +104,7 @@
     display: flex;
     align-items: center;
     gap: 10px;
+    width: 100%;
   }
 
   .section-label::after {
@@ -104,7 +115,7 @@
   }
 
   /* ===========================
-     FORM CARD
+     FORM CARD  — centered, fixed width
   =========================== */
   .form-card {
     background: var(--white);
@@ -112,9 +123,10 @@
     box-shadow: var(--shadow-md);
     overflow: hidden;
     animation: cardSlideUp 0.6s 0.1s ease both;
+    width: 100%;
+    max-width: 780px;        /* ← controls how wide the card is */
   }
 
-  /* Left accent strip */
   .form-card-header {
     background: var(--oxford);
     padding: 1.6rem 2rem;
@@ -199,7 +211,6 @@
     padding-right: 36px;
   }
 
-  /* File input */
   input[type="file"].form-control-custom {
     padding: 8px 14px;
     cursor: pointer;
@@ -362,223 +373,201 @@
     font-size: 1.4rem;
     flex-shrink: 0;
   }
-  
-  /* ===== DASHBOARD BACKGROUND FIX ===== */
-
-/* main dashboard area */
-.content-wrapper{
-	background:#F3EFE7 !important;
-}
-
-/* page body soft contrast */
-body{
-	background:#F3EFE7 !important;
-}
-
-/* panels/cards area subtle contrast */
-.main-panel{
-	background:#F3EFE7 !important;
-}
 
 </style>
 
 <body>
 
-<jsp:include page="AdminHeader.jsp"></jsp:include>
+<jsp:include page="ParticipantHeader.jsp"></jsp:include>
 
 <div class="container-scroller">
   <div class="container-fluid page-body-wrapper">
 
-    <jsp:include page="AdminLeftSidebar.jsp"></jsp:include>
+    <jsp:include page="ParticipantLeftSidebar.jsp"></jsp:include>
 
     <div class="main-panel">
       <div class="content-wrapper">
 
-        <!-- ===========================
-             PAGE TITLE
-        =========================== -->
-        <div class="welcome-badge">Admin Panel</div>
-        <h3 class="page-title">User Registration</h3>
-        <p class="page-subtitle">Add a new user to the platform</p>
+        <!-- PAGE TITLE BLOCK -->
+        <div class="page-header-block">
+      
+          <h3 class="page-title">User Registration</h3>
+          <p class="page-subtitle">Add a new user to the platform</p>
+          <div class="section-label">New User</div>
+        </div>
 
-        <div class="section-label">New User</div>
+        <!-- FORM CARD -->
+        <div class="form-card">
 
-        <div class="row justify-content-center">
-          <div class="col-lg-9">
+          <!-- Card Header -->
+          <div class="form-card-header">
+            <div class="form-card-header-icon">👤</div>
+            <div class="form-card-header-text">
+              <h5>Create User Account</h5>
+              <p>Fill in all required fields to register a new user</p>
+            </div>
+          </div>
 
-            <div class="form-card">
+          <!-- Card Body -->
+          <div class="form-card-body">
 
-              <!-- Card Header -->
-              <div class="form-card-header">
-                <div class="form-card-header-icon">👤</div>
-                <div class="form-card-header-text">
-                  <h5>Create User Account</h5>
-                  <p>Fill in all required fields to register a new user</p>
+            <form action="register" method="post" enctype="multipart/form-data" id="registerForm">
+
+              <!-- PERSONAL INFO -->
+              <div class="form-section">
+                <div class="form-section-title">Personal Information</div>
+                <div class="row">
+
+                  <div class="col-md-6">
+                    <div class="form-group-custom">
+                      <label class="form-label-custom">First Name <span style="color:var(--rose)">*</span></label>
+                      <input type="text" name="firstName" class="form-control-custom" placeholder="Enter first name" required>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="form-group-custom">
+                      <label class="form-label-custom">Last Name <span style="color:var(--rose)">*</span></label>
+                      <input type="text" name="lastName" class="form-control-custom" placeholder="Enter last name" required>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="form-group-custom">
+                      <label class="form-label-custom">Birth Year <span style="color:var(--rose)">*</span></label>
+                      <input type="number" name="birthYear" class="form-control-custom" min="1900" max="2100" placeholder="e.g. 2000" required>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="form-group-custom">
+                      <label class="form-label-custom">Contact Number <span style="color:var(--rose)">*</span></label>
+                      <input type="text" name="contactNum" class="form-control-custom" placeholder="Enter contact number" required>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="form-group-custom">
+                      <label class="form-label-custom">Qualification <span style="color:var(--rose)">*</span></label>
+                      <input type="text" name="qualification" class="form-control-custom" placeholder="e.g. B.Tech, MCA, BSc" required>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="form-group-custom">
+                      <label class="form-label-custom">User Type</label>
+                      <select name="userTypeId" class="form-control-custom">
+                        <option value="-1">— Select User Type —</option>
+                        <c:forEach items="${allUserType}" var="ut">
+                          <option value="${ut.userTypeId}">${ut.userType}</option>
+                        </c:forEach>
+                      </select>
+                    </div>
+                  </div>
+
+                  <!-- Gender -->
+                  <div class="col-12">
+                    <div class="form-group-custom">
+                      <label class="form-label-custom">Gender <span style="color:var(--rose)">*</span></label>
+                      <div class="radio-group">
+                        <label class="radio-option">
+                          <input type="radio" name="gender" value="MALE" required> Male
+                        </label>
+                        <label class="radio-option">
+                          <input type="radio" name="gender" value="FEMALE"> Female
+                        </label>
+                        <label class="radio-option">
+                          <input type="radio" name="gender" value="OTHER"> Other
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+
                 </div>
               </div>
 
-              <!-- Card Body -->
-              <div class="form-card-body">
+              <!-- ACCOUNT INFO -->
+              <div class="form-section">
+                <div class="form-section-title">Account Credentials</div>
+                <div class="row">
 
-                <form action="register" method="post" enctype="multipart/form-data">
-
-                  <!-- PERSONAL INFO -->
-                  <div class="form-section">
-                    <div class="form-section-title">Personal Information</div>
-                    <div class="row">
-
-                      <div class="col-md-6">
-                        <div class="form-group-custom">
-                          <label class="form-label-custom">First Name <span style="color:var(--rose)">*</span></label>
-                          <input type="text" name="firstName" class="form-control-custom" placeholder="Enter first name" required>
-                        </div>
-                      </div>
-
-                      <div class="col-md-6">
-                        <div class="form-group-custom">
-                          <label class="form-label-custom">Last Name <span style="color:var(--rose)">*</span></label>
-                          <input type="text" name="lastName" class="form-control-custom" placeholder="Enter last name" required>
-                        </div>
-                      </div>
-
-                      <div class="col-md-6">
-                        <div class="form-group-custom">
-                          <label class="form-label-custom">Birth Year <span style="color:var(--rose)">*</span></label>
-                          <input type="number" name="birthYear" class="form-control-custom" min="1900" max="2100" placeholder="e.g. 2000" required>
-                        </div>
-                      </div>
-
-                      <div class="col-md-6">
-                        <div class="form-group-custom">
-                          <label class="form-label-custom">Contact Number <span style="color:var(--rose)">*</span></label>
-                          <input type="text" name="contactNum" class="form-control-custom" placeholder="Enter contact number" required>
-                        </div>
-                      </div>
-
-                      <div class="col-md-6">
-                        <div class="form-group-custom">
-                          <label class="form-label-custom">Qualification <span style="color:var(--rose)">*</span></label>
-                          <input type="text" name="qualification" class="form-control-custom" placeholder="e.g. B.Tech, MCA, BSc" required>
-                        </div>
-                      </div>
-
-                      <div class="col-md-6">
-                        <div class="form-group-custom">
-                          <label class="form-label-custom">User Type</label>
-                          <select name="userTypeId" class="form-control-custom">
-                            <option value="-1">— Select User Type —</option>
-                            <c:forEach items="${allUserType}" var="ut">
-                              <option value="${ut.userTypeId}">${ut.userType}</option>
-                            </c:forEach>
-                          </select>
-                        </div>
-                      </div>
-
-                      <!-- Gender -->
-                      <div class="col-12">
-                        <div class="form-group-custom">
-                          <label class="form-label-custom">Gender <span style="color:var(--rose)">*</span></label>
-                          <div class="radio-group">
-                            <label class="radio-option">
-                              <input type="radio" name="gender" value="MALE" required> Male
-                            </label>
-                            <label class="radio-option">
-                              <input type="radio" name="gender" value="FEMALE"> Female
-                            </label>
-                            <label class="radio-option">
-                              <input type="radio" name="gender" value="OTHER"> Other
-                            </label>
-                          </div>
-                        </div>
-                      </div>
-
-                    </div>
-                  </div>
-
-                  <!-- ACCOUNT INFO -->
-                  <div class="form-section">
-                    <div class="form-section-title">Account Credentials</div>
-                    <div class="row">
-
-                      <div class="col-md-6">
-                        <div class="form-group-custom">
-                          <label class="form-label-custom">Email Address <span style="color:var(--rose)">*</span></label>
-                          <input type="email" name="email" class="form-control-custom" placeholder="Enter email" required>
-                        </div>
-                      </div>
-
-                      <div class="col-md-6">
-                        <div class="form-group-custom">
-                          <label class="form-label-custom">Password <span style="color:var(--rose)">*</span></label>
-                          <input type="password" name="password" class="form-control-custom" placeholder="Set password" required>
-                        </div>
-                      </div>
-
-                    </div>
-                  </div>
-
-                  <!-- LOCATION -->
-                  <div class="form-section">
-                    <div class="form-section-title">Location</div>
-                    <div class="row">
-
-                      <div class="col-md-4">
-                        <div class="form-group-custom">
-                          <label class="form-label-custom">City <span style="color:var(--rose)">*</span></label>
-                          <input type="text" name="city" class="form-control-custom" placeholder="City" required>
-                        </div>
-                      </div>
-
-                      <div class="col-md-4">
-                        <div class="form-group-custom">
-                          <label class="form-label-custom">State <span style="color:var(--rose)">*</span></label>
-                          <input type="text" name="state" class="form-control-custom" placeholder="State" required>
-                        </div>
-                      </div>
-
-                      <div class="col-md-4">
-                        <div class="form-group-custom">
-                          <label class="form-label-custom">Country <span style="color:var(--rose)">*</span></label>
-                          <input type="text" name="country" class="form-control-custom" value="India" required>
-                        </div>
-                      </div>
-
-                    </div>
-                  </div>
-
-                  <!-- PROFILE PICTURE -->
-                  <div class="form-section">
-                    <div class="form-section-title">Profile Picture</div>
+                  <div class="col-md-6">
                     <div class="form-group-custom">
-                      <label class="form-label-custom">Upload Photo</label>
-                      <div class="avatar-preview-wrap">
-                        <div class="avatar-placeholder" id="avatarPlaceholder">📷</div>
-                        <img id="avatarPreview" class="avatar-preview" src="" alt="Preview">
-                        <input type="file" name="profilePic" class="form-control-custom" accept="image/*" onchange="previewAvatar(this)" style="flex:1;">
-                      </div>
+                      <label class="form-label-custom">Email Address <span style="color:var(--rose)">*</span></label>
+                      <input type="email" name="email" class="form-control-custom" placeholder="Enter email" required>
                     </div>
                   </div>
 
-                </form>
+                  <div class="col-md-6">
+                    <div class="form-group-custom">
+                      <label class="form-label-custom">Password <span style="color:var(--rose)">*</span></label>
+                      <input type="password" name="password" class="form-control-custom" placeholder="Set password" required>
+                    </div>
+                  </div>
 
+                </div>
               </div>
 
-              <!-- Footer Actions -->
-              <div class="form-footer">
-                <a href="listUser" class="btn-cancel">← Cancel</a>
-                <button type="submit" form="" onclick="document.querySelector('form').submit()" class="btn-submit">
-                  ✓ Save User
-                </button>
+              <!-- LOCATION -->
+              <div class="form-section">
+                <div class="form-section-title">Location</div>
+                <div class="row">
+
+                  <div class="col-md-4">
+                    <div class="form-group-custom">
+                      <label class="form-label-custom">City <span style="color:var(--rose)">*</span></label>
+                      <input type="text" name="city" class="form-control-custom" placeholder="City" required>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4">
+                    <div class="form-group-custom">
+                      <label class="form-label-custom">State <span style="color:var(--rose)">*</span></label>
+                      <input type="text" name="state" class="form-control-custom" placeholder="State" required>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4">
+                    <div class="form-group-custom">
+                      <label class="form-label-custom">Country <span style="color:var(--rose)">*</span></label>
+                      <input type="text" name="country" class="form-control-custom" value="India" required>
+                    </div>
+                  </div>
+
+                </div>
               </div>
 
-            </div>
+              <!-- PROFILE PICTURE -->
+              <div class="form-section">
+                <div class="form-section-title">Profile Picture</div>
+                <div class="form-group-custom">
+                  <label class="form-label-custom">Upload Photo</label>
+                  <div class="avatar-preview-wrap">
+                    <div class="avatar-placeholder" id="avatarPlaceholder">📷</div>
+                    <img id="avatarPreview" class="avatar-preview" src="" alt="Preview">
+                    <input type="file" name="profilePic" class="form-control-custom" accept="image/*" onchange="previewAvatar(this)" style="flex:1;">
+                  </div>
+                </div>
+              </div>
+
+            </form>
 
           </div>
+
+          <!-- Footer Actions -->
+          <div class="form-footer">
+            <a href="listUser" class="btn-cancel">← Cancel</a>
+            <button type="button" onclick="document.getElementById('registerForm').submit()" class="btn-submit">
+              ✓ Save User
+            </button>
+          </div>
+
         </div>
+        <!-- /form-card -->
 
       </div>
 
-      <jsp:include page="AdminFooter.jsp"></jsp:include>
+      <jsp:include page="ParticipantFooter.jsp"></jsp:include>
 
     </div>
   </div>
