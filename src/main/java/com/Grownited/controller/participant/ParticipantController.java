@@ -23,12 +23,12 @@ public class ParticipantController {
     
     @GetMapping("/participant/login")
     public String login() {
-        return "participant/Login";
+        return "admin/Login";
     }
    
     @GetMapping("/participant/signup")
     public String signup() {
-        return "participant/Signup";
+        return "admin/Signup";
     }
 
 

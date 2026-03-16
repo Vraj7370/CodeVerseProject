@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>Login</title>
 
-<jsp:include page="AdminCSS.jsp"></jsp:include>
+
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 
@@ -312,23 +312,6 @@
   }
 
   .signup-row a:hover { color: var(--oxford); }
-  
-  /* ===== DASHBOARD BACKGROUND FIX ===== */
-
-/* main dashboard area */
-.content-wrapper{
-	background:#F3EFE7 !important;
-}
-
-/* page body soft contrast */
-body{
-	background:#F3EFE7 !important;
-}
-
-/* panels/cards area subtle contrast */
-.main-panel{
-	background:#F3EFE7 !important;
-}
 
 </style>
 </head>
@@ -337,11 +320,11 @@ body{
 
 <div class="container-scroller">
 
-  <jsp:include page="AdminHeader.jsp"></jsp:include>
+  
 
   <div class="container-fluid page-body-wrapper">
 
-    <jsp:include page="AdminLeftSidebar.jsp"></jsp:include>
+    
 
     <div class="main-panel">
       <div class="content-wrapper">
@@ -429,7 +412,7 @@ body{
 
       </div>
 
-      <jsp:include page="AdminFooter.jsp"></jsp:include>
+      
 
     </div>
   </div>
