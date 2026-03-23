@@ -1,87 +1,70 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
-<style>
-
-	/* ===== DASHBOARD BACKGROUND FIX ===== */
-
-/* main dashboard area */
-.content-wrapper{
-	background:#F3EFE7 !important;
-}
-
-/* page body soft contrast */
-body{
-	background:#F3EFE7 !important;
-}
-
-/* panels/cards area subtle contrast */
-.main-panel{
-	background:#F3EFE7 !important;
-}
-</style>
-
-<jsp:include page="AdminCSS.jsp" />
-
-<div class="container-scroller">
-
-	<jsp:include page="AdminHeader.jsp" />
-	<div class="container-fluid page-body-wrapper">
-		<jsp:include page="AdminLeftSidebar.jsp" />
-
-		<div class="main-panel">
-			<div class="content-wrapper">
-
-				<div class="text-center mb-4">
-					<h3 class="font-weight-bold border-bottom pb-2">Hackathon
-						Prize Management</h3>
-				</div>
-
-				<div class="card shadow-sm">
-					<div class="card-body">
-
-						<div class="d-flex justify-content-between mb-3">
-							<p class="card-title mb-0">All Prizes</p>
-
-							<a href="newHackathonPrize" class="btn btn-primary btn-sm">+
-								New Prize</a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>List Hackathon Prize</title>
+<jsp:include page="AdminCSS.jsp"></jsp:include>
+</head>
+<body>
+	<div class="container-scroller">
+		<jsp:include page="AdminHeader.jsp"></jsp:include>
+		<div class="container-fluid page-body-wrapper">
+			<jsp:include page="AdminLeftSidebar.jsp"></jsp:include>
+			<div class="main-panel">
+				<div class="content-wrapper">
+					<h3 class="font-weight-bold mb-3">List Hackathon Prize</h3>
+					<div class="card">
+						<div class="card-body">
+							<div class="d-flex justify-content-between">
+								<p class="card-title">All Prizes</p>
+								<c:url var="newPrizeUrl" value="newHackathonPrize">
+									<c:if test="${hackathonId != null}">
+										<c:param name="hackathonId" value="${hackathonId}" />
+									</c:if>
+								</c:url>
+								<a href="${newPrizeUrl}" class="text-info">New</a>
+							</div>
+							<div class="table-responsive">
+								<table class="table table-bordered table-striped">
+									<thead class="table-dark">
+										<tr>
+											<th>#</th>
+											<th>Hackathon ID</th>
+											<th>Prize Title</th>
+											<th>Prize Description</th>
+											<th>Action</th>
+										</tr>
+									</thead>
+									<tbody>
+										<c:if test="${empty prizeList}">
+											<tr>
+												<td colspan="5" class="text-center text-muted">No prizes found</td>
+											</tr>
+										</c:if>
+										<c:forEach var="p" items="${prizeList}" varStatus="i">
+											<tr>
+												<td>${i.index + 1}</td>
+												<td>${p.hackathonId}</td>
+												<td>${p.prizeTitle}</td>
+												<td style="max-width: 450px; white-space: normal;">${p.prizeDescription}</td>
+												<td>
+													<a href="editHackathonPrize?hackathonPrizeId=${p.hackathonPrizeId}" class="btn btn-sm btn-warning">Edit</a>
+													<a href="deleteHackathonPrize?hackathonPrizeId=${p.hackathonPrizeId}&hackathonId=${p.hackathonId}" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this prize?')">Delete</a>
+												</td>
+											</tr>
+										</c:forEach>
+									</tbody>
+								</table>
+							</div>
 						</div>
-
-						<table class="table table-bordered">
-
-							<tr>
-								<th>#</th>
-								<th>Hackathon</th>
-								<th>Prize Title</th>
-								<th>Description</th>
-								<th>Action</th>
-							</tr>
-
-							<c:forEach items="${prizeList}" var="p" varStatus="i">
-
-								<tr>
-									<td>${i.count}</td>
-									<td>${p.hackathon.title}</td>
-									<td>${p.prizeTitle}</td>
-									<td>${p.prizeDescription}</td>
-
-									<td><a
-										href="deleteHackathonPrize?hackathonPrizeId=${p.hackathonPrizeId}"
-										class="btn btn-danger btn-sm"
-										onclick="return confirm('Delete?')"> Delete </a></td>
-
-								</tr>
-
-							</c:forEach>
-
-						</table>
-
 					</div>
 				</div>
-
+				<jsp:include page="AdminFooter.jsp"></jsp:include>
 			</div>
-
-			<jsp:include page="AdminFooter.jsp" />
-
 		</div>
 	</div>
-</div>
+</body>
+</html>

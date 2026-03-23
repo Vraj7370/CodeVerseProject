@@ -8,7 +8,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
-@Entity 
+@Entity // create table
 @Table(name = "users") // this will assign table name => users
 public class UserEntity {
 
@@ -20,13 +20,17 @@ public class UserEntity {
 	private String email;
 	private String password;
 	private LocalDate createdAt;  
-	private String role; 
+	private String role; //admin , participant , judge
 	private String gender;
 	private Integer birthYear;
 	private String contactNum; 
 	private String profilePicURL;
 	private String otp;
 	private Boolean active;
+	private Boolean passwordResetRequired;
+	private String qualification;
+	private String designation;
+	private String organization;
 	
 	public LocalDate getCreatedAt() {
 		return createdAt;
@@ -105,6 +109,30 @@ public class UserEntity {
 	}
 	public void setActive(Boolean active) {
 		this.active = active;
+	}
+	public Boolean getPasswordResetRequired() {
+		return passwordResetRequired;
+	}
+	public void setPasswordResetRequired(Boolean passwordResetRequired) {
+		this.passwordResetRequired = passwordResetRequired;
+	}
+	public String getQualification() {
+		return qualification;
+	}
+	public void setQualification(String qualification) {
+		this.qualification = qualification;
+	}
+	public String getDesignation() {
+		return designation;
+	}
+	public void setDesignation(String designation) {
+		this.designation = designation;
+	}
+	public String getOrganization() {
+		return organization;
+	}
+	public void setOrganization(String organization) {
+		this.organization = organization;
 	}
 
 	

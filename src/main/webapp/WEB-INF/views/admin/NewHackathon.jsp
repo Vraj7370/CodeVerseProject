@@ -14,6 +14,9 @@
 
 <style>
 
+  /* ===========================
+     CODEVERSE THEME — Variables
+  =========================== */
   :root {
     --navy:      #1B2A4A;
     --oxford:    #0E1F3D;
@@ -34,14 +37,15 @@
 
   * { box-sizing: border-box; }
 
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--ivory);
-    color: var(--navy);
-  }
+  body        { font-family: 'DM Sans', sans-serif; background: #F3EFE7 !important; color: var(--navy); }
+  .main-panel { background: #F3EFE7 !important; }
 
+  /* ===========================
+     PAGE WRAPPER & ANIMATIONS
+  =========================== */
   .content-wrapper {
     padding: 2rem 2rem 1rem !important;
+    background: #F3EFE7 !important;
     animation: pageFadeIn 0.7s ease both;
   }
 
@@ -56,7 +60,7 @@
   }
 
   /* ===========================
-     PAGE TITLE
+     PAGE HEADER
   =========================== */
   .welcome-badge {
     display: inline-block;
@@ -96,7 +100,6 @@
     align-items: center;
     gap: 10px;
   }
-
   .section-label::after {
     content: '';
     flex: 1;
@@ -172,31 +175,41 @@
     letter-spacing: 0.3px;
     transition: color 0.2s;
   }
-
   .view-all-link:hover { color: var(--gold); }
 
-  .form-card-body {
-    padding: 2rem 2.2rem;
-  }
+  .form-card-body { padding: 2rem 2.2rem; }
 
   /* ===========================
-     FORM SECTION TITLE
+     SECTION TITLES INSIDE CARD
   =========================== */
   .form-section-title {
     font-family: 'Playfair Display', serif;
     font-size: 0.95rem;
     color: var(--oxford);
-    margin-bottom: 1rem;
+    margin: 1.8rem 0 1rem;
     padding-bottom: 0.5rem;
     border-bottom: 2px solid var(--cream);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .form-section-title:first-of-type { margin-top: 0; }
+
+  .form-section-title .section-icon {
+    width: 26px;
+    height: 26px;
+    border-radius: 6px;
+    background: rgba(14,31,61,0.07);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
   }
 
   /* ===========================
      FORM FIELDS
   =========================== */
-  .form-group-custom {
-    margin-bottom: 1.3rem;
-  }
+  .form-group-custom { margin-bottom: 1.3rem; }
 
   .form-label-custom {
     display: block;
@@ -207,11 +220,7 @@
     color: var(--slate);
     margin-bottom: 6px;
   }
-
-  .form-label-custom .req {
-    color: var(--rose);
-    margin-left: 2px;
-  }
+  .form-label-custom .req { color: var(--rose); margin-left: 2px; }
 
   .form-control-custom {
     width: 100%;
@@ -224,14 +233,13 @@
     background: var(--ivory);
     outline: none;
     transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+    resize: vertical;
   }
-
   .form-control-custom:focus {
     border-color: var(--eton);
     box-shadow: 0 0 0 3px rgba(46,107,114,0.1);
     background: var(--white);
   }
-
   .form-control-custom::placeholder { color: var(--muted); }
 
   select.form-control-custom {
@@ -241,14 +249,13 @@
     background-repeat: no-repeat;
     background-position: right 14px center;
     padding-right: 36px;
+    resize: none;
   }
 
-  input[type="date"].form-control-custom {
-    color-scheme: light;
-  }
+  input[type="date"].form-control-custom { color-scheme: light; }
 
   /* ===========================
-     TEAM SIZE — SPECIAL LAYOUT
+     TEAM SIZE — MIN / MAX
   =========================== */
   .team-size-group {
     display: grid;
@@ -269,7 +276,47 @@
   }
 
   /* ===========================
-     FORM FOOTER
+     PRIZE CARDS
+  =========================== */
+  .prize-card {
+    background: var(--ivory);
+    border: 1.5px solid var(--cream);
+    border-radius: var(--radius-sm);
+    padding: 1.2rem 1.4rem;
+    margin-bottom: 1rem;
+    position: relative;
+    transition: border-color 0.2s;
+  }
+  .prize-card:hover { border-color: rgba(201,168,76,0.4); }
+
+  .prize-card-rank {
+    position: absolute;
+    top: -10px;
+    left: 16px;
+    background: var(--oxford);
+    color: var(--gold);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 2px 10px;
+    border-radius: 50px;
+  }
+
+  .prize-card-rank.optional {
+    background: var(--cream);
+    color: var(--muted);
+  }
+
+  .prize-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 0.5rem;
+  }
+
+  /* ===========================
+     FORM FOOTER (Actions)
   =========================== */
   .form-footer {
     padding: 1.3rem 2.2rem;
@@ -297,11 +344,7 @@
     cursor: pointer;
     transition: all 0.22s ease;
   }
-
-  .btn-cancel:hover {
-    background: var(--slate);
-    color: var(--white);
-  }
+  .btn-cancel:hover { background: var(--slate); color: var(--white); }
 
   .btn-submit {
     display: inline-flex;
@@ -319,36 +362,26 @@
     transition: all 0.22s ease;
     letter-spacing: 0.3px;
   }
-
   .btn-submit:hover {
     background: var(--eton);
     color: var(--white);
     transform: translateY(-2px);
     box-shadow: var(--shadow-md);
   }
-  
-  /* ===== DASHBOARD BACKGROUND FIX ===== */
 
-/* main dashboard area */
-.content-wrapper{
-	background:#F3EFE7 !important;
-}
-
-/* page body soft contrast */
-body{
-	background:#F3EFE7 !important;
-}
-
-/* panels/cards area subtle contrast */
-.main-panel{
-	background:#F3EFE7 !important;
-}
+  /* ===========================
+     HELPER HINT TEXT
+  =========================== */
+  .field-hint {
+    font-size: 0.72rem;
+    color: var(--muted);
+    margin-top: 4px;
+  }
 
 </style>
 </head>
 
 <body>
-
 <div class="container-scroller">
 
   <jsp:include page="AdminHeader.jsp"></jsp:include>
@@ -360,21 +393,19 @@ body{
     <div class="main-panel">
       <div class="content-wrapper">
 
-        <!-- ===========================
-             PAGE TITLE
-        =========================== -->
+        <!-- ===== PAGE HEADER ===== -->
         <div class="welcome-badge">Admin Panel</div>
         <h3 class="page-title">New Hackathon</h3>
-        <p class="page-subtitle">Create and publish a new hackathon event</p>
+        <p class="page-subtitle">Create and publish a new hackathon event for participants</p>
 
-        <div class="section-label">Event Details</div>
+        <div class="section-label">Event Configuration</div>
 
         <div class="row justify-content-center">
-          <div class="col-lg-8 col-md-10">
+          <div class="col-lg-9 col-md-11">
 
             <div class="form-card">
 
-              <!-- Card Header -->
+              <!-- ===== CARD HEADER ===== -->
               <div class="form-card-header">
                 <div class="form-card-header-left">
                   <div class="form-card-header-icon">💻</div>
@@ -386,21 +417,44 @@ body{
                 <a href="listHackathon" class="view-all-link">View All →</a>
               </div>
 
-              <!-- Card Body -->
+              <!-- ===== CARD BODY ===== -->
               <div class="form-card-body">
 
-                <form action="saveHackathon" method="post">
+                <form action="saveHackathon" method="post" id="hackathonForm">
+                  <input type="hidden" name="leaderboardPublished" value="false" />
 
-                  <!-- BASIC INFO -->
-                  <div class="form-section-title">Basic Information</div>
+                  <!-- ─── 1. BASIC INFORMATION ─── -->
+                  <div class="form-section-title">
+                    <span class="section-icon">📋</span> Basic Information
+                  </div>
 
                   <div class="form-group-custom">
                     <label class="form-label-custom">Hackathon Title <span class="req">*</span></label>
-                    <input type="text" class="form-control-custom" name="title" placeholder="Enter hackathon title" required>
+                    <input type="text" class="form-control-custom" name="title"
+                           placeholder="e.g. Code Sprint 2025 — National Level Hackathon" required>
+                  </div>
+
+                  <div class="form-group-custom">
+                    <label class="form-label-custom">Short Description</label>
+                    <textarea class="form-control-custom" name="description" rows="3"
+                              placeholder="Brief summary shown on listing cards (2–3 sentences)"></textarea>
+                    <div class="field-hint">Shown as preview text on the hackathon listing page.</div>
+                  </div>
+
+                  <div class="form-group-custom">
+                    <label class="form-label-custom">Full Hackathon Details (HTML) <span class="req">*</span></label>
+                    <textarea class="form-control-custom" name="hackathonDetails" rows="7"
+                              placeholder="&lt;p&gt;Enter full details, rules, timeline, and other information here...&lt;/p&gt;" required></textarea>
+                    <div class="field-hint">Supports HTML. Shown on the hackathon detail page.</div>
+                  </div>
+
+                  <!-- ─── 2. EVENT SETTINGS ─── -->
+                  <div class="form-section-title">
+                    <span class="section-icon">⚙️</span> Event Settings
                   </div>
 
                   <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                       <div class="form-group-custom">
                         <label class="form-label-custom">Status <span class="req">*</span></label>
                         <select name="status" class="form-control-custom" required>
@@ -411,52 +465,53 @@ body{
                         </select>
                       </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                       <div class="form-group-custom">
                         <label class="form-label-custom">Event Type <span class="req">*</span></label>
                         <select name="eventType" class="form-control-custom" required>
-                          <option value="">— Select Event Type —</option>
+                          <option value="">— Select Type —</option>
                           <option value="ONLINE">Online</option>
                           <option value="OFFLINE">Offline</option>
                           <option value="HYBRID">Hybrid</option>
                         </select>
                       </div>
                     </div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                       <div class="form-group-custom">
                         <label class="form-label-custom">Payment <span class="req">*</span></label>
                         <select name="payment" class="form-control-custom" required>
-                          <option value="">— Select Payment Type —</option>
+                          <option value="">— Select —</option>
                           <option value="FREE">Free</option>
                           <option value="PAID">Paid</option>
                         </select>
                       </div>
                     </div>
-                    <div class="col-md-6">
-                      <div class="form-group-custom">
-                        <label class="form-label-custom">Location</label>
-                        <input type="text" name="location" class="form-control-custom" placeholder="City, Country or Online">
-                      </div>
-                    </div>
                   </div>
 
-                  <!-- TEAM + USER TYPE -->
-                  <div class="form-section-title">Participation</div>
+                  <div class="form-group-custom">
+                    <label class="form-label-custom">Location</label>
+                    <input type="text" name="location" class="form-control-custom"
+                           placeholder="e.g. Ahmedabad, Gujarat  or  Online (Zoom)">
+                  </div>
+
+                  <!-- ─── 3. PARTICIPATION ─── -->
+                  <div class="form-section-title">
+                    <span class="section-icon">👥</span> Participation
+                  </div>
 
                   <div class="form-group-custom">
                     <label class="form-label-custom">Team Size <span class="req">*</span></label>
                     <div class="team-size-group">
                       <div>
-                        <label class="form-label-custom" style="font-size:0.65rem;">Minimum</label>
-                        <input type="number" name="minTeamSize" class="form-control-custom" min="1" placeholder="e.g. 1" required>
+                        <label class="form-label-custom" style="font-size:0.65rem; margin-bottom:4px;">Minimum</label>
+                        <input type="number" name="minTeamSize" class="form-control-custom"
+                               min="1" placeholder="e.g. 1" required>
                       </div>
                       <div class="team-size-separator">to</div>
                       <div>
-                        <label class="form-label-custom" style="font-size:0.65rem;">Maximum</label>
-                        <input type="number" name="maxTeamSize" class="form-control-custom" min="1" placeholder="e.g. 5" required>
+                        <label class="form-label-custom" style="font-size:0.65rem; margin-bottom:4px;">Maximum</label>
+                        <input type="number" name="maxTeamSize" class="form-control-custom"
+                               min="1" placeholder="e.g. 5" required>
                       </div>
                     </div>
                   </div>
@@ -471,48 +526,109 @@ body{
                     </select>
                   </div>
 
-                  <!-- REGISTRATION DATES -->
-                  <div class="form-section-title">Registration Period</div>
+                  <!-- ─── 4. REGISTRATION PERIOD ─── -->
+                  <div class="form-section-title">
+                    <span class="section-icon">📅</span> Registration Period
+                  </div>
 
                   <div class="row">
                     <div class="col-md-6">
                       <div class="form-group-custom">
                         <label class="form-label-custom">Start Date <span class="req">*</span></label>
-                        <input type="date" name="registrationStartDate" class="form-control-custom" required>
+                        <input type="date" name="registrationStartDate"
+                               class="form-control-custom" required>
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group-custom">
                         <label class="form-label-custom">End Date <span class="req">*</span></label>
-                        <input type="date" name="registrationEndDate" class="form-control-custom" required>
+                        <input type="date" name="registrationEndDate"
+                               class="form-control-custom" required>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- ─── 5. PRIZE DETAILS ─── -->
+                  <div class="form-section-title">
+                    <span class="section-icon">🏆</span> Prize Details
+                  </div>
+
+                  <!-- Prize 1 — Required -->
+                  <div class="prize-card">
+                    <span class="prize-card-rank">🥇 First Prize</span>
+                    <div class="prize-grid" style="margin-top:0.8rem;">
+                      <div class="form-group-custom" style="margin-bottom:0;">
+                        <label class="form-label-custom">Prize Title <span class="req">*</span></label>
+                        <input type="text" name="prizeTitle1" class="form-control-custom"
+                               placeholder="e.g. First Prize" required>
+                      </div>
+                      <div class="form-group-custom" style="margin-bottom:0;">
+                        <label class="form-label-custom">Prize Description <span class="req">*</span></label>
+                        <textarea name="prizeDescription1" class="form-control-custom" rows="2"
+                                  placeholder="e.g. ₹50,000 Cash + Trophy + Internship" required></textarea>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Prize 2 — Optional -->
+                  <div class="prize-card">
+                    <span class="prize-card-rank optional">🥈 Second Prize — Optional</span>
+                    <div class="prize-grid" style="margin-top:0.8rem;">
+                      <div class="form-group-custom" style="margin-bottom:0;">
+                        <label class="form-label-custom">Prize Title</label>
+                        <input type="text" name="prizeTitle2" class="form-control-custom"
+                               placeholder="e.g. Second Prize">
+                      </div>
+                      <div class="form-group-custom" style="margin-bottom:0;">
+                        <label class="form-label-custom">Prize Description</label>
+                        <textarea name="prizeDescription2" class="form-control-custom" rows="2"
+                                  placeholder="e.g. ₹25,000 Cash + Certificate"></textarea>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Prize 3 — Optional -->
+                  <div class="prize-card">
+                    <span class="prize-card-rank optional">🥉 Third Prize — Optional</span>
+                    <div class="prize-grid" style="margin-top:0.8rem;">
+                      <div class="form-group-custom" style="margin-bottom:0;">
+                        <label class="form-label-custom">Prize Title</label>
+                        <input type="text" name="prizeTitle3" class="form-control-custom"
+                               placeholder="e.g. Third Prize">
+                      </div>
+                      <div class="form-group-custom" style="margin-bottom:0;">
+                        <label class="form-label-custom">Prize Description</label>
+                        <textarea name="prizeDescription3" class="form-control-custom" rows="2"
+                                  placeholder="e.g. ₹10,000 Cash + Certificate"></textarea>
                       </div>
                     </div>
                   </div>
 
                 </form>
 
-              </div>
+              </div><!-- /.form-card-body -->
 
-              <!-- Footer Actions -->
+              <!-- ===== CARD FOOTER — ACTIONS ===== -->
               <div class="form-footer">
                 <a href="admin-dashboard" class="btn-cancel">← Cancel</a>
-                <button type="submit" onclick="document.querySelector('form').submit()" class="btn-submit">
+                <button type="button" onclick="document.getElementById('hackathonForm').submit()"
+                        class="btn-submit">
                   ✓ Save Hackathon
                 </button>
               </div>
 
-            </div>
+            </div><!-- /.form-card -->
 
           </div>
         </div>
 
-      </div>
+      </div><!-- /.content-wrapper -->
 
       <jsp:include page="AdminFooter.jsp"></jsp:include>
 
-    </div>
-  </div>
-</div>
+    </div><!-- /.main-panel -->
+  </div><!-- /.page-body-wrapper -->
+</div><!-- /.container-scroller -->
 
 </body>
 </html>

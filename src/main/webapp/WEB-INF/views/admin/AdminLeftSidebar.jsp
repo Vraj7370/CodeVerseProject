@@ -133,6 +133,10 @@
 							NewUser Type</a></li>
 					<li class="nav-item"><a class="nav-link" href="listUser">User
 							List</a></li>
+					<li class="nav-item"><a class="nav-link" href="newJudge">New 
+							Judge</a></li>
+					<li class="nav-item"><a class="nav-link" href="listJudge">List
+							Judge</a></li>				
 				</ul>
 			</div></li>
 		<li class="nav-item"><a class="nav-link"
@@ -161,41 +165,7 @@
 
 					<li class="nav-item"><a class="nav-link" href="listHackathon">List
 							Hackathon</a></li>
-					<li class="nav-item"><a class="nav-link"
-						href="newHackathonDescription">New Hackathon description </a></li>
-					<li class="nav-item"><a class="nav-link"
-						href="listHackathonDescription">List Hackathon description </a></li>
-					<li class="nav-item"><a class="nav-link"
-						href="newHackathonPrize">New Hackathon Prize </a></li>
-
-					<li class="nav-item"><a class="nav-link"
-						href="newHackathonTeam">New Hackathon Team </a></li>
-					<li class="nav-item"><a class="nav-link"
-						href="listHackathonTeam">List Hackathon Team </a></li>
 				</ul>
-			</div></li>
-		<li class="nav-item"><a class="nav-link"
-			data-bs-toggle="collapse" href="#tables" aria-expanded="false"
-			aria-controls="tables"> <i class="icon-grid-2 menu-icon"></i> <span
-				class="menu-title">Tables</span> <i class="menu-arrow"></i>
-		</a>
-			<div class="collapse" id="tables">
-				<ul class="nav flex-column sub-menu">
-					<li class="nav-item"><a class="nav-link"
-						href="pages/tables/basic-table.html">Basic table</a></li>
-				</ul>
-			</div></li>
-		<li class="nav-item"><a class="nav-link"
-			data-bs-toggle="collapse" href="#icons" aria-expanded="false"
-			aria-controls="icons"> <i class="icon-contract menu-icon"></i> <span
-				class="menu-title">Icons</span> <i class="menu-arrow"></i>
-		</a>
-			<div class="collapse" id="icons">
-				<ul class="nav flex-column sub-menu">
-					<li class="nav-item"><a class="nav-link"
-						href="pages/icons/mdi.html">Mdi icons</a></li>
-				</ul>
-			</div></li>
 		<li class="nav-item"><a class="nav-link"
 			data-bs-toggle="collapse" href="#auth" aria-expanded="false"
 			aria-controls="auth"> <i class="icon-head menu-icon"></i> <span
@@ -209,22 +179,5 @@
 							Register </a></li>
 				</ul>
 			</div></li>
-		<li class="nav-item"><a class="nav-link"
-			data-bs-toggle="collapse" href="#error" aria-expanded="false"
-			aria-controls="error"> <i class="icon-ban menu-icon"></i> <span
-				class="menu-title">Error pages</span> <i class="menu-arrow"></i>
-		</a>
-			<div class="collapse" id="error">
-				<ul class="nav flex-column sub-menu">
-					<li class="nav-item"><a class="nav-link"
-						href="pages/samples/error-404.html"> 404 </a></li>
-					<li class="nav-item"><a class="nav-link"
-						href="pages/samples/error-500.html"> 500 </a></li>
-				</ul>
-			</div></li>
-		<li class="nav-item"><a class="nav-link"
-			href="../../../docs/documentation.html"> <i
-				class="icon-paper menu-icon"></i> <span class="menu-title">Documentation</span>
-		</a></li>
 	</ul>
 </nav>

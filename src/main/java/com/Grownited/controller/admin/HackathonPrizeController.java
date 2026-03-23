@@ -61,7 +61,7 @@ public class HackathonPrizeController {
 
     // Delete
     @GetMapping("/deleteHackathonPrize")
-    public String deleteHackathonPrize(Long hackathonPrizeId) {
+    public String deleteHackathonPrize(Integer hackathonPrizeId) {
 
         hackathonPrizeRepository.deleteById(hackathonPrizeId);
 

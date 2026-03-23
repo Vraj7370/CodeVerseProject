@@ -1,6 +1,10 @@
 package com.Grownited.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "hackathon_team")
@@ -10,17 +14,10 @@ public class HackathonTeamEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer hackathonTeamId;
 
+	private Integer hackathonId;
+	private Integer teamLeaderId;
 	private String teamName;
-
 	private String teamStatus;
-
-	// Hackathon FK
-	@ManyToOne
-	private HackathonEntity hackathon;
-
-	// Team Leader FK (User)
-	@ManyToOne
-	private UserEntity teamLeader;
 
 	public Integer getHackathonTeamId() {
 		return hackathonTeamId;
@@ -28,6 +25,22 @@ public class HackathonTeamEntity {
 
 	public void setHackathonTeamId(Integer hackathonTeamId) {
 		this.hackathonTeamId = hackathonTeamId;
+	}
+
+	public Integer getHackathonId() {
+		return hackathonId;
+	}
+
+	public void setHackathonId(Integer hackathonId) {
+		this.hackathonId = hackathonId;
+	}
+
+	public Integer getTeamLeaderId() {
+		return teamLeaderId;
+	}
+
+	public void setTeamLeaderId(Integer teamLeaderId) {
+		this.teamLeaderId = teamLeaderId;
 	}
 
 	public String getTeamName() {
@@ -45,21 +58,4 @@ public class HackathonTeamEntity {
 	public void setTeamStatus(String teamStatus) {
 		this.teamStatus = teamStatus;
 	}
-
-	public HackathonEntity getHackathon() {
-		return hackathon;
-	}
-
-	public void setHackathon(HackathonEntity hackathon) {
-		this.hackathon = hackathon;
-	}
-
-	public UserEntity getTeamLeader() {
-		return teamLeader;
-	}
-
-	public void setTeamLeader(UserEntity teamLeader) {
-		this.teamLeader = teamLeader;
-	}
-
 }

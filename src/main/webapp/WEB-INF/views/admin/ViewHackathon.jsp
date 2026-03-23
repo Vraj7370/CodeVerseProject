@@ -1,585 +1,709 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>View Hackathon</title>
 
 <jsp:include page="AdminCSS.jsp"></jsp:include>
 
-<link
-	href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@300;400;500;600&display=swap"
-	rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
-:root {
-	--navy: #1B2A4A;
-	--oxford: #0E1F3D;
-	--eton: #2E6B72;
-	--sage: #4A7C6F;
-	--ivory: #F7F4EE;
-	--cream: #EDE9E0;
-	--slate: #4B5B6E;
-	--muted: #8C97A4;
-	--gold: #C9A84C;
-	--rose: #A85858;
-	--white: #FFFFFF;
-	--shadow-sm: 0 2px 12px rgba(27, 42, 74, 0.08);
-	--shadow-md: 0 8px 32px rgba(27, 42, 74, 0.12);
-	--radius: 14px;
-	--radius-sm: 8px;
-}
 
-* {
-	box-sizing: border-box;
-}
-
-body {
-	font-family: 'DM Sans', sans-serif;
-	background: var(--ivory);
-	color: var(--navy);
-}
-
-.content-wrapper {
-	padding: 2rem 2rem 1rem !important;
-	animation: pageFadeIn 0.7s ease both;
-}
-
-@
-keyframes pageFadeIn {from { opacity:0;
-	transform: translateY(18px);
-}
-
-to {
-	opacity: 1;
-	transform: translateY(0);
-}
-
-}
-@
-keyframes cardSlideUp {from { opacity:0;
-	transform: translateY(24px);
-}
-
-to {
-	opacity: 1;
-	transform: translateY(0);
-}
-
-}
-
-/* ===========================
-     PAGE TITLE
+  /* ===========================
+     CODEVERSE THEME — Variables
   =========================== */
-.welcome-badge {
-	display: inline-block;
-	background: var(--oxford);
-	color: var(--gold);
-	font-family: 'Playfair Display', serif;
-	font-size: 0.7rem;
-	letter-spacing: 2px;
-	text-transform: uppercase;
-	padding: 4px 12px;
-	border-radius: 50px;
-	margin-bottom: 0.5rem;
-}
+  :root {
+    --navy:      #1B2A4A;
+    --oxford:    #0E1F3D;
+    --eton:      #2E6B72;
+    --sage:      #4A7C6F;
+    --ivory:     #F7F4EE;
+    --cream:     #EDE9E0;
+    --slate:     #4B5B6E;
+    --muted:     #8C97A4;
+    --gold:      #C9A84C;
+    --rose:      #A85858;
+    --white:     #FFFFFF;
+    --shadow-sm: 0 2px 12px rgba(27,42,74,0.08);
+    --shadow-md: 0 8px 32px rgba(27,42,74,0.12);
+    --radius:    14px;
+    --radius-sm: 8px;
+  }
 
-.page-title {
-	font-family: 'Playfair Display', serif;
-	font-size: 2rem;
-	font-weight: 700;
-	color: var(--oxford);
-	margin-bottom: 0.25rem;
-}
+  * { box-sizing: border-box; }
 
-.page-subtitle {
-	color: var(--muted);
-	font-size: 0.9rem;
-	margin-bottom: 2rem;
-}
+  body        { font-family: 'DM Sans', sans-serif; background: #F3EFE7 !important; color: var(--navy); }
+  .main-panel { background: #F3EFE7 !important; }
 
-.section-label {
-	font-size: 0.7rem;
-	font-weight: 700;
-	letter-spacing: 2px;
-	text-transform: uppercase;
-	color: var(--muted);
-	margin: 1.8rem 0 1rem;
-	display: flex;
-	align-items: center;
-	gap: 10px;
-}
-
-.section-label::after {
-	content: '';
-	flex: 1;
-	height: 1px;
-	background: var(--cream);
-}
-
-/* ===========================
-     DETAIL CARD
+  /* ===========================
+     ANIMATIONS
   =========================== */
-.detail-card {
-	background: var(--white);
-	border-radius: var(--radius);
-	box-shadow: var(--shadow-md);
-	overflow: hidden;
-	animation: cardSlideUp 0.6s 0.1s ease both;
-}
+  .content-wrapper {
+    padding: 2rem 2rem 1rem !important;
+    background: #F3EFE7 !important;
+    animation: pageFadeIn 0.7s ease both;
+  }
 
-/* Dark header strip */
-.detail-card-header {
-	background: var(--oxford);
-	padding: 1.6rem 2rem;
-	display: flex;
-	align-items: flex-start;
-	justify-content: space-between;
-	gap: 1rem;
-	flex-wrap: wrap;
-}
+  @keyframes pageFadeIn {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
 
-.detail-header-left {
-	display: flex;
-	align-items: center;
-	gap: 1rem;
-}
+  @keyframes cardSlideUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
 
-.detail-header-icon {
-	width: 48px;
-	height: 48px;
-	border-radius: 50%;
-	background: rgba(201, 168, 76, 0.15);
-	border: 1.5px solid rgba(201, 168, 76, 0.35);
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	font-size: 1.3rem;
-	flex-shrink: 0;
-}
-
-.detail-header-info h5 {
-	font-family: 'Playfair Display', serif;
-	font-size: 1.2rem;
-	color: var(--white);
-	margin: 0 0 4px;
-}
-
-.detail-header-info p {
-	font-size: 0.78rem;
-	color: rgba(255, 255, 255, 0.45);
-	margin: 0;
-}
-
-.detail-header-badges {
-	display: flex;
-	align-items: center;
-	gap: 0.5rem;
-	flex-wrap: wrap;
-}
-
-/* ===========================
-     PILL STYLES
+  /* ===========================
+     PAGE HEADER
   =========================== */
-.pill {
-	display: inline-block;
-	padding: 4px 13px;
-	border-radius: 50px;
-	font-size: 0.72rem;
-	font-weight: 700;
-	letter-spacing: 0.5px;
-}
+  .welcome-badge {
+    display: inline-block;
+    background: var(--oxford);
+    color: var(--gold);
+    font-family: 'Playfair Display', serif;
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 50px;
+    margin-bottom: 0.5rem;
+  }
 
-/* Light bg pills (for body) */
-.pill-upcoming {
-	background: #E8F0FE;
-	color: #2C4A6E;
-}
+  .page-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--oxford);
+    margin-bottom: 0.25rem;
+  }
 
-.pill-ongoing {
-	background: #E8F5EE;
-	color: #2D6A4F;
-}
+  .page-subtitle {
+    color: var(--muted);
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+  }
 
-.pill-completed {
-	background: var(--cream);
-	color: var(--slate);
-}
+  .section-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 1.6rem 0 1rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--cream);
+  }
 
-.pill-free {
-	background: #E8F5EE;
-	color: #2D6A4F;
-}
-
-.pill-paid {
-	background: #FEF0EB;
-	color: #B5573B;
-}
-
-/* Dark bg pills (for header) */
-.pill-dark-upcoming {
-	background: rgba(44, 74, 110, 0.4);
-	color: #A8C4F0;
-	border: 1px solid rgba(44, 74, 110, 0.6);
-}
-
-.pill-dark-ongoing {
-	background: rgba(45, 106, 79, 0.35);
-	color: #6FCF97;
-	border: 1px solid rgba(45, 106, 79, 0.5);
-}
-
-.pill-dark-completed {
-	background: rgba(255, 255, 255, 0.1);
-	color: rgba(255, 255, 255, 0.6);
-	border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.pill-dark-free {
-	background: rgba(45, 106, 79, 0.35);
-	color: #6FCF97;
-	border: 1px solid rgba(45, 106, 79, 0.5);
-}
-
-.pill-dark-paid {
-	background: rgba(168, 88, 88, 0.35);
-	color: #EB9090;
-	border: 1px solid rgba(168, 88, 88, 0.5);
-}
-
-/* ===========================
-     INFO GRID (body)
+  /* ===========================
+     MAIN VIEW CARD
   =========================== */
-.detail-body {
-	padding: 2rem 2.2rem;
-}
+  .form-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+    animation: cardSlideUp 0.6s 0.1s ease both;
+    margin-bottom: 1.6rem;
+  }
 
-.info-section-title {
-	font-family: 'Playfair Display', serif;
-	font-size: 0.95rem;
-	color: var(--oxford);
-	margin-bottom: 1rem;
-	padding-bottom: 0.5rem;
-	border-bottom: 2px solid var(--cream);
-}
+  .form-card-header {
+    background: var(--oxford);
+    padding: 1.5rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+  }
+  .form-card-header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
 
-.info-grid {
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	gap: 1.2rem 2.5rem;
-	margin-bottom: 2rem;
-}
+  .form-card-header-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
 
-.info-item .info-key {
-	font-size: 0.7rem;
-	font-weight: 700;
-	letter-spacing: 1.2px;
-	text-transform: uppercase;
-	color: var(--muted);
-	margin-bottom: 4px;
-}
+  .form-card-header-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(201,168,76,0.15);
+    border: 1.5px solid rgba(201,168,76,0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+  }
 
-.info-item .info-val {
-	font-size: 0.92rem;
-	font-weight: 500;
-	color: var(--navy);
-}
+  .form-card-header-text h5 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: var(--white);
+    margin: 0 0 2px;
+  }
+  .form-card-header-text p {
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.4);
+    margin: 0;
+  }
 
-.info-val-muted {
-	color: var(--muted);
-	font-style: italic;
-	font-size: 0.85rem;
-}
+  .form-card-body { padding: 0; }
 
-/* Team size special display */
-.team-range {
-	display: inline-flex;
-	align-items: center;
-	gap: 8px;
-	background: var(--cream);
-	padding: 4px 14px;
-	border-radius: 50px;
-	font-size: 0.85rem;
-	font-weight: 600;
-	color: var(--slate);
-}
-
-.team-range span {
-	color: var(--oxford);
-	font-weight: 700;
-}
-
-/* Date range display */
-.date-range {
-	display: flex;
-	align-items: center;
-	gap: 8px;
-	flex-wrap: wrap;
-}
-
-.date-chip {
-	background: var(--ivory);
-	border: 1px solid var(--cream);
-	border-radius: var(--radius-sm);
-	padding: 5px 12px;
-	font-size: 0.85rem;
-	color: var(--navy);
-	font-weight: 500;
-}
-
-.date-arrow {
-	color: var(--muted);
-	font-size: 0.8rem;
-}
-
-/* ===========================
-     FOOTER ACTIONS
+  /* ===========================
+     SECTION TITLE INSIDE CARD
   =========================== */
-.detail-footer {
-	padding: 1.2rem 2.2rem;
-	border-top: 1px solid var(--cream);
-	display: flex;
-	justify-content: flex-end;
-	gap: 0.75rem;
-	background: var(--ivory);
-}
+  .card-section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.95rem;
+    color: var(--oxford);
+    padding: 1.4rem 2rem 0.6rem;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-top: 1px solid var(--cream);
+  }
+  .card-section-title:first-of-type { border-top: none; }
 
-.btn-action {
-	display: inline-flex;
-	align-items: center;
-	gap: 6px;
-	padding: 9px 22px;
-	border-radius: var(--radius-sm);
-	font-family: 'DM Sans', sans-serif;
-	font-size: 0.86rem;
-	font-weight: 600;
-	text-decoration: none;
-	border: 1.5px solid transparent;
-	cursor: pointer;
-	transition: all 0.22s ease;
-}
+  .card-section-icon {
+    width: 26px;
+    height: 26px;
+    border-radius: 6px;
+    background: rgba(14,31,61,0.07);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    flex-shrink: 0;
+  }
 
-.btn-back {
-	border-color: var(--slate);
-	color: var(--slate);
-	background: transparent;
-}
+  /* ===========================
+     INFO GRID — KEY / VALUE PAIRS
+  =========================== */
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 0;
+    padding: 0.5rem 1.4rem 1.4rem;
+  }
 
-.btn-back:hover {
-	background: var(--slate);
-	color: var(--white);
-}
+  .info-item {
+    padding: 0.75rem 0.6rem;
+    border-bottom: 1px solid rgba(237,233,224,0.7);
+  }
+  .info-item:last-child { border-bottom: none; }
 
-.btn-edit {
-	background: var(--gold);
-	color: var(--oxford);
-	border-color: var(--gold);
-}
+  .info-label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
 
-.btn-edit:hover {
-	background: var(--oxford);
-	color: var(--gold);
-	border-color: var(--oxford);
-}
+  .info-value {
+    font-size: 0.92rem;
+    font-weight: 500;
+    color: var(--navy);
+  }
 
-/* ===== DASHBOARD BACKGROUND FIX ===== */
+  .info-value.empty { color: var(--muted); font-style: normal; font-weight: 400; }
 
-/* main dashboard area */
-.content-wrapper {
-	background: #F3EFE7 !important;
-}
+  /* ===========================
+     BADGES (inline)
+  =========================== */
+  .cv-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 11px;
+    border-radius: 50px;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+  }
+  .badge-UPCOMING  { background: rgba(201,168,76,0.15);  color: #8a6e1e; }
+  .badge-ONGOING   { background: rgba(46,107,114,0.15);  color: var(--eton); }
+  .badge-COMPLETED { background: rgba(75,91,110,0.13);   color: var(--slate); }
+  .badge-FREE      { background: rgba(74,124,111,0.15);  color: var(--sage); }
+  .badge-PAID      { background: rgba(168,88,88,0.12);   color: var(--rose); }
+  .badge-published { background: rgba(46,107,114,0.15);  color: var(--eton); }
+  .badge-draft     { background: rgba(75,91,110,0.1);    color: var(--muted); }
 
-/* page body soft contrast */
-body {
-	background: #F3EFE7 !important;
-}
+  /* Team size pill */
+  .team-range {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.84rem;
+    font-weight: 600;
+    color: var(--slate);
+    background: var(--ivory);
+    border: 1px solid var(--cream);
+    border-radius: 20px;
+    padding: 3px 12px;
+  }
+  .team-range span { color: var(--muted); font-weight: 400; }
 
-/* panels/cards area subtle contrast */
-.main-panel {
-	background: #F3EFE7 !important;
-}
+  /* ===========================
+     HTML DETAILS BOX
+  =========================== */
+  .html-content-box {
+    margin: 0 2rem 1.6rem;
+    background: var(--ivory);
+    border: 1.5px solid var(--cream);
+    border-radius: var(--radius-sm);
+    padding: 1.2rem 1.4rem;
+    font-size: 0.9rem;
+    line-height: 1.75;
+    color: var(--slate);
+  }
+  .html-content-box.empty-box {
+    color: var(--muted);
+    font-style: normal;
+    text-align: center;
+    padding: 2rem;
+  }
+
+  /* ===========================
+     JUDGES GRID
+  =========================== */
+  .judges-wrap { padding: 0.8rem 2rem 1.6rem; }
+
+  .judge-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 12px;
+  }
+
+  .judge-card {
+    background: var(--ivory);
+    border: 1.5px solid var(--cream);
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .judge-card:hover {
+    border-color: rgba(201,168,76,0.4);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .judge-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--cream);
+    flex-shrink: 0;
+  }
+
+  .judge-name {
+    font-weight: 600;
+    font-size: 0.92rem;
+    color: var(--oxford);
+  }
+
+  .judge-email {
+    font-size: 0.78rem;
+    color: var(--eton);
+    margin-top: 2px;
+  }
+
+  .judge-meta {
+    font-size: 0.73rem;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  .no-data {
+    padding: 0 2rem 1.4rem;
+    font-size: 0.88rem;
+    color: var(--muted);
+  }
+
+  /* ===========================
+     PRIZE TABLE
+  =========================== */
+  .prize-wrap { padding: 0.8rem 2rem 1.6rem; }
+
+  .cv-prize-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+  }
+  .cv-prize-table thead tr { background: var(--oxford); }
+  .cv-prize-table thead th {
+    padding: 11px 16px;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.55);
+    border: none;
+  }
+  .cv-prize-table tbody tr { border-bottom: 1px solid var(--cream); transition: background 0.15s; }
+  .cv-prize-table tbody tr:last-child { border-bottom: none; }
+  .cv-prize-table tbody tr:hover { background: rgba(201,168,76,0.04); }
+  .cv-prize-table tbody td { padding: 13px 16px; color: var(--navy); vertical-align: middle; }
+
+  .prize-rank {
+    font-size: 0.75rem;
+    color: var(--muted);
+    font-weight: 600;
+    width: 40px;
+  }
+
+  .prize-title-cell {
+    font-weight: 600;
+    color: var(--oxford);
+  }
+
+  .prize-medal {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* ===========================
+     CARD FOOTER — ACTIONS
+  =========================== */
+  .form-footer {
+    padding: 1.2rem 2rem;
+    background: var(--ivory);
+    border-top: 1px solid var(--cream);
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    align-items: center;
+  }
+
+  .btn-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 22px;
+    border-radius: var(--radius-sm);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 600;
+    text-decoration: none;
+    border: 1.5px solid var(--slate);
+    color: var(--slate);
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.22s ease;
+  }
+  .btn-back:hover { background: var(--slate); color: var(--white); text-decoration: none; }
+
+  .btn-edit {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 10px 26px;
+    border-radius: var(--radius-sm);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 700;
+    text-decoration: none;
+    border: none;
+    background: var(--oxford);
+    color: var(--gold);
+    cursor: pointer;
+    letter-spacing: 0.3px;
+    transition: all 0.22s ease;
+  }
+  .btn-edit:hover {
+    background: var(--eton);
+    color: var(--white);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    text-decoration: none;
+  }
+
 </style>
 </head>
 
 <body>
+<div class="container-scroller">
 
-	<div class="container-scroller">
+  <jsp:include page="AdminHeader.jsp"></jsp:include>
 
-		<jsp:include page="AdminHeader.jsp"></jsp:include>
+  <div class="container-fluid page-body-wrapper">
 
-		<div class="container-fluid page-body-wrapper">
+    <jsp:include page="AdminLeftSidebar.jsp"></jsp:include>
 
-			<jsp:include page="AdminLeftSidebar.jsp"></jsp:include>
+    <div class="main-panel">
+      <div class="content-wrapper">
 
-			<div class="main-panel">
-				<div class="content-wrapper">
+        <!-- ===== PAGE HEADER ===== -->
+        <div class="welcome-badge">Admin Panel</div>
+        <h3 class="page-title">Hackathon Details</h3>
+        <p class="page-subtitle">Full overview of the selected hackathon event</p>
 
-					<!-- ===========================
-             PAGE TITLE
-        =========================== -->
-					<div class="welcome-badge">Admin Panel</div>
-					<h3 class="page-title">Hackathon Details</h3>
-					<p class="page-subtitle">Full information for this hackathon
-						event</p>
+        <div class="section-label">Event Overview</div>
 
-					<div class="section-label">Overview</div>
+        <!-- ===== MAIN CARD ===== -->
+        <div class="form-card">
 
-					<div class="row justify-content-center">
-						<div class="col-lg-10">
+          <!-- Card Header -->
+          <div class="form-card-header">
+            <div class="form-card-header-left">
+              <div class="form-card-header-icon">💻</div>
+              <div class="form-card-header-text">
+                <h5>${hackathon.title}</h5>
+                <p>Hackathon ID: ${hackathon.hackathonId}</p>
+              </div>
+            </div>
+            <c:choose>
+              <c:when test="${hackathon.leaderboardPublished}">
+                <span class="cv-badge badge-published">📢 Leaderboard Published</span>
+              </c:when>
+              <c:otherwise>
+                <span class="cv-badge badge-draft">📝 Leaderboard Draft</span>
+              </c:otherwise>
+            </c:choose>
+          </div>
 
-							<div class="detail-card">
+          <!-- ─── SECTION 1: Basic Details ─── -->
+          <div class="card-section-title">
+            <span class="card-section-icon">📋</span> Basic Information
+          </div>
 
-								<!-- ===========================
-                   DARK HEADER
-              =========================== -->
-								<div class="detail-card-header">
+          <div class="info-grid">
 
-									<div class="detail-header-left">
-										<div class="detail-header-icon">💻</div>
-										<div class="detail-header-info">
-											<h5>${hackathon.title}</h5>
-											<p>ID #${hackathon.hackathonId} &nbsp;·&nbsp;
-												${hackathon.eventType}</p>
-										</div>
-									</div>
+            <div class="info-item">
+              <div class="info-label">Title</div>
+              <div class="info-value">${hackathon.title}</div>
+            </div>
 
-									<div class="detail-header-badges">
-										<c:choose>
-											<c:when test="${hackathon.status == 'UPCOMING'}">
-												<span class="pill pill-dark-upcoming">${hackathon.status}</span>
-											</c:when>
-											<c:when test="${hackathon.status == 'ONGOING'}">
-												<span class="pill pill-dark-ongoing">${hackathon.status}</span>
-											</c:when>
-											<c:otherwise>
-												<span class="pill pill-dark-completed">${hackathon.status}</span>
-											</c:otherwise>
-										</c:choose>
+            <div class="info-item">
+              <div class="info-label">Status</div>
+              <div class="info-value">
+                <span class="cv-badge badge-${hackathon.status}">${hackathon.status}</span>
+              </div>
+            </div>
 
-										<c:choose>
-											<c:when test="${hackathon.payment == 'FREE'}">
-												<span class="pill pill-dark-free">${hackathon.payment}</span>
-											</c:when>
-											<c:otherwise>
-												<span class="pill pill-dark-paid">${hackathon.payment}</span>
-											</c:otherwise>
-										</c:choose>
-									</div>
+            <div class="info-item">
+              <div class="info-label">Event Type</div>
+              <div class="info-value">${hackathon.eventType}</div>
+            </div>
 
-								</div>
+            <div class="info-item">
+              <div class="info-label">Payment</div>
+              <div class="info-value">
+                <span class="cv-badge badge-${hackathon.payment}">${hackathon.payment}</span>
+              </div>
+            </div>
 
-								<!-- ===========================
-                   BODY
-              =========================== -->
-								<div class="detail-body">
+            <div class="info-item">
+              <div class="info-label">Location</div>
+              <div class="info-value">
+                <c:choose>
+                  <c:when test="${not empty hackathon.location}">${hackathon.location}</c:when>
+                  <c:otherwise><span class="empty">—</span></c:otherwise>
+                </c:choose>
+              </div>
+            </div>
 
-									<!-- Event Details -->
-									<div class="info-section-title">Event Details</div>
-									<div class="info-grid">
+            <div class="info-item">
+              <div class="info-label">User Type</div>
+              <div class="info-value">${hackathon.userTypeId}</div>
+            </div>
 
-										<div class="info-item">
-											<div class="info-key">Event Type</div>
-											<div class="info-val">${hackathon.eventType}</div>
-										</div>
+          </div>
 
-										<div class="info-item">
-											<div class="info-key">Location</div>
-											<div class="info-val">
-												<c:choose>
-													<c:when test="${not empty hackathon.location}">${hackathon.location}</c:when>
-													<c:otherwise>
-														<span class="info-val-muted">Not specified</span>
-													</c:otherwise>
-												</c:choose>
-											</div>
-										</div>
+          <!-- ─── SECTION 2: Participation ─── -->
+          <div class="card-section-title">
+            <span class="card-section-icon">👥</span> Participation
+          </div>
 
-										<div class="info-item">
-											<div class="info-key">Team Size</div>
-											<div class="info-val">
-												<span class="team-range"> 👥 <span>${hackathon.minTeamSize}</span>
-													to <span>${hackathon.maxTeamSize}</span> members
-												</span>
-											</div>
-										</div>
+          <div class="info-grid">
 
-										<div class="info-item">
-											<div class="info-key">Eligibility</div>
+            <div class="info-item">
+              <div class="info-label">Team Size</div>
+              <div class="info-value">
+                <span class="team-range">
+                  ${hackathon.minTeamSize} <span>–</span> ${hackathon.maxTeamSize} members
+                </span>
+              </div>
+            </div>
 
-											<div class="info-val">
+            <div class="info-item">
+              <div class="info-label">Registration Start</div>
+              <div class="info-value">${hackathon.registrationStartDate}</div>
+            </div>
 
-												<c:choose>
+            <div class="info-item">
+              <div class="info-label">Registration End</div>
+              <div class="info-value">${hackathon.registrationEndDate}</div>
+            </div>
 
-													<c:when test="${not empty hackathon.userTypeId}">
+            <div class="info-item">
+              <div class="info-label">Leaderboard Status</div>
+              <div class="info-value">
+                <c:choose>
+                  <c:when test="${hackathon.leaderboardPublished}">
+                    <span class="cv-badge badge-published">Published</span>
+                  </c:when>
+                  <c:otherwise>
+                    <span class="cv-badge badge-draft">Draft</span>
+                  </c:otherwise>
+                </c:choose>
+              </div>
+            </div>
 
-														<c:forEach var="u" items="${allUserType}">
-															<c:if test="${u.userTypeId == hackathon.userTypeId}">
-																<span class="pill pill-upcoming"> 🎓
-																	${u.userType} </span>
-															</c:if>
-														</c:forEach>
+          </div>
 
-													</c:when>
+          <!-- ─── SECTION 3: Short Description ─── -->
+          <c:if test="${not empty hackathon.description}">
+            <div class="card-section-title">
+              <span class="card-section-icon">📝</span> Short Description
+            </div>
+            <div style="padding: 0.4rem 2rem 1.4rem;">
+              <div class="html-content-box">${hackathon.description}</div>
+            </div>
+          </c:if>
 
-													<c:otherwise>
-														<span class="info-val-muted">All users allowed</span>
-													</c:otherwise>
+          <!-- ─── SECTION 4: Full HTML Details ─── -->
+          <div class="card-section-title">
+            <span class="card-section-icon">📄</span> Full Hackathon Details
+          </div>
+          <c:choose>
+            <c:when test="${not empty hackathonDescription}">
+              <div class="html-content-box">
+                <c:out value="${hackathonDescription.hackathonDetails}" escapeXml="false" />
+              </div>
+            </c:when>
+            <c:otherwise>
+              <div class="html-content-box empty-box">No detailed description has been added yet.</div>
+            </c:otherwise>
+          </c:choose>
 
-												</c:choose>
+          <!-- ─── SECTION 5: Assigned Judges ─── -->
+          <div class="card-section-title">
+            <span class="card-section-icon">⚖</span> Assigned Judges
+          </div>
+          <c:choose>
+            <c:when test="${empty judgeUsers}">
+              <div class="no-data">No judges have been assigned to this hackathon yet.</div>
+            </c:when>
+            <c:otherwise>
+              <div class="judges-wrap">
+                <div class="judge-grid">
+                  <c:forEach items="${judgeUsers}" var="j">
+                    <div class="judge-card">
+                      <c:choose>
+                        <c:when test="${not empty j.profilePicURL}">
+                          <img src="${j.profilePicURL}" class="judge-avatar" alt="Judge">
+                        </c:when>
+                        <c:otherwise>
+                          <img src="assets/images/faces/dummy.jpg" class="judge-avatar" alt="Judge">
+                        </c:otherwise>
+                      </c:choose>
+                      <div>
+                        <div class="judge-name">${j.firstName} ${j.lastName}</div>
+                        <div class="judge-email">${j.email}</div>
+                        <c:if test="${not empty j.designation}">
+                          <div class="judge-meta">🏷 ${j.designation}</div>
+                        </c:if>
+                        <c:if test="${not empty j.qualification}">
+                          <div class="judge-meta">🎓 ${j.qualification}</div>
+                        </c:if>
+                        <c:if test="${not empty j.organization}">
+                          <div class="judge-meta">🏢 ${j.organization}</div>
+                        </c:if>
+                      </div>
+                    </div>
+                  </c:forEach>
+                </div>
+              </div>
+            </c:otherwise>
+          </c:choose>
 
-											</div>
-										</div>
+          <!-- ─── SECTION 6: Prize Details ─── -->
+          <div class="card-section-title">
+            <span class="card-section-icon">🏆</span> Prize Details
+          </div>
+          <c:choose>
+            <c:when test="${empty prizeList}">
+              <div class="no-data">No prize details have been added yet.</div>
+            </c:when>
+            <c:otherwise>
+              <div class="prize-wrap">
+                <div class="cv-table-wrapper" style="border-radius: var(--radius-sm); overflow: hidden; border: 1px solid var(--cream);">
+                  <table class="cv-prize-table">
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>Prize Title</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <c:forEach var="p" items="${prizeList}" varStatus="i">
+                        <tr>
+                          <td class="prize-rank">
+                            <c:choose>
+                              <c:when test="${i.count == 1}">🥇</c:when>
+                              <c:when test="${i.count == 2}">🥈</c:when>
+                              <c:when test="${i.count == 3}">🥉</c:when>
+                              <c:otherwise>${i.count}</c:otherwise>
+                            </c:choose>
+                          </td>
+                          <td class="prize-title-cell">${p.prizeTitle}</td>
+                          <td style="color: var(--slate); font-size: 0.875rem;">${p.prizeDescription}</td>
+                        </tr>
+                      </c:forEach>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </c:otherwise>
+          </c:choose>
 
-									</div>
+          <!-- ===== FOOTER ACTIONS ===== -->
+          <div class="form-footer">
+            <a href="listHackathon" class="btn-back">← Back to List</a>
+            <a href="editHackathon?hackathonId=${hackathon.hackathonId}" class="btn-edit">✏ Edit Hackathon</a>
+          </div>
 
-									<!-- Registration Period -->
-									<div class="info-section-title">Registration Period</div>
-									<div class="info-grid">
+        </div>
+        <!-- /.form-card -->
 
-										<div class="info-item">
-											<div class="info-key">Start Date</div>
-											<div class="info-val">
-												<div class="date-chip">📅
-													${hackathon.registrationStartDate}</div>
-											</div>
-										</div>
+      </div>
+      <!-- /.content-wrapper -->
 
-										<div class="info-item">
-											<div class="info-key">End Date</div>
-											<div class="info-val">
-												<div class="date-chip">📅
-													${hackathon.registrationEndDate}</div>
-											</div>
-										</div>
+      <jsp:include page="AdminFooter.jsp"></jsp:include>
 
-									</div>
-
-								</div>
-
-								<!-- ===========================
-                   FOOTER
-              =========================== -->
-								<div class="detail-footer">
-									<a href="listHackathon" class="btn-action btn-back">← Back
-										to List</a> <a
-										href="editHackathon?hackathonId=${hackathon.hackathonId}"
-										class="btn-action btn-edit">✎ Edit Hackathon</a>
-								</div>
-
-							</div>
-
-						</div>
-					</div>
-
-				</div>
-
-				<jsp:include page="AdminFooter.jsp"></jsp:include>
-
-			</div>
-		</div>
-	</div>
+    </div>
+    <!-- /.main-panel -->
+  </div>
+  <!-- /.page-body-wrapper -->
+</div>
+<!-- /.container-scroller -->
 
 </body>
 </html>

@@ -8,22 +8,20 @@ public class HackathonPrizeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long hackathonPrizeId;
+    private Integer hackathonPrizeId;
 
     private String prizeTitle;
 
     @Column(length = 2000)
     private String prizeDescription;
 
-    // FK
-    @ManyToOne
-    private HackathonEntity hackathon;
+    private Integer hackathonId;   // simple FK
 
-    public Long getHackathonPrizeId() {
+    public Integer getHackathonPrizeId() {
         return hackathonPrizeId;
     }
 
-    public void setHackathonPrizeId(Long hackathonPrizeId) {
+    public void setHackathonPrizeId(Integer hackathonPrizeId) {
         this.hackathonPrizeId = hackathonPrizeId;
     }
 
@@ -43,11 +41,11 @@ public class HackathonPrizeEntity {
         this.prizeDescription = prizeDescription;
     }
 
-    public HackathonEntity getHackathon() {
-        return hackathon;
+    public Integer getHackathonId() {
+        return hackathonId;
     }
 
-    public void setHackathon(HackathonEntity hackathon) {
-        this.hackathon = hackathon;
+    public void setHackathonId(Integer hackathonId) {
+        this.hackathonId = hackathonId;
     }
 }

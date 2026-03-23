@@ -11,6 +11,15 @@ public class HackathonDescriptionEntity {
     @Column(name = "hackathon_description_id")
     private Integer hackathonDescriptionId;
     private String hackathonDetails;
+    private Integer hackathonId;
+
+    public Integer getHackathonId() {
+        return hackathonId;
+    }
+
+    public void setHackathonId(Integer hackathonId) {
+        this.hackathonId = hackathonId;
+    }
 	
     public Integer getHackathonDescriptionId() {
 		return hackathonDescriptionId;
@@ -27,8 +36,5 @@ public class HackathonDescriptionEntity {
 	}
 	
     
-	
 
-
-   
 }
