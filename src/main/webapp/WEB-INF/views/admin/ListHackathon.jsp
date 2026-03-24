@@ -620,12 +620,13 @@
                         <!-- Actions -->
                         <td>
                           <div class="hackathon-actions">
-
-                            <a href="listHackathonDescription?hackathonId=${h.hackathonId}"
-                               class="cv-btn cv-btn-desc">📄 Desc</a>
-
-                            <a href="listHackathonPrize?hackathonId=${h.hackathonId}"
-                               class="cv-btn cv-btn-prize">🏆 Prizes</a>
+                          
+                          
+                          <a href="/admin/hackathon/description/list?hackathonId=${h.hackathonId}"
+                            class="cv-btn cv-btn-desc">📄 Desc</a>
+                            
+                            <a href="/admin/hackathon/prize/list?hackathonId=${h.hackathonId}"
+       						class="cv-btn cv-btn-prize">🏆 Prizes</a>
 
                             <a href="manageHackathonJudge?hackathonId=${h.hackathonId}"
                                class="cv-btn cv-btn-judge">⚖ Judges</a>

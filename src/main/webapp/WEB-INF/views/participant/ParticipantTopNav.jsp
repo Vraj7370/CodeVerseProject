@@ -1,88 +1,152 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+<!-- ✅ FONT (REQUIRED) -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
 <style>
-.pnav-header {
+
+/* ✅ REQUIRED VARIABLES (FIX ISSUE) */
+:root {
+	--nv: #0e1f3d;
+	--nv2: #1a3260;
+	--nv-dim: rgba(14, 31, 61, 0.07);
+
+	--tl: #2e6b72;
+
+	--t2: #4b5b6e;
+
+	--bd: rgba(14, 31, 61, 0.08);
+
+	--ff: 'Inter', sans-serif;
+}
+
+/* ✅ FORCE SAME FONT */
+.navbar, .navbar * {
+	font-family: var(--ff);
+}
+
+/* ===== NAVBAR ===== */
+.navbar {
 	position: sticky;
 	top: 0;
-	z-index: 120;
-	background: rgba(10, 10, 15, 0.88);
-	backdrop-filter: blur(20px);
-	border-bottom: 1px solid #2a2a3d;
-	padding: 0 24px;
-	min-height: 64px;
+	z-index: 500;
+	height: 60px;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	gap: 12px;
+	padding: 0 48px;
+	background: rgba(244, 242, 238, 0.9);
+	backdrop-filter: blur(20px) saturate(180%);
+	border-bottom: 1px solid var(--bd);
+	box-shadow: 0 1px 0 var(--bd);
 }
-.pnav-logo {
+
+/* ===== BRAND ===== */
+.brand {
 	display: flex;
 	align-items: center;
 	gap: 10px;
-	font-family: 'Space Mono', monospace;
-	font-size: 18px;
+	text-decoration: none;
+}
+
+.brand-mark {
+	width: 32px;
+	height: 32px;
+	border-radius: 8px;
+	background: var(--nv);
+	display: grid;
+	place-items: center;
+	color: #e0be73;
+}
+
+.brand-name {
+	font-size: 1.1rem;
 	font-weight: 700;
-	color: #e2e8f0;
-	text-decoration: none;
+	color: var(--nv);
+	letter-spacing: -0.3px;
 }
-.pnav-logo-icon {
-	width: 34px;
-	height: 34px;
-	background: linear-gradient(135deg, #7c3aed, #06b6d4);
+
+.brand-name span {
+	color: var(--tl);
+}
+
+/* ===== LINKS ===== */
+.nav-links {
+	display: flex;
+	align-items: center;
+	gap: 2px;
+}
+
+.nav-links a {
+	font-size: 0.875rem;
+	font-weight: 500;
+	color: var(--t2);
+	padding: 6px 13px;
 	border-radius: 8px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-.pnav-links {
-	display: flex;
-	align-items: center;
-	gap: 8px;
-	flex-wrap: wrap;
-	justify-content: flex-end;
-}
-.pnav-links a {
-	color: #64748b;
 	text-decoration: none;
-	font-size: 14px;
+	transition: all 0.18s;
+}
+
+.nav-links a:hover {
+	color: var(--nv);
+	background: var(--nv-dim);
+}
+
+/* CTA */
+.nav-cta {
+	background: var(--nv);
+	color: #fff !important;
+	padding: 7px 16px;
+	border-radius: 8px;
 	font-weight: 600;
-	padding: 8px 14px;
-	border-radius: 8px;
-	transition: all 0.2s;
 }
-.pnav-links a:hover {
-	color: #e2e8f0;
-	background: #1c1c27;
+
+/* PROFILE */
+.profile img {
+	width: 32px;
+	height: 32px;
+	border-radius: 50%;
+	object-fit: cover;
+	margin-left: 10px;
 }
-.pnav-links .pnav-primary {
-	background: #7c3aed;
-	color: #fff;
-}
-.pnav-links .pnav-primary:hover {
-	background: #6d28d9;
-}
-@media (max-width: 760px) {
-	.pnav-header {
-		padding: 10px 14px;
-	}
-	.pnav-logo {
-		font-size: 16px;
-	}
-}
+
 </style>
 
-<header class="pnav-header">
-	<a class="pnav-logo" href="/participant/home">
-		<div class="pnav-logo-icon">
-			<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"
+
+<!-- ✅ EXACT SAME NAVBAR -->
+<header class="navbar">
+
+	<a href="/participant/home" class="brand">
+		<div class="brand-mark">
+			<svg width="15" height="15" viewBox="0 0 24 24" fill="none"
+				stroke="currentColor" stroke-width="2.5"
 				stroke-linecap="round" stroke-linejoin="round">
 				<polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
 			</svg>
 		</div>
-		HackPortal
+		<span class="brand-name">Code<span>Verse</span></span>
 	</a>
-	<nav class="pnav-links">
+
+	<nav class="nav-links">
 		<a href="/participant/home">Explore</a>
 		<a href="/participant/my-hackathons">My Hackathons</a>
-		<a href="/logout">Logout</a>
-		<a href="/participant/profile" class="pnav-primary">My Profile</a>
+		<a href="/participant/leaderboard">Leaderboard</a>
+
+		<c:if test="${empty sessionScope.user}">
+			<a href="/login">Login</a>
+			<a href="/signup" class="nav-cta">Register</a>
+		</c:if>
+
+		<c:if test="${not empty sessionScope.user}">
+			<a href="/logout">Logout</a>
+		</c:if>
+
+		<!-- PROFILE -->
+		<c:if test="${not empty sessionScope.user}">
+			<div class="profile">
+				<img src="${sessionScope.user.profilePicURL}">
+			</div>
+		</c:if>
 	</nav>
+
 </header>
