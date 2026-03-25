@@ -1,51 +1,56 @@
 package com.Grownited.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "hackathon_prize")
 public class HackathonPrizeEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer hackathonPrizeId;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer hackathonPrizeId;
 
-    private String prizeTitle;
+	private Integer hackathonId;
 
-    @Column(length = 2000)
-    private String prizeDescription;
+	private String prizeTitle;
 
-    private Integer hackathonId;   // simple FK
+	@Column(columnDefinition = "TEXT")
+	private String prizeDescription;
 
-    public Integer getHackathonPrizeId() {
-        return hackathonPrizeId;
-    }
+	public Integer getHackathonPrizeId() {
+		return hackathonPrizeId;
+	}
 
-    public void setHackathonPrizeId(Integer hackathonPrizeId) {
-        this.hackathonPrizeId = hackathonPrizeId;
-    }
+	public void setHackathonPrizeId(Integer hackathonPrizeId) {
+		this.hackathonPrizeId = hackathonPrizeId;
+	}
 
-    public String getPrizeTitle() {
-        return prizeTitle;
-    }
+	public Integer getHackathonId() {
+		return hackathonId;
+	}
 
-    public void setPrizeTitle(String prizeTitle) {
-        this.prizeTitle = prizeTitle;
-    }
+	public void setHackathonId(Integer hackathonId) {
+		this.hackathonId = hackathonId;
+	}
 
-    public String getPrizeDescription() {
-        return prizeDescription;
-    }
+	public String getPrizeTitle() {
+		return prizeTitle;
+	}
 
-    public void setPrizeDescription(String prizeDescription) {
-        this.prizeDescription = prizeDescription;
-    }
+	public void setPrizeTitle(String prizeTitle) {
+		this.prizeTitle = prizeTitle;
+	}
 
-    public Integer getHackathonId() {
-        return hackathonId;
-    }
+	public String getPrizeDescription() {
+		return prizeDescription;
+	}
 
-    public void setHackathonId(Integer hackathonId) {
-        this.hackathonId = hackathonId;
-    }
+	public void setPrizeDescription(String prizeDescription) {
+		this.prizeDescription = prizeDescription;
+	}
 }

@@ -137,7 +137,7 @@ public class HackathonController {
 		model.addAttribute("prize1", getPrizeOrNew(prizeList, 0));
 		model.addAttribute("prize2", getPrizeOrNew(prizeList, 1));
 		model.addAttribute("prize3", getPrizeOrNew(prizeList, 2));
-		return "EditHackathon";
+		return "admin/EditHackathon";
 	}
 
 	@PostMapping("updateHackathon")

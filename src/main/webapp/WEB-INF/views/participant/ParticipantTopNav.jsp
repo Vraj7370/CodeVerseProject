@@ -130,7 +130,7 @@
 	<nav class="nav-links">
 		<a href="/participant/home">Explore</a>
 		<a href="/participant/my-hackathons">My Hackathons</a>
-		<a href="/participant/leaderboard">Leaderboard</a>
+		<!-- <a href="/participant/leaderboard">Leaderboard</a> -->
 
 		<c:if test="${empty sessionScope.user}">
 			<a href="/login">Login</a>
@@ -143,10 +143,24 @@
 
 		<!-- PROFILE -->
 		<c:if test="${not empty sessionScope.user}">
-			<div class="profile">
-				<img src="${sessionScope.user.profilePicURL}">
-			</div>
-		</c:if>
+  <div class="profile">
+
+    <c:choose>
+
+      <c:when test="${not empty sessionScope.user.profilePicURL}">
+        <img src="${sessionScope.user.profilePicURL}" 
+             style="width:40px;height:40px;border-radius:50%;">
+      </c:when>
+
+      <c:otherwise>
+        <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" 
+             style="width:40px;height:40px;border-radius:50%;">
+      </c:otherwise>
+
+    </c:choose>
+
+  </div>
+</c:if>
 	</nav>
 
 </header>

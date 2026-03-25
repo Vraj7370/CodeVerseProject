@@ -14,159 +14,152 @@ import com.Grownited.repository.HackathonPrizeRepository;
 import com.Grownited.repository.HackathonRepository;
 
 @Controller
-@RequestMapping("/admin/hackathon")   // ✅ prefix added (BEST PRACTICE)
+@RequestMapping("/admin/hackathon")
 public class HackathonExtraController {
 
-	@Autowired
-	HackathonDescriptionRepository hackathonDescriptionRepository;
+    @Autowired
+    HackathonDescriptionRepository hackathonDescriptionRepository;
 
-	@Autowired
-	HackathonPrizeRepository hackathonPrizeRepository;
+    @Autowired
+    HackathonPrizeRepository hackathonPrizeRepository;
 
-	@Autowired
-	HackathonRepository hackathonRepository;
+    @Autowired
+    HackathonRepository hackathonRepository;
 
-	// ================== DESCRIPTION ==================
+    // ================== DESCRIPTION ==================
 
-	// Open Form
-	@GetMapping("/description/new")
-	public String newHackathonDescription(
-			@RequestParam(required = false) Integer hackathonId, Model model) {
+    @GetMapping("/description/new")
+    public String newHackathonDescription(@RequestParam(required = false) Integer hackathonId, Model model) {
+        model.addAttribute("allHackthon", hackathonRepository.findAll());
+        model.addAttribute("hackathonId", hackathonId);
+        return "admin/NewHackathonDescription";
+    }
 
-		model.addAttribute("allHackthon", hackathonRepository.findAll());
-		model.addAttribute("hackathonId", hackathonId);
-		return "admin/NewHackathonDescription";
-	}
+    @PostMapping("/description/save")
+    public String saveHackathonDescription(HackathonDescriptionEntity entity) {
+        hackathonDescriptionRepository.save(entity);
+        return "redirect:/admin/hackathon/description/list?hackathonId=" + entity.getHackathonId();
+    }
 
-	// Save
-	@PostMapping("/description/save")
-	public String saveHackathonDescription(HackathonDescriptionEntity entity) {
+    @GetMapping("/description/list")
+    public String listHackathonDescription(@RequestParam(required = false) Integer hackathonId, Model model) {
 
-		hackathonDescriptionRepository.save(entity);
-		return "redirect:/admin/hackathon/description/list?hackathonId=" + entity.getHackathonId();
-	}
+        List<HackathonDescriptionEntity> list =
+                (hackathonId == null)
+                        ? hackathonDescriptionRepository.findAll()
+                        : hackathonDescriptionRepository.findByHackathonId(hackathonId);
 
-	// List
-	@GetMapping("/description/list")
-	public String listHackathonDescription(
-			@RequestParam(required = false) Integer hackathonId, Model model) {
+        model.addAttribute("descriptionList", list);
+        model.addAttribute("hackathonId", hackathonId);
 
-		List<HackathonDescriptionEntity> list =
-				hackathonId == null
-				? hackathonDescriptionRepository.findAll()
-				: hackathonDescriptionRepository.findByHackathonId(hackathonId);
+        return "admin/ListHackathonDescription";
+    }
 
-		model.addAttribute("descriptionList", list);
-		model.addAttribute("hackathonId", hackathonId);
-		return "admin/ListHackathonDescription";
-	}
+    @GetMapping("/description/edit")
+    public String editHackathonDescription(Integer hackathonDescriptionId, Model model) {
 
-	// Edit
-	@GetMapping("/description/edit")
-	public String editHackathonDescription(Integer hackathonDescriptionId, Model model) {
+        HackathonDescriptionEntity data =
+                hackathonDescriptionRepository.findById(hackathonDescriptionId).orElse(null);
 
-		HackathonDescriptionEntity data =
-				hackathonDescriptionRepository.findById(hackathonDescriptionId).orElse(null);
+        model.addAttribute("description", data);
+        model.addAttribute("allHackthon", hackathonRepository.findAll());
 
-		model.addAttribute("description", data);
-		model.addAttribute("allHackthon", hackathonRepository.findAll());
-		return "admin/EditHackathonDescription";
-	}
+        return "admin/EditHackathonDescription";
+    }
 
-	// Update
-	@PostMapping("/description/update")
-	public String updateHackathonDescription(HackathonDescriptionEntity entity) {
+    @PostMapping("/description/update")
+    public String updateHackathonDescription(HackathonDescriptionEntity entity) {
 
-		hackathonDescriptionRepository.save(entity);
-		return "redirect:/admin/hackathon/description/list?hackathonId=" + entity.getHackathonId();
-	}
+        hackathonDescriptionRepository.save(entity);
+        return "redirect:/admin/hackathon/description/list?hackathonId=" + entity.getHackathonId();
+    }
 
-	// Delete
-	@GetMapping("/description/delete")
-	public String deleteHackathonDescription(Integer hackathonDescriptionId,
-			@RequestParam(required = false) Integer hackathonId) {
+    @GetMapping("/description/delete")
+    public String deleteHackathonDescription(Integer hackathonDescriptionId,
+                                             @RequestParam(required = false) Integer hackathonId) {
 
-		if (hackathonId == null) {
-			HackathonDescriptionEntity entity =
-					hackathonDescriptionRepository.findById(hackathonDescriptionId).orElse(null);
+        if (hackathonId == null) {
+            HackathonDescriptionEntity entity =
+                    hackathonDescriptionRepository.findById(hackathonDescriptionId).orElse(null);
 
-			if (entity != null) {
-				hackathonId = entity.getHackathonId();
-			}
-		}
+            if (entity != null) {
+                hackathonId = entity.getHackathonId();
+            }
+        }
 
-		hackathonDescriptionRepository.deleteById(hackathonDescriptionId);
+        hackathonDescriptionRepository.deleteById(hackathonDescriptionId);
 
-		return "redirect:/admin/hackathon/description/list"
-				+ (hackathonId != null ? "?hackathonId=" + hackathonId : "");
-	}
+        return "redirect:/admin/hackathon/description/list"
+                + (hackathonId != null ? "?hackathonId=" + hackathonId : "");
+    }
 
-	// ================== PRIZE ==================
+    // ================== PRIZE ==================
 
-	@GetMapping("/prize/new")
-	public String newHackathonPrize(
-			@RequestParam(required = false) Integer hackathonId, Model model) {
+    @GetMapping("/prize/new")
+    public String newHackathonPrize(@RequestParam(required = false) Integer hackathonId, Model model) {
 
-		model.addAttribute("allHackthon", hackathonRepository.findAll());
-		model.addAttribute("hackathonId", hackathonId);
-		return "admin/NewHackathonPrize";
-	}
+        model.addAttribute("allHackthon", hackathonRepository.findAll());
+        model.addAttribute("hackathonId", hackathonId);
 
-	@PostMapping("/prize/save")
-	public String saveHackathonPrize(HackathonPrizeEntity entity) {
+        return "admin/NewHackathonPrize";
+    }
 
-		hackathonPrizeRepository.save(entity);
-		return "redirect:/admin/hackathon/prize/list?hackathonId=" + entity.getHackathonId();
-	}
+    @PostMapping("/prize/save")
+    public String saveHackathonPrize(HackathonPrizeEntity entity) {
 
-	@GetMapping("/prize/list")
-	public String listHackathonPrize(
-			@RequestParam(required = false) Integer hackathonId, Model model) {
+        hackathonPrizeRepository.save(entity);
+        return "redirect:/admin/hackathon/prize/list?hackathonId=" + entity.getHackathonId();
+    }
 
-		List<HackathonPrizeEntity> list =
-				hackathonId == null
-				? hackathonPrizeRepository.findAll()
-				: hackathonPrizeRepository.findByHackathonId(hackathonId);
+    @GetMapping("/prize/list")
+    public String listHackathonPrize(@RequestParam(required = false) Integer hackathonId, Model model) {
 
-		model.addAttribute("prizeList", list);
-		model.addAttribute("hackathonId", hackathonId);
-		return "admin/ListHackathonPrize";
-	}
+        List<HackathonPrizeEntity> list =
+                (hackathonId == null)
+                        ? hackathonPrizeRepository.findAll()
+                        : hackathonPrizeRepository.findByHackathonId(hackathonId);
 
-	@GetMapping("/prize/edit")
-	public String editHackathonPrize(Integer hackathonPrizeId, Model model) {
+        model.addAttribute("prizeList", list);
+        model.addAttribute("hackathonId", hackathonId);
 
-		HackathonPrizeEntity data =
-				hackathonPrizeRepository.findById(hackathonPrizeId).orElse(null);
+        return "admin/ListHackathonPrize";
+    }
 
-		model.addAttribute("prize", data);
-		model.addAttribute("allHackthon", hackathonRepository.findAll());
-		return "admin/EditHackathonPrize";
-	}
+    @GetMapping("/prize/edit")
+    public String editHackathonPrize(Integer hackathonPrizeId, Model model) {
 
-	@PostMapping("/prize/update")
-	public String updateHackathonPrize(HackathonPrizeEntity entity) {
+        HackathonPrizeEntity data =
+                hackathonPrizeRepository.findById(hackathonPrizeId).orElse(null);
 
-		hackathonPrizeRepository.save(entity);
-		return "redirect:/admin/hackathon/prize/list?hackathonId=" + entity.getHackathonId();
-	}
+        model.addAttribute("prize", data);
+        model.addAttribute("allHackthon", hackathonRepository.findAll());
 
-	@GetMapping("/prize/delete")
-	public String deleteHackathonPrize(Integer hackathonPrizeId,
-			@RequestParam(required = false) Integer hackathonId) {
+        return "admin/EditHackathonPrize";
+    }
 
-		if (hackathonId == null) {
-			HackathonPrizeEntity entity =
-					hackathonPrizeRepository.findById(hackathonPrizeId).orElse(null);
+    @PostMapping("/prize/update")
+    public String updateHackathonPrize(HackathonPrizeEntity entity) {
 
-			if (entity != null) {
-				hackathonId = entity.getHackathonId();
-			}
-		}
+        hackathonPrizeRepository.save(entity);
+        return "redirect:/admin/hackathon/prize/list?hackathonId=" + entity.getHackathonId();
+    }
 
-		hackathonPrizeRepository.deleteById(hackathonPrizeId);
+    @GetMapping("/prize/delete")
+    public String deleteHackathonPrize(Integer hackathonPrizeId,
+                                       @RequestParam(required = false) Integer hackathonId) {
 
-		return "redirect:/admin/hackathon/prize/list"
-				+ (hackathonId != null ? "?hackathonId=" + hackathonId : "");
-	}
+        if (hackathonId == null) {
+            HackathonPrizeEntity entity =
+                    hackathonPrizeRepository.findById(hackathonPrizeId).orElse(null);
+
+            if (entity != null) {
+                hackathonId = entity.getHackathonId();
+            }
+        }
+
+        hackathonPrizeRepository.deleteById(hackathonPrizeId);
+
+        return "redirect:/admin/hackathon/prize/list"
+                + (hackathonId != null ? "?hackathonId=" + hackathonId : "");
+    }
 }

@@ -342,18 +342,16 @@ select, input { font-family: var(--ff); }
     <span class="brand-name">Code<span>Verse</span></span>
   </a>
   <nav class="nav-links">
-    <a href="#">Explore</a>
-    <a href="#">Leaderboard</a>
-    <a href="#">About</a>
-    <a href="login">Login</a>
-    <a href="signup" class="nav-cta">
-      Register
-      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-        <line x1="5" y1="12" x2="19" y2="12"/>
-        <polyline points="12 5 19 12 12 19"/>
+			<a href="/participant/home">Explore</a>
+			<a href="/participant/my-hackathons">My Hackathons</a> <a href="/logout">Logout</a> <a href="/participant/profile" class="nav-cta">My Profile</a>
+			<svg width="11" height="11" viewBox="0 0 24 24" fill="none"
+					stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+					stroke-linejoin="round">
+        <line x1="5" y1="12" x2="19" y2="12" />
+					<polyline points="12 5 19 12 12 19" />
       </svg>
-    </a>
-  </nav>
+		
+		</nav>
 </header>
 
 <!-- PAGE -->

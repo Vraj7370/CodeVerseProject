@@ -242,6 +242,27 @@
     color: var(--muted); 
   }
 
+  .form-select-custom {
+    width: 100%;
+    padding: 10px 14px 10px 38px;
+    border: 1.5px solid var(--cream);
+    border-radius: var(--radius-sm);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    color: var(--navy);
+    background: var(--ivory);
+    outline: none;
+    cursor: pointer;
+    transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+    appearance: none;
+  }
+
+  .form-select-custom:focus {
+    border-color: var(--eton);
+    box-shadow: 0 0 0 3px rgba(46,107,114,0.1);
+    background: var(--white);
+  }
+
   /* Helper text */
   .field-hint {
     font-size: 0.75rem;
@@ -472,8 +493,24 @@
                     </div>
                   </div>
 
-                  <!-- Third Row: Qualification & Designation -->
+                  <!-- Third Row: Gender & Qualification -->
                   <div class="form-row-two">
+                    <div class="form-col">
+                      <div class="form-group-custom">
+                        <label class="form-label-custom">
+                          Gender
+                        </label>
+                        <div class="input-wrap">
+                          <span class="input-icon">👤</span>
+                          <select name="gender" class="form-select-custom">
+                            <option value="">Select gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
                     <div class="form-col">
                       <div class="form-group-custom">
                         <label class="form-label-custom">
@@ -490,6 +527,10 @@
                         </div>
                       </div>
                     </div>
+                  </div>
+
+                  <!-- Fourth Row: Designation & Organization -->
+                  <div class="form-row-two">
                     <div class="form-col">
                       <div class="form-group-custom">
                         <label class="form-label-custom">
@@ -506,23 +547,22 @@
                         </div>
                       </div>
                     </div>
-                  </div>
-
-                  <!-- Fourth Row: Organization (Full Width) -->
-                  <div class="form-group-custom">
-                    <label class="form-label-custom">
-                      Organization
-                    </label>
-                    <div class="input-wrap">
-                      <span class="input-icon">🏢</span>
-                      <input
-                        type="text"
-                        name="organization"
-                        class="form-control-custom"
-                        placeholder="Company or Institute name"
-                      >
+                    <div class="form-col">
+                      <div class="form-group-custom">
+                        <label class="form-label-custom">
+                          Organization
+                        </label>
+                        <div class="input-wrap">
+                          <span class="input-icon">🏢</span>
+                          <input
+                            type="text"
+                            name="organization"
+                            class="form-control-custom"
+                            placeholder="Company or Institute name"
+                          >
+                        </div>
+                      </div>
                     </div>
-                    <div class="field-hint">The organization where the judge currently works.</div>
                   </div>
 
                 </form>

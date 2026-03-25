@@ -1,40 +1,46 @@
 package com.Grownited.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "hackathon_description")
 public class HackathonDescriptionEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "hackathon_description_id")
-    private Integer hackathonDescriptionId;
-    private String hackathonDetails;
-    private Integer hackathonId;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer hackathonDescriptionId;
 
-    public Integer getHackathonId() {
-        return hackathonId;
-    }
+	@Column(columnDefinition = "TEXT")
+	private String hackathonDetails;
 
-    public void setHackathonId(Integer hackathonId) {
-        this.hackathonId = hackathonId;
-    }
-	
-    public Integer getHackathonDescriptionId() {
+	private Integer hackathonId;
+
+	public Integer getHackathonDescriptionId() {
 		return hackathonDescriptionId;
 	}
+
 	public void setHackathonDescriptionId(Integer hackathonDescriptionId) {
 		this.hackathonDescriptionId = hackathonDescriptionId;
 	}
-	
+
 	public String getHackathonDetails() {
 		return hackathonDetails;
 	}
+
 	public void setHackathonDetails(String hackathonDetails) {
 		this.hackathonDetails = hackathonDetails;
 	}
-	
-    
 
+	public Integer getHackathonId() {
+		return hackathonId;
+	}
+
+	public void setHackathonId(Integer hackathonId) {
+		this.hackathonId = hackathonId;
+	}
 }
