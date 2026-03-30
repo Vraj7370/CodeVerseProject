@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>Reset Password</title>
 
-<jsp:include page="AdminCSS.jsp"></jsp:include>
+<%-- <jsp:include page="AdminCSS.jsp"></jsp:include> --%>
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 
@@ -393,11 +393,11 @@ body{
 
 <div class="container-scroller">
 
-  <jsp:include page="AdminHeader.jsp"></jsp:include>
+  <%-- <jsp:include page="AdminHeader.jsp"></jsp:include> --%>
 
   <div class="container-fluid page-body-wrapper">
 
-    <jsp:include page="AdminLeftSidebar.jsp"></jsp:include>
+    <%-- <jsp:include page="AdminLeftSidebar.jsp"></jsp:include> --%>
 
     <div class="main-panel">
       <div class="content-wrapper">
@@ -507,7 +507,7 @@ body{
 
       </div>
 
-      <jsp:include page="AdminFooter.jsp"></jsp:include>
+      <%-- <jsp:include page="AdminFooter.jsp"></jsp:include> --%>
 
     </div>
   </div>

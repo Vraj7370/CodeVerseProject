@@ -45,15 +45,15 @@ import com.Grownited.repository.HackathonTeamRepository;
 import com.Grownited.repository.HackathonSubmissionRepository;
 import com.Grownited.repository.UserDetailRepository;
 import com.Grownited.repository.UserRepository;
+import com.Grownited.service.MailerService;
 
 import jakarta.servlet.http.HttpSession;
-
 
 @Controller
 public class ParticipantController {
 
 	@Autowired
-	HackathonRepository hackathonRepository; 
+	HackathonRepository hackathonRepository;
 
 	@Autowired
 	HackathonDescriptionRepository hackathonDescriptionRepository;
@@ -84,16 +84,19 @@ public class ParticipantController {
 
 	@Autowired
 	UserDetailRepository userDetailRepository;
-	
+
+	@Autowired
+	MailerService mailerService;
+
 	@GetMapping("/participant/participant-dashboard")
-	public String participantDashboard( ) {
+	public String participantDashboard() {
 		return "participant/ParticipantDashboard";
 	}
-	
+
 	@GetMapping("/participant/home")
-	public String home( Model model) {
-		model.addAttribute("hackathons",hackathonRepository.findAll()); 
-		return   "participant/Home";
+	public String home(Model model) {
+		model.addAttribute("hackathons", hackathonRepository.findAll());
+		return "participant/Home";
 	}
 
 	@GetMapping("participant/profile")
@@ -104,7 +107,8 @@ public class ParticipantController {
 			return "redirect:/login";
 		}
 
-		UserDetailEntity userDetail = userDetailRepository.findByUserId(user.getUserId()).orElse(new UserDetailEntity());
+		UserDetailEntity userDetail = userDetailRepository.findByUserId(user.getUserId())
+				.orElse(new UserDetailEntity());
 		model.addAttribute("user", user);
 		model.addAttribute("userDetail", userDetail);
 		model.addAttribute("success", success);
@@ -139,7 +143,8 @@ public class ParticipantController {
 		user.setOrganization(StringUtils.hasText(organization) ? organization.trim() : null);
 		userRepository.save(user);
 
-		UserDetailEntity userDetail = userDetailRepository.findByUserId(user.getUserId()).orElse(new UserDetailEntity());
+		UserDetailEntity userDetail = userDetailRepository.findByUserId(user.getUserId())
+				.orElse(new UserDetailEntity());
 		userDetail.setUserId(user.getUserId());
 		userDetail.setQualification(StringUtils.hasText(qualification) ? qualification.trim() : null);
 		userDetail.setCity(StringUtils.hasText(city) ? city.trim() : null);
@@ -161,7 +166,8 @@ public class ParticipantController {
 
 		Map<Integer, MyHackathonRow> rowMap = new LinkedHashMap<>();
 
-		List<HackathonParticipantEntity> joinedHackathons = hackathonParticipantRepository.findByParticipantId(user.getUserId());
+		List<HackathonParticipantEntity> joinedHackathons = hackathonParticipantRepository
+				.findByParticipantId(user.getUserId());
 		for (HackathonParticipantEntity joined : joinedHackathons) {
 			Optional<HackathonEntity> opHackathon = hackathonRepository.findById(joined.getHackathonId());
 			if (opHackathon.isPresent()) {
@@ -190,7 +196,8 @@ public class ParticipantController {
 				row.setLeader(true);
 				row.setRoleTitle("TEAM_LEADER");
 				row.setTeamSize((int) hackathonTeamMemberRepository.countByTeamId(team.getHackathonTeamId()));
-				row.setPendingInvites((int) hackathonTeamInviteRepository.countByTeamIdAndInviteStatus(team.getHackathonTeamId(), "PENDING"));
+				row.setPendingInvites((int) hackathonTeamInviteRepository
+						.countByTeamIdAndInviteStatus(team.getHackathonTeamId(), "PENDING"));
 				row.setSubmissionEnabled(isSubmissionOpen(h, today));
 				rowMap.put(h.getHackathonId(), row);
 			}
@@ -211,7 +218,8 @@ public class ParticipantController {
 				row.setLeader(user.getUserId().equals(opTeam.get().getTeamLeaderId()));
 				row.setRoleTitle(member.getRoleTitle());
 				row.setTeamSize((int) hackathonTeamMemberRepository.countByTeamId(opTeam.get().getHackathonTeamId()));
-				row.setPendingInvites((int) hackathonTeamInviteRepository.countByTeamIdAndInviteStatus(opTeam.get().getHackathonTeamId(), "PENDING"));
+				row.setPendingInvites((int) hackathonTeamInviteRepository
+						.countByTeamIdAndInviteStatus(opTeam.get().getHackathonTeamId(), "PENDING"));
 				row.setSubmissionEnabled(isSubmissionOpen(opHackathon.get(), today));
 				rowMap.put(opHackathon.get().getHackathonId(), row);
 			}
@@ -232,20 +240,24 @@ public class ParticipantController {
 		}
 
 		HackathonEntity hackathon = opHackathon.get();
-		Optional<HackathonDescriptionEntity> description = hackathonDescriptionRepository.findFirstByHackathonId(hackathonId);
-		List<HackathonPrizeEntity> prizes = hackathonPrizeRepository.findByHackathonIdOrderByHackathonPrizeIdAsc(hackathonId);
+		Optional<HackathonDescriptionEntity> description = hackathonDescriptionRepository
+				.findFirstByHackathonId(hackathonId);
+		List<HackathonPrizeEntity> prizes = hackathonPrizeRepository
+				.findByHackathonIdOrderByHackathonPrizeIdAsc(hackathonId);
 		UserEntity user = (UserEntity) session.getAttribute("user");
 
 		LocalDate today = LocalDate.now();
-		boolean registrationOpen = hackathon.getRegistrationStartDate() != null && hackathon.getRegistrationEndDate() != null
-				&& !today.isBefore(hackathon.getRegistrationStartDate()) && !today.isAfter(hackathon.getRegistrationEndDate());
+		boolean registrationOpen = hackathon.getRegistrationStartDate() != null
+				&& hackathon.getRegistrationEndDate() != null && !today.isBefore(hackathon.getRegistrationStartDate())
+				&& !today.isAfter(hackathon.getRegistrationEndDate());
 
 		boolean alreadyRegistered = false;
 		boolean alreadyInTeam = false;
 		Integer teamId = null;
 		HackathonTeamInviteEntity pendingInvite = null;
 		if (user != null) {
-			alreadyRegistered = hackathonParticipantRepository.existsByHackathonIdAndParticipantId(hackathonId, user.getUserId());
+			alreadyRegistered = hackathonParticipantRepository.existsByHackathonIdAndParticipantId(hackathonId,
+					user.getUserId());
 			alreadyInTeam = hackathonTeamRepository.existsByHackathonIdAndTeamLeaderId(hackathonId, user.getUserId())
 					|| hackathonTeamMemberRepository.existsByHackathonIdAndMemberId(hackathonId, user.getUserId());
 			teamId = findTeamIdForUser(hackathonId, user.getUserId());
@@ -269,7 +281,8 @@ public class ParticipantController {
 		model.addAttribute("error", error);
 		boolean completed = "COMPLETE".equalsIgnoreCase(hackathon.getStatus())
 				|| "COMPLETED".equalsIgnoreCase(hackathon.getStatus());
-		model.addAttribute("leaderboardAvailable", completed && Boolean.TRUE.equals(hackathon.getLeaderboardPublished()));
+		model.addAttribute("leaderboardAvailable",
+				completed && Boolean.TRUE.equals(hackathon.getLeaderboardPublished()));
 		return "participant/HackathonDetail";
 	}
 
@@ -359,13 +372,15 @@ public class ParticipantController {
 
 		HackathonEntity hackathon = opHackathon.get();
 		LocalDate today = LocalDate.now();
-		boolean registrationOpen = hackathon.getRegistrationStartDate() != null && hackathon.getRegistrationEndDate() != null
-				&& !today.isBefore(hackathon.getRegistrationStartDate()) && !today.isAfter(hackathon.getRegistrationEndDate());
+		boolean registrationOpen = hackathon.getRegistrationStartDate() != null
+				&& hackathon.getRegistrationEndDate() != null && !today.isBefore(hackathon.getRegistrationStartDate())
+				&& !today.isAfter(hackathon.getRegistrationEndDate());
 		if (!registrationOpen) {
 			return "redirect:/participant/hackathon/" + hackathonId + "?error=registrationClosed";
 		}
 
-		boolean alreadyRegistered = hackathonParticipantRepository.existsByHackathonIdAndParticipantId(hackathonId, user.getUserId());
+		boolean alreadyRegistered = hackathonParticipantRepository.existsByHackathonIdAndParticipantId(hackathonId,
+				user.getUserId());
 		if (alreadyRegistered) {
 			return "redirect:/participant/hackathon/" + hackathonId + "?error=alreadyRegistered";
 		}
@@ -393,7 +408,8 @@ public class ParticipantController {
 		}
 
 		Integer teamId = findTeamIdForUser(hackathonId, user.getUserId());
-		boolean joinedHackathon = hackathonParticipantRepository.existsByHackathonIdAndParticipantId(hackathonId, user.getUserId());
+		boolean joinedHackathon = hackathonParticipantRepository.existsByHackathonIdAndParticipantId(hackathonId,
+				user.getUserId());
 		if (!joinedHackathon) {
 			return "redirect:/participant/hackathon/" + hackathonId + "?error=notRegistered";
 		}
@@ -426,11 +442,10 @@ public class ParticipantController {
 			List<Integer> joinedParticipantIds = hackathonParticipantRepository.findByHackathonId(hackathonId).stream()
 					.map(HackathonParticipantEntity::getParticipantId).collect(Collectors.toList());
 			participantUsers = userRepository.findAllById(joinedParticipantIds).stream()
-					.filter(u -> "PARTICIPANT".equals(u.getRole()))
-					.filter(u -> u.getActive() != null && u.getActive())
+					.filter(u -> "PARTICIPANT".equals(u.getRole())).filter(u -> u.getActive() != null && u.getActive())
 					.filter(u -> !existingMemberIds.contains(u.getUserId()))
-					.filter(u -> !u.getUserId().equals(user.getUserId()))
-					.filter(u -> !hackathonTeamMemberRepository.existsByHackathonIdAndMemberId(hackathonId, u.getUserId()))
+					.filter(u -> !u.getUserId().equals(user.getUserId())).filter(u -> !hackathonTeamMemberRepository
+							.existsByHackathonIdAndMemberId(hackathonId, u.getUserId()))
 					.collect(Collectors.toList());
 
 			inviteList = hackathonTeamInviteRepository.findByTeamIdOrderByHackathonTeamInviteIdDesc(teamId);
@@ -450,7 +465,8 @@ public class ParticipantController {
 		}).collect(Collectors.toList());
 		if (hasTeam) {
 			Integer myTeamId = teamId;
-			availableTeams = availableTeams.stream().filter(t -> !t.getHackathonTeamId().equals(myTeamId)).collect(Collectors.toList());
+			availableTeams = availableTeams.stream().filter(t -> !t.getHackathonTeamId().equals(myTeamId))
+					.collect(Collectors.toList());
 		}
 
 		model.addAttribute("hackathon", opHackathon.get());
@@ -515,7 +531,8 @@ public class ParticipantController {
 
 	@PostMapping("participant/hackathon/{hackathonId}/team/join-existing")
 	@Transactional
-	public String joinExistingTeam(@PathVariable Integer hackathonId, @RequestParam Integer joinTeamId, HttpSession session) {
+	public String joinExistingTeam(@PathVariable Integer hackathonId, @RequestParam Integer joinTeamId,
+			HttpSession session) {
 		UserEntity user = (UserEntity) session.getAttribute("user");
 		if (user == null) {
 			return "redirect:/login";
@@ -562,7 +579,8 @@ public class ParticipantController {
 
 	@PostMapping("participant/hackathon/{hackathonId}/team/invite-member")
 	@Transactional
-	public String inviteRegisteredMember(@PathVariable Integer hackathonId, @RequestParam Integer invitedUserId, HttpSession session) {
+	public String inviteRegisteredMember(@PathVariable Integer hackathonId, @RequestParam Integer invitedUserId,
+			HttpSession session) {
 		UserEntity user = (UserEntity) session.getAttribute("user");
 		if (user == null) {
 			return "redirect:/login";
@@ -596,13 +614,14 @@ public class ParticipantController {
 			return "redirect:/participant/hackathon/" + hackathonId + "/team?error=invalidUser";
 		}
 
-		boolean alreadyInHackathon = hackathonTeamMemberRepository.existsByHackathonIdAndMemberId(hackathonId, invitedUserId);
+		boolean alreadyInHackathon = hackathonTeamMemberRepository.existsByHackathonIdAndMemberId(hackathonId,
+				invitedUserId);
 		if (alreadyInHackathon) {
 			return "redirect:/participant/hackathon/" + hackathonId + "/team?error=alreadyInHackathon";
 		}
 
-		boolean pendingInviteExists = hackathonTeamInviteRepository.existsByHackathonIdAndInvitedUserIdAndInviteStatus(hackathonId,
-				invitedUserId, "PENDING");
+		boolean pendingInviteExists = hackathonTeamInviteRepository
+				.existsByHackathonIdAndInvitedUserIdAndInviteStatus(hackathonId, invitedUserId, "PENDING");
 		if (pendingInviteExists) {
 			return "redirect:/participant/hackathon/" + hackathonId + "/team?error=inviteExists";
 		}
@@ -626,6 +645,7 @@ public class ParticipantController {
 	@Transactional
 	public String inviteExternalMember(@PathVariable Integer hackathonId, @RequestParam String externalEmail,
 			@RequestParam(required = false) String roleTitle, HttpSession session) {
+
 		UserEntity user = (UserEntity) session.getAttribute("user");
 		if (user == null) {
 			return "redirect:/login";
@@ -640,6 +660,7 @@ public class ParticipantController {
 		if (teamId == null) {
 			return "redirect:/participant/hackathon/" + hackathonId + "?error=notRegistered";
 		}
+
 		Optional<HackathonTeamEntity> opTeam = hackathonTeamRepository.findById(teamId);
 		if (opTeam.isEmpty() || !user.getUserId().equals(opTeam.get().getTeamLeaderId())) {
 			return "redirect:/participant/hackathon/" + hackathonId + "/team?error=notLeader";
@@ -647,12 +668,6 @@ public class ParticipantController {
 
 		if (!StringUtils.hasText(externalEmail) || !externalEmail.contains("@")) {
 			return "redirect:/participant/hackathon/" + hackathonId + "/team?error=invalidEmail";
-		}
-
-		boolean duplicatePending = hackathonTeamInviteRepository.existsByTeamIdAndInvitedEmailAndInviteStatus(teamId,
-				externalEmail.trim(), "PENDING");
-		if (duplicatePending) {
-			return "redirect:/participant/hackathon/" + hackathonId + "/team?error=inviteExists";
 		}
 
 		HackathonTeamInviteEntity externalInvite = new HackathonTeamInviteEntity();
@@ -664,7 +679,11 @@ public class ParticipantController {
 		externalInvite.setRoleTitle(StringUtils.hasText(roleTitle) ? roleTitle.trim() : "MEMBER");
 		externalInvite.setInviteStatus("PENDING");
 		externalInvite.setCreatedAt(LocalDate.now());
+
 		hackathonTeamInviteRepository.save(externalInvite);
+
+		// ✅ EMAIL SEND
+		mailerService.sendForgotPasswordOtp(externalEmail);
 
 		return "redirect:/participant/hackathon/" + hackathonId + "/team?success=externalInvited";
 	}
@@ -691,7 +710,8 @@ public class ParticipantController {
 			return "redirect:/participant/hackathon/" + hackathonId + "/team?error=cannotRemoveLeader";
 		}
 
-		Optional<HackathonTeamMemberEntity> opMember = hackathonTeamMemberRepository.findFirstByTeamIdAndMemberId(teamId, memberId);
+		Optional<HackathonTeamMemberEntity> opMember = hackathonTeamMemberRepository
+				.findFirstByTeamIdAndMemberId(teamId, memberId);
 		if (opMember.isEmpty()) {
 			return "redirect:/participant/hackathon/" + hackathonId + "/team?error=memberNotFound";
 		}
@@ -702,13 +722,15 @@ public class ParticipantController {
 
 	@PostMapping("participant/hackathon/{hackathonId}/invite/{inviteId}/accept")
 	@Transactional
-	public String acceptInvitation(@PathVariable Integer hackathonId, @PathVariable Integer inviteId, HttpSession session) {
+	public String acceptInvitation(@PathVariable Integer hackathonId, @PathVariable Integer inviteId,
+			HttpSession session) {
 		return handleInvitationResponse(hackathonId, inviteId, session, true, false);
 	}
 
 	@PostMapping("participant/hackathon/{hackathonId}/invite/{inviteId}/reject")
 	@Transactional
-	public String rejectInvitation(@PathVariable Integer hackathonId, @PathVariable Integer inviteId, HttpSession session) {
+	public String rejectInvitation(@PathVariable Integer hackathonId, @PathVariable Integer inviteId,
+			HttpSession session) {
 		return handleInvitationResponse(hackathonId, inviteId, session, false, false);
 	}
 
@@ -756,7 +778,8 @@ public class ParticipantController {
 			return basePath + "?success=inviteRejected";
 		}
 
-		boolean alreadyInHackathon = hackathonTeamMemberRepository.existsByHackathonIdAndMemberId(hackathonId, user.getUserId());
+		boolean alreadyInHackathon = hackathonTeamMemberRepository.existsByHackathonIdAndMemberId(hackathonId,
+				user.getUserId());
 		if (alreadyInHackathon) {
 			invite.setInviteStatus("REJECTED");
 			hackathonTeamInviteRepository.save(invite);
@@ -809,8 +832,8 @@ public class ParticipantController {
 			return "redirect:/participant/hackathon/" + hackathonId + "/team?error=notLeader";
 		}
 
-		HackathonSubmissionEntity submission = hackathonSubmissionRepository.findByHackathonIdAndTeamId(hackathonId, teamId)
-				.orElse(new HackathonSubmissionEntity());
+		HackathonSubmissionEntity submission = hackathonSubmissionRepository
+				.findByHackathonIdAndTeamId(hackathonId, teamId).orElse(new HackathonSubmissionEntity());
 		submission.setHackathonId(hackathonId);
 		submission.setTeamId(teamId);
 
@@ -823,7 +846,8 @@ public class ParticipantController {
 
 	@PostMapping("participant/hackathon/{hackathonId}/submission/save")
 	@Transactional
-	public String saveSubmission(@PathVariable Integer hackathonId, HackathonSubmissionEntity formSubmission, HttpSession session) {
+	public String saveSubmission(@PathVariable Integer hackathonId, HackathonSubmissionEntity formSubmission,
+			HttpSession session) {
 		UserEntity user = (UserEntity) session.getAttribute("user");
 		if (user == null) {
 			return "redirect:/login";
@@ -838,8 +862,8 @@ public class ParticipantController {
 			return "redirect:/participant/hackathon/" + hackathonId + "/team?error=notLeader";
 		}
 
-		HackathonSubmissionEntity submission = hackathonSubmissionRepository.findByHackathonIdAndTeamId(hackathonId, teamId)
-				.orElse(new HackathonSubmissionEntity());
+		HackathonSubmissionEntity submission = hackathonSubmissionRepository
+				.findByHackathonIdAndTeamId(hackathonId, teamId).orElse(new HackathonSubmissionEntity());
 
 		submission.setHackathonId(hackathonId);
 		submission.setTeamId(teamId);
@@ -864,12 +888,13 @@ public class ParticipantController {
 	}
 
 	private Integer findTeamIdForUser(Integer hackathonId, Integer userId) {
-		Optional<HackathonTeamMemberEntity> memberRow = hackathonTeamMemberRepository.findFirstByHackathonIdAndMemberId(hackathonId,
-				userId);
+		Optional<HackathonTeamMemberEntity> memberRow = hackathonTeamMemberRepository
+				.findFirstByHackathonIdAndMemberId(hackathonId, userId);
 		if (memberRow.isPresent()) {
 			return memberRow.get().getTeamId();
 		}
-		Optional<HackathonTeamEntity> leaderTeam = hackathonTeamRepository.findFirstByHackathonIdAndTeamLeaderId(hackathonId, userId);
+		Optional<HackathonTeamEntity> leaderTeam = hackathonTeamRepository
+				.findFirstByHackathonIdAndTeamLeaderId(hackathonId, userId);
 		return leaderTeam.map(HackathonTeamEntity::getHackathonTeamId).orElse(null);
 	}
 
@@ -879,7 +904,5 @@ public class ParticipantController {
 		}
 		return today.isAfter(hackathon.getRegistrationEndDate());
 	}
-	
-	
-	
+
 }

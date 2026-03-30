@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.Grownited.entity.UserDetailEntity;
 import com.Grownited.entity.UserEntity;
@@ -61,6 +63,30 @@ public class UserController {
 	    userDetailRepository.deleteById(userId);
 
 	    userRepository.deleteById(userId);
+
+	    return "redirect:/listUser";
+	}
+	
+	@GetMapping("/editUser")
+	public String editUser(@RequestParam("userId") Integer userId, Model model) {
+
+	    if (userId == null) {
+	        return "redirect:/listUser";
+	    }
+
+	    UserEntity user = userRepository.findById(userId).orElse(null);
+	    UserDetailEntity userDetail = userDetailRepository.findByUserId(userId).orElse(null);
+
+	    model.addAttribute("user", user);
+	    model.addAttribute("userDetail", userDetail);
+
+	    return "admin/EditUser";
+	}
+	
+	@PostMapping("/updateUser")
+	public String updateUser(UserEntity user) {
+
+	    userRepository.save(user);
 
 	    return "redirect:/listUser";
 	}

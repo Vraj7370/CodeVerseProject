@@ -35,7 +35,7 @@
     --gold:       #C9A84C;
     --rose:       #A85858;
     --white:      #FFFFFF;
-    --shadow-sm:  0 2px 12px rgba(27,42,74,0.08);
+    --shadow-sm:  0 2px 12px rgba(27,42,74,0.08);x
     --shadow-md:  0 8px 32px rgba(27,42,74,0.12);
     --shadow-lg:  0 16px 48px rgba(27,42,74,0.16);
     --radius:     14px;
