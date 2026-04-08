@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 
+import org.springframework.stereotype.Component;
+
 import com.Grownited.entity.UserEntity;
 
 import jakarta.servlet.Filter;
@@ -15,11 +17,11 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-//@Component
+@Component
 public class AuthFilter implements Filter {
 
     @Override
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)   
             throws IOException, ServletException {
 
         HttpServletRequest req = (HttpServletRequest) request;
@@ -30,7 +32,7 @@ public class AuthFilter implements Filter {
         ArrayList<String> publicUrl = new ArrayList<>();
 
         // Public pages
-        publicUrl.add("/login");
+        publicUrl.add("/login"); 
         publicUrl.add("/signup");
         publicUrl.add("/register");
         publicUrl.add("/authenticate");
@@ -38,7 +40,7 @@ public class AuthFilter implements Filter {
         publicUrl.add("/forgot-password");
         publicUrl.add("/reset-password");
 
-        // Static resources
+    
         if (publicUrl.contains(uri) || uri.contains("assets") || uri.contains("css") 
                 || uri.contains("js") || uri.contains("images")) {
 
